@@ -12,25 +12,34 @@ const Navbar = () => {
             src={logoImg}
             alt={"logoImage"}
             className="block mr-10"
-            width={250}
+            width={230}
           />
         </Link>
       </div>
 
       <ul className="flex">
         <Link href="/about">
-          <li className="mr-2 ml-4  text-black font-bold btn btn-ghost">
+          <li className="mr-1 ml-4  text-black font-bold btn btn-ghost btn-lg">
             ABOUT
           </li>
         </Link>
         <Link href="/portfolio">
-          <li className="mr-2 text-black font-bold btn btn-ghost">PORTFOLIO</li>
+          <li className="mr-1 text-black font-bold btn btn-ghost btn-lg">
+            PORTFOLIO
+          </li>
         </Link>
         <Link href="/process">
-          <li className="mr-2 text-blacc font-bold btn btn-ghost">PROCESS</li>
+          <li className="mr-1 text-blacc font-bold btn btn-ghost btn-lg">
+            PROCESS
+          </li>
         </Link>
         <Link href="/lotation">
-          <li className=" text-black font-bold btn btn-ghost">LOTATION</li>
+          <li className="text-black font-bold btn btn-ghost btn-lg">
+            LOTATION
+          </li>
+        </Link>
+        <Link href="/contact">
+          <li className="text-black font-bold btn btn-ghost btn-lg">CONTACT</li>
         </Link>
       </ul>
     </nav>
