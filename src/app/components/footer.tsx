@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import logoImg from "/public/imgs/logo_v5.png";
+import logoImg from "/public/imgs/logo_new_v2.png";
 import {
   IoLogoFacebook,
   IoLogoInstagram,
