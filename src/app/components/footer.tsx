@@ -7,16 +7,11 @@ import {
   IoLogoYoutube,
 } from "react-icons/io5";
 
-const footer = () => {
+const Footer = () => {
   return (
-    <footer className="footer footer-center p-4  text-gray-400">
+    <footer className="footer footer-center p-4  text-gray-400 pt-10 bg-black ">
       <aside>
-        <Image
-          src={logoImg}
-          alt={"logoImage"}
-          className="block mr-10"
-          width={200}
-        />
+        <Image src={logoImg} alt={"logoImage"} className="block " width={200} />
         <p className="font-bold">
           대표: 신상현 <br />
           사업자번호: 111-11-11111 | 메일: bano1123@naver.com | 전화:
@@ -26,13 +21,16 @@ const footer = () => {
       </aside>
       <nav>
         <div className="grid grid-flow-col gap-4">
-          <a>
+          <a href="/">
             <IoLogoFacebook className="text-3xl" />
           </a>
-          <a>
+          <a
+            href="https://www.youtube.com/@TryToShinDirect./videos"
+            target="_blank"
+          >
             <IoLogoYoutube className="text-3xl" />
           </a>
-          <a>
+          <a href="/">
             <IoLogoInstagram className="text-3xl" />
           </a>
         </div>
@@ -41,4 +39,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;

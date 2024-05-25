@@ -5,13 +5,13 @@ import logoImg from "/public/imgs/logo_new_v2.png";
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between px-8 fixed top-4 left-0 right-0 mb-4 ">
-      <div className="">
+    <nav className="fixed flex justify-between px-8  top-4 left-0 right-0 mb-4 z-50">
+      <div className="w-60">
         <Link href="/" className="text-white font-black">
           <Image
             src={logoImg}
             alt={"logoImage"}
-            className="block mr-10"
+            className="block mr-10 w-60"
             width={230}
           />
         </Link>
