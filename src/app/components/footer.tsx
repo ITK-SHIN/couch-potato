@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-4  text-gray-400 pt-10 bg-black ">
+    <footer className="footer footer-center p-4  text-gray-400 pt-10 bg-white h-50">
       <aside>
         <Image src={logoImg} alt={"logoImage"} className="block " width={200} />
         <p className="font-bold">

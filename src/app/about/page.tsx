@@ -8,7 +8,11 @@ const page = () => {
   return (
     <main className="relative">
       <article className="relative ">
-        <Image src={bg} alt="background Image" className="block mr-10 " />
+        <Image
+          src={bg}
+          alt="background Image"
+          className="block mr-10 h-screen"
+        />
         <section className="absolute top-1/4 left-1/4 right-1/4 flex flex-col items-center">
           <div>
             <button className="btn btn-outline mb-2 text-2xl">About</button>

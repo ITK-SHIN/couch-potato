@@ -8,7 +8,11 @@ export default function Home() {
     <>
       <main className="relative h-screen">
         <article className="relative ">
-          <Image src={backImg} alt="background Image" className="block mr-10" />
+          <Image
+            src={backImg}
+            alt="background Image"
+            className="block mr-10 h-screen object-cover"
+          />
           <section className="absolute top-1/4 left-1/4 right-1/4 flex flex-col items-center">
             <div>
               <button className="btn btn-outline mb-2">
