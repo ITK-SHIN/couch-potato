@@ -26,7 +26,7 @@ const Navbar = () => {
           <Image
             src={logoImg}
             alt={"logoImage"}
-            className="block mr-10 mt-4 w-44 lg:w-60 lg:mt-0"
+            className="block  mt-4 w-44 lg:w-60 lg:mt-0"
             width={230}
           />
         </Link>
