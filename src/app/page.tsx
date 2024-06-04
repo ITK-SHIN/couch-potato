@@ -6,12 +6,12 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <main className="relative h-screen">
-        <article className="relative ">
+      <main className="relative h-screen ">
+        <article className="relative w-full ">
           <Image
             src={backImg}
             alt="background Image"
-            className="block mr-10 h-screen object-cover"
+            className="block mr-10 h-screen object-cover w-full"
           />
           <section className="absolute top-1/4 left-1/4 right-1/4 flex flex-col items-center">
             <div>

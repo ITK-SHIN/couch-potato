@@ -28,8 +28,21 @@ const config: Config = {
       xl: "1280px",
       // => @media (min-width: 1280px) { ... }
 
-      "2xl": "1536px",
-      // => @media (min-width: 1536px) { ... }
+      xlup: { max: "1024px" },
+    },
+
+    colors: {
+      /* transparent: 'transparent',
+      current: 'currentColor',
+      'white': '#ffffff',
+      'purple': '#3f3cbb',
+      'midnight': '#121063',
+      'metal': '#565584',
+      'tahiti': '#3ab7bf',
+      'silver': '#ecebff',
+      'bubble-gum': '#ff77e9',
+      'bermuda': '#78dcca', */
+      primary: "#A30FE2",
     },
   },
   plugins: [require("daisyui")],

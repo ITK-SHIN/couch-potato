@@ -1,49 +1,96 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import logoImg from "/public/imgs/logo_new_v2.png";
+import { IoMenu } from "react-icons/io5";
+import { usePathname } from "next/navigation";
+import Sidebar from "./Sidebar";
+import { useState } from "react";
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsActive(!isActive);
+  };
+
   return (
-    <nav className="fixed flex justify-between px-8  top-4 left-0 right-0 mb-4 z-50">
+    <nav className="fixed flex justify-between px-8  top-0 left-0 right-0 mb-4 z-50 lg:top-4">
       <div className="w-60">
-        <Link href="/" className="text-white font-black">
+        <Link
+          href="/"
+          className="text-white font-black"
+          onClick={() => setIsActive(false)}
+        >
           <Image
             src={logoImg}
             alt={"logoImage"}
-            className="block mr-10 w-60 min-w-28"
+            className="block mr-10 mt-4 w-44 lg:w-60 lg:mt-0"
             width={230}
           />
         </Link>
       </div>
 
-      <ul className="flex">
-        <Link href="/about">
-          <li className="mr-1 ml-4  text-black font-bold btn btn-ghost text-lg">
-            ABOUT
+      <div>
+        <ul className="flex">
+          <li className={`${pathname === "/about" ? "text-primary" : ""}`}>
+            <Link
+              href="/about"
+              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block "
+            >
+              ABOUT
+            </Link>
           </li>
-        </Link>
-        <Link href="/portfolio">
-          <li className="mr-1 text-black font-bold btn btn-ghost text-lg">
-            PORTFOLIO
+          <li className={`${pathname === "/portfolio" ? "text-primary" : ""}`}>
+            <Link
+              href="/portfolio"
+              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block"
+            >
+              PORTFOLIO
+            </Link>
           </li>
-        </Link>
-        <Link href="/process">
-          <li className="mr-1 text-black font-bold btn btn-ghost text-lg">
-            PROCESS
+          <li className={`${pathname === "/process" ? "text-primary" : ""}`}>
+            <Link
+              href="/process"
+              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block"
+            >
+              PROCESS
+            </Link>
           </li>
-        </Link>
-        <Link href="/lotation">
-          <li className="text-black font-bold btn btn-ghost text-lg">
-            LOTATION
+          <li className={`${pathname === "/lotation" ? "text-primary" : ""}`}>
+            <Link
+              href="/lotation"
+              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block"
+            >
+              LOTATION
+            </Link>
           </li>
-        </Link>
-        <Link href="/contact">
-          <li className="text-black font-bold btn btn-ghost text-lg">
-            CONTACT
+          <li className={`${pathname === "/contact" ? "text-primary" : ""}`}>
+            <Link
+              href="/contact"
+              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block"
+            >
+              CONTACT
+            </Link>
           </li>
-        </Link>
-      </ul>
+        </ul>
+
+        <div className="lg:hidden  z-90">
+          {isActive ? (
+            <>
+              <Sidebar toggleSidebar={toggleSidebar} />
+            </>
+          ) : (
+            <>
+              <IoMenu
+                onClick={toggleSidebar}
+                className="cursor-pointer text-4xl mt-4"
+              />
+            </>
+          )}
+        </div>
+      </div>
     </nav>
   );
 };
