@@ -2,7 +2,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import logoImg from "/public/imgs/logo_new_v2.png";
-
 import { usePathname } from "next/navigation";
 import { IoClose } from "react-icons/io5";
 
@@ -37,57 +36,57 @@ const Sidebar = ({ toggleSidebar }: SidebarProps) => {
         />
       </div>
       <ul className="flex flex-col pt-2">
-        <li
-          onClick={toggleSidebar}
-          className={`${pathname === "/about" ? "text-primary" : ""} block `}
-        >
+        <li>
           <Link
             href="/about"
-            className="block text-black font-bold btn btn-ghost text-base leading-10 lg:block"
+            className={`${
+              pathname === "/about" ? "text-primary" : ""
+            } block text-black font-bold btn btn-ghost text-base leading-10 p-0 lg:block`}
+            onClick={toggleSidebar}
           >
             ABOUT
           </Link>
         </li>
-        <li
-          onClick={toggleSidebar}
-          className={`${pathname === "/portfolio" ? "text-primary" : ""}`}
-        >
+        <li>
           <Link
             href="/portfolio"
-            className="block text-black font-bold btn btn-ghost text-base leading-10 lg:block"
+            className={`${
+              pathname === "/portfolio" ? "text-primary" : ""
+            } block text-black font-bold btn btn-ghost text-base leading-10 p-0 lg:block`}
+            onClick={toggleSidebar}
           >
             PORTFOLIO
           </Link>
         </li>
-        <li
-          onClick={toggleSidebar}
-          className={`${pathname === "/process" ? "text-primary" : ""}`}
-        >
+        <li>
           <Link
             href="/process"
-            className="block text-black font-bold btn btn-ghost text-base leading-10 lg:block"
+            className={`${
+              pathname === "/process" ? "text-primary" : ""
+            } block text-black font-bold btn btn-ghost text-base leading-10 p-0 lg:block`}
+            onClick={toggleSidebar}
           >
             PROCESS
           </Link>
         </li>
-        <li
-          onClick={toggleSidebar}
-          className={`${pathname === "/lotation" ? "text-primary" : ""}`}
-        >
+        <li>
           <Link
             href="/lotation"
-            className="block text-black font-bold btn btn-ghost text-base leading-10 lg:block"
+            className={`${
+              pathname === "/lotation" ? "text-primary" : ""
+            } block text-black font-bold btn btn-ghost text-base leading-10 p-0 lg:block`}
+            onClick={toggleSidebar}
           >
             LOTATION
           </Link>
         </li>
-        <li
-          onClick={toggleSidebar}
-          className={`${pathname === "/contact" ? "text-primary" : ""}`}
-        >
+        <li>
           <Link
             href="/contact"
-            className="block text-black font-bold btn btn-ghost text-base leading-10 lg:block"
+            className={`${
+              pathname === "/contact" ? "text-primary" : ""
+            } block text-black font-bold btn btn-ghost text-base leading-10 p-0 lg:block`}
+            onClick={toggleSidebar}
           >
             CONTACT
           </Link>
