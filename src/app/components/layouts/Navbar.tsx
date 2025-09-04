@@ -75,7 +75,7 @@ const Navbar = () => {
               CONTACT
             </Link>
           </li>
-        </ul> 
+        </ul>
 
         <div className="lg:hidden  z-40">
           {isActive ? (
