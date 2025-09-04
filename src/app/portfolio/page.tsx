@@ -5,15 +5,15 @@ import Link from "next/link";
 import { getChannelVideos, isYouTubeAPIConfigured } from "@/utils/youtube";
 
 const PortfolioPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [portfolioItems, setPortfolioItems] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [isMuted, setIsMuted] = useState(true);
-  const [volume, setVolume] = useState(75);
-  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [volume, setVolume] = useState<number>(75);
+  const [showVolumeSlider, setShowVolumeSlider] = useState<boolean>(false);
   const [iframeRef, setIframeRef] = useState<HTMLDivElement | null>(null);
   const [videoContainerRef, setVideoContainerRef] =
     useState<HTMLDivElement | null>(null);
@@ -34,14 +34,13 @@ const PortfolioPage = () => {
     const newMuteState = !isMuted;
     setIsMuted(newMuteState);
 
-    if (iframeRef && isPlayerReady) {
-      // YouTube iframe API를 통해 음소거 상태 변경 (올바른 JSON 포맷)
-      const message = JSON.stringify({
-        event: "command",
-        func: newMuteState ? "mute" : "unMute",
-        args: [],
-      });
-      iframeRef.contentWindow?.postMessage(message, "*");
+    if (player && isPlayerReady) {
+      if (newMuteState) {
+        player.mute();
+      } else {
+        player.unMute();
+      }
+      console.log(`Mute toggled: ${newMuteState}`);
     }
   };
 
@@ -55,71 +54,47 @@ const PortfolioPage = () => {
       setIsMuted(false);
     }
 
-    // 디바운스를 위한 타이머 설정
-    if (window.volumeChangeTimer) {
-      clearTimeout(window.volumeChangeTimer);
-    }
+    // 플레이어 API를 통해 직접 볼륨 조절
+    if (player && isPlayerReady) {
+      console.log(`Setting volume to: ${newVolume}`);
 
-    window.volumeChangeTimer = setTimeout(() => {
-      if (iframeRef && isPlayerReady) {
-        console.log(`Setting volume to: ${newVolume}`);
+      // 볼륨 설정
+      player.setVolume(newVolume);
 
-        // 먼저 음소거 해제 (볼륨이 0이 아닌 경우)
-        if (newVolume > 0) {
-          const unmuteMessage = JSON.stringify({
-            event: "command",
-            func: "unMute",
-            args: [],
-          });
-          iframeRef.contentWindow?.postMessage(unmuteMessage, "*");
-        }
-
-        // 볼륨 설정
-        const volumeMessage = JSON.stringify({
-          event: "command",
-          func: "setVolume",
-          args: [newVolume],
-        });
-        iframeRef.contentWindow?.postMessage(volumeMessage, "*");
-
-        // 볼륨이 0이면 음소거
-        if (newVolume === 0) {
-          setTimeout(() => {
-            const muteMessage = JSON.stringify({
-              event: "command",
-              func: "mute",
-              args: [],
-            });
-            iframeRef.contentWindow?.postMessage(muteMessage, "*");
-          }, 100);
-        }
+      // 볼륨에 따른 음소거 상태 조절
+      if (newVolume === 0) {
+        player.mute();
+      } else if (isMuted && newVolume > 0) {
+        player.unMute();
       }
-    }, 100); // 100ms 디바운스
+    }
   };
 
   const toggleFullscreen = () => {
     if (videoContainerRef) {
       if (!document.fullscreenElement) {
         // 전체화면 진입
-        if (videoContainerRef.requestFullscreen) {
-          videoContainerRef.requestFullscreen();
-        } else if (videoContainerRef.webkitRequestFullscreen) {
-          videoContainerRef.webkitRequestFullscreen();
-        } else if (videoContainerRef.mozRequestFullScreen) {
-          videoContainerRef.mozRequestFullScreen();
-        } else if (videoContainerRef.msRequestFullscreen) {
-          videoContainerRef.msRequestFullscreen();
+        const element = videoContainerRef as any;
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if (element.webkitRequestFullscreen) {
+          element.webkitRequestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+          element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) {
+          element.msRequestFullscreen();
         }
       } else {
         // 전체화면 종료
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
+        const doc = document as any;
+        if (doc.exitFullscreen) {
+          doc.exitFullscreen();
+        } else if (doc.webkitExitFullscreen) {
+          doc.webkitExitFullscreen();
+        } else if (doc.mozCancelFullScreen) {
+          doc.mozCancelFullScreen();
+        } else if (doc.msExitFullscreen) {
+          doc.msExitFullscreen();
         }
       }
     }
@@ -219,7 +194,7 @@ const PortfolioPage = () => {
             playsinline: 1,
           },
           events: {
-            onReady: (event) => {
+            onReady: (event: any) => {
               console.log("YouTube Player ready!");
               // 초기 볼륨 설정
               event.target.setVolume(volume);
@@ -229,7 +204,7 @@ const PortfolioPage = () => {
                 `Initial volume set to: ${volume}, muted: ${isMuted}`
               );
             },
-            onStateChange: (event) => {
+            onStateChange: (event: any) => {
               console.log("Player state changed:", event.data);
             },
           },

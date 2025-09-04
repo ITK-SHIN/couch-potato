@@ -14,7 +14,7 @@ const ContactPage = () => {
     message: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleChange = (e: any) => {
     setFormData({

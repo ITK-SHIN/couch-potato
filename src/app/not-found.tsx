@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function NotFound() {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);

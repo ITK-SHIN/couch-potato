@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const page = () => {
+const AboutPage = () => {
   return (
     <>
       {/* Hero Section */}
@@ -276,4 +276,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AboutPage;

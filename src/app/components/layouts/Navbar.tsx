@@ -9,7 +9,7 @@ import { useState } from "react";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   const toggleSidebar = () => {
     setIsActive(!isActive);

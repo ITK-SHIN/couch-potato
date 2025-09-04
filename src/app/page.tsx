@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const [isMuted, setIsMuted] = useState(true);
-  const [volume, setVolume] = useState(75);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [volume, setVolume] = useState<number>(75);
   const [iframeRef, setIframeRef] = useState<HTMLDivElement | null>(null);
   const [videoContainerRef, setVideoContainerRef] =
     useState<HTMLDivElement | null>(null);
@@ -67,7 +67,7 @@ export default function Home() {
             playsinline: 1,
           },
           events: {
-            onReady: (event) => {
+            onReady: (event: any) => {
               console.log("YouTube Player ready!");
               // 초기 볼륨 설정
               event.target.setVolume(volume);
@@ -77,7 +77,7 @@ export default function Home() {
                 `Initial volume set to: ${volume}, muted: ${isMuted}`
               );
             },
-            onStateChange: (event) => {
+            onStateChange: (event: any) => {
               console.log("Player state changed:", event.data);
             },
           },

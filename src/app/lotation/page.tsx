@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const page = () => {
+const LotationPage = () => {
   const locations = [
     {
       name: "본사 스튜디오",
@@ -294,4 +294,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default LotationPage;
