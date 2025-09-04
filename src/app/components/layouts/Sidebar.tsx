@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import logoImg from "/public/imgs/logo_new_v2.png";
+// import logoImg from "../../../../../public/imgs/logo_new_v2.png";
 import { usePathname } from "next/navigation";
 import { IoClose } from "react-icons/io5";
 
@@ -24,10 +24,11 @@ const Sidebar = ({ toggleSidebar }: SidebarProps) => {
           onClick={toggleSidebar}
         >
           <Image
-            src={logoImg}
+            src="/imgs/logo_new_v2.png"
             alt={"logoImage"}
             className="block ml-8 mt-4 w-44 lg:w-60 lg:mt-0"
             width={230}
+            height={100}
           />
         </Link>
         <IoClose

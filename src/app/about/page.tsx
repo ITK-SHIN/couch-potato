@@ -1,7 +1,7 @@
 import React from "react";
-import bg from "/public/imgs/about3.jpg";
+// import bg from "../../../../public/imgs/about3.jpg";
 import Image from "next/image";
-import logoImg from "/public/imgs/logo_new_v5.png";
+// import logoImg from "../../../../public/imgs/logo_new_v5.png";
 import Link from "next/link";
 
 const page = () => {
@@ -9,9 +9,11 @@ const page = () => {
     <main className="relative">
       <article className="relative ">
         <Image
-          src={bg}
+          src="/imgs/about3.jpg"
           alt="background Image"
           className="block mr-10 h-screen"
+          fill
+          style={{objectFit: 'cover'}}
         />
         <section className="absolute top-1/4 left-1/4 right-1/4 flex flex-col items-center">
           <div>

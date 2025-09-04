@@ -1,6 +1,6 @@
 import Image from "next/image";
-import backImg from "/public/imgs/1.jpg";
-import logoImg from "/public/imgs/logo_new_v5.png";
+// import backImg from "../../../public/imgs/1.jpg";
+// import logoImg from "../../../public/imgs/logo_new_v5.png";
 import Link from "next/link";
 
 export default function Home() {
@@ -9,9 +9,11 @@ export default function Home() {
       <main className="relative h-screen ">
         <article className="relative w-full ">
           <Image
-            src={backImg}
+            src="/imgs/1.jpg"
             alt="background Image"
             className="block mr-10 h-screen object-cover w-full"
+            fill
+            style={{objectFit: 'cover'}}
           />
           <section className="absolute top-1/4 left-1/4 right-1/4 flex flex-col items-center">
             <div>

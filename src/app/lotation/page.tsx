@@ -1,15 +1,17 @@
 import React from "react";
-import bg from "/public/imgs/lotation.jpg";
+// import bg from "../../../../public/imgs/lotation.jpg";
 import Image from "next/image";
 
 const page = () => {
   return (
-    <div>
+    <div className="relative">
       <Image
-        src={bg}
+        src="/imgs/lotation.jpg"
         alt="background Image"
         className="block mr-10 h-screen  bg-cover  bg-center object-cover"
-        sizes="100vw "
+        fill
+        sizes="100vw"
+        style={{objectFit: 'cover'}}
       />
     </div>
   );

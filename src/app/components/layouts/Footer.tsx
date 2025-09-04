@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import logoImg from "/public/imgs/logo_new_v2.png";
+// import logoImg from "../../../../../public/imgs/logo_new_v2.png";
 import {
   IoLogoFacebook,
   IoLogoInstagram,
@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className="footer footer-center p-4  text-gray-400 pt-10 bg-white h-50">
       <aside>
-        <Image src={logoImg} alt={"logoImage"} className="block " width={200} />
+        <Image src="/imgs/logo_new_v2.png" alt={"logoImage"} className="block " width={200} height={80} />
         <p className="font-bold">
           대표: 신상현 <br />
           사업자번호: 111-11-11111 | 메일: bano1123@naver.com | 전화:

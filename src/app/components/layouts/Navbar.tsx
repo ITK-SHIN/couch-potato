@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import logoImg from "/public/imgs/logo_new_v2.png";
+// import logoImg from "../../../../../public/imgs/logo_new_v2.png";
 import { IoMenu } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
@@ -24,10 +24,11 @@ const Navbar = () => {
           onClick={() => setIsActive(false)}
         >
           <Image
-            src={logoImg}
+            src="/imgs/logo_new_v2.png"
             alt={"logoImage"}
             className="block  mt-4 w-44 lg:w-60 lg:mt-0"
             width={230}
+            height={100}
           />
         </Link>
       </div>
