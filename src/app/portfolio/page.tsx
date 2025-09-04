@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getChannelVideos, isYouTubeAPIConfigured } from "@/utils/youtube";
 
-const page = () => {
+const PortfolioPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -858,4 +858,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default PortfolioPage;

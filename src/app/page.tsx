@@ -86,7 +86,7 @@ export default function Home() {
         console.error("Error creating YouTube player:", error);
       }
     }
-  }, [isPlayerReady, iframeRef, player]);
+  }, [isPlayerReady, iframeRef, player, isMuted, volume]);
 
   // 풀스크린 토글 함수
   const toggleFullscreen = () => {
@@ -640,7 +640,7 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed italic">
-                  "{testimonial.review}"
+                  &quot;{testimonial.review}&quot;
                 </p>
               </div>
             ))}

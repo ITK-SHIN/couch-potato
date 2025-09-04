@@ -25,11 +25,11 @@ const page = () => {
                 🏢 ABOUT COUCH POTATO
               </span>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight animate-slide-up drop-shadow-2xl">
               우리의 이야기
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-yellow-300 max-w-3xl mx-auto leading-relaxed mb-12 animate-fade-in-delayed font-bold drop-shadow-lg">
               창의적인 영상으로 브랜드의 가치를 전달하는 팀
             </p>
@@ -58,19 +58,20 @@ const page = () => {
                 </span>
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mb-8"></div>
-              
+
               <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                 <p>
-                  <strong>COUCH POTATO</strong>는 '소파에서 감자'라는 뜻으로, 
-                  편안하게 소파에 앉아 영상을 감상하는 순간을 의미합니다.
+                  <strong>COUCH POTATO</strong>는 &apos;소파에서 감자&apos;라는
+                  뜻으로, 편안하게 소파에 앉아 영상을 감상하는 순간을
+                  의미합니다.
                 </p>
                 <p>
-                  우리는 그 순간에 시청자의 마음을 움직이고, 브랜드의 메시지를 
+                  우리는 그 순간에 시청자의 마음을 움직이고, 브랜드의 메시지를
                   깊이 있게 전달하는 영상을 만들고자 합니다.
                 </p>
                 <p>
-                  단순한 영상 제작을 넘어서, 브랜드와 고객 사이의 감정적 연결고리를 
-                  만들어내는 것이 우리의 목표입니다.
+                  단순한 영상 제작을 넘어서, 브랜드와 고객 사이의 감정적
+                  연결고리를 만들어내는 것이 우리의 목표입니다.
                 </p>
               </div>
             </div>
@@ -79,8 +80,12 @@ const page = () => {
               <div className="aspect-square bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-8 shadow-2xl">
                 <div className="bg-white rounded-2xl h-full flex flex-col items-center justify-center p-8">
                   <div className="text-center">
-                    <div className="text-8xl font-black text-black mb-6">CP</div>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">COUCH POTATO</h3>
+                    <div className="text-8xl font-black text-black mb-6">
+                      CP
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                      COUCH POTATO
+                    </h3>
                     <p className="text-gray-600">Creative Video Production</p>
                   </div>
                 </div>
@@ -107,18 +112,24 @@ const page = () => {
                   신
                 </div>
               </div>
-              
+
               <div className="flex-1">
-                <h3 className="text-3xl font-black text-black mb-6">신상현 대표</h3>
+                <h3 className="text-3xl font-black text-black mb-6">
+                  신상현 대표
+                </h3>
                 <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed italic">
-                  "수많은 영상 업체들이 많지만, COUCH POTATO를 컨택해주신 것에는 
-                  단순히 제작 그 이상의 가치를 보셨기 때문이라고 생각합니다.
-                  <br /><br />
-                  영상 콘텐츠로 전하는 브랜드의 힘을 믿습니다. 우리는 전하고 싶은 
-                  메시지를 가장 잘 표현할 수 있는 방법을 수단과 방법을 가리지 않고 
-                  찾아내어, 기어코 구현시키는 팀입니다.
-                  <br /><br />
-                  고객의 비전을 현실로 만드는 것, 그것이 COUCH POTATO의 사명입니다."
+                  &quot;수많은 영상 업체들이 많지만, COUCH POTATO를 컨택해주신
+                  것에는 단순히 제작 그 이상의 가치를 보셨기 때문이라고
+                  생각합니다.
+                  <br />
+                  <br />
+                  영상 콘텐츠로 전하는 브랜드의 힘을 믿습니다. 우리는 전하고
+                  싶은 메시지를 가장 잘 표현할 수 있는 방법을 수단과 방법을
+                  가리지 않고 찾아내어, 기어코 구현시키는 팀입니다.
+                  <br />
+                  <br />
+                  고객의 비전을 현실로 만드는 것, 그것이 COUCH POTATO의
+                  사명입니다.&quot;
                 </blockquote>
               </div>
             </div>
@@ -144,22 +155,30 @@ const page = () => {
               {
                 icon: "🎨",
                 title: "창의성",
-                description: "독창적인 아이디어와 혁신적인 접근으로 차별화된 영상을 제작합니다."
+                description:
+                  "독창적인 아이디어와 혁신적인 접근으로 차별화된 영상을 제작합니다.",
               },
               {
                 icon: "🤝",
                 title: "신뢰",
-                description: "고객과의 약속을 지키며, 투명하고 정직한 소통을 추구합니다."
+                description:
+                  "고객과의 약속을 지키며, 투명하고 정직한 소통을 추구합니다.",
               },
               {
                 icon: "⚡",
                 title: "전문성",
-                description: "최신 기술과 트렌드를 바탕으로 전문적인 퀄리티를 보장합니다."
-              }
+                description:
+                  "최신 기술과 트렌드를 바탕으로 전문적인 퀄리티를 보장합니다.",
+              },
             ].map((value, index) => (
-              <div key={index} className="text-center group hover:transform hover:scale-105 transition-all duration-300">
+              <div
+                key={index}
+                className="text-center group hover:transform hover:scale-105 transition-all duration-300"
+              >
                 <div className="text-6xl mb-6">{value.icon}</div>
-                <h3 className="text-2xl font-bold text-black mb-4">{value.title}</h3>
+                <h3 className="text-2xl font-bold text-black mb-4">
+                  {value.title}
+                </h3>
                 <p className="text-gray-600 leading-relaxed">
                   {value.description}
                 </p>
@@ -187,29 +206,41 @@ const page = () => {
               {
                 name: "신상현",
                 role: "대표 / 총괄 디렉터",
-                description: "10년 이상의 영상 제작 경험으로 프로젝트 전반을 이끌어갑니다.",
-                initial: "신"
+                description:
+                  "10년 이상의 영상 제작 경험으로 프로젝트 전반을 이끌어갑니다.",
+                initial: "신",
               },
               {
                 name: "크리에이티브 팀",
                 role: "기획 / 연출",
-                description: "창의적인 아이디어로 브랜드만의 스토리를 구성합니다.",
-                initial: "C"
+                description:
+                  "창의적인 아이디어로 브랜드만의 스토리를 구성합니다.",
+                initial: "C",
               },
               {
                 name: "프로덕션 팀",
                 role: "촬영 / 편집",
-                description: "최신 장비와 기술로 완성도 높은 영상을 제작합니다.",
-                initial: "P"
-              }
+                description:
+                  "최신 장비와 기술로 완성도 높은 영상을 제작합니다.",
+                initial: "P",
+              },
             ].map((member, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+              >
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-black mx-auto mb-6">
                   {member.initial}
                 </div>
-                <h3 className="text-xl font-bold text-black mb-2">{member.name}</h3>
-                <p className="text-blue-600 font-semibold mb-4">{member.role}</p>
-                <p className="text-gray-600 leading-relaxed">{member.description}</p>
+                <h3 className="text-xl font-bold text-black mb-2">
+                  {member.name}
+                </h3>
+                <p className="text-blue-600 font-semibold mb-4">
+                  {member.role}
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  {member.description}
+                </p>
               </div>
             ))}
           </div>
@@ -223,10 +254,10 @@ const page = () => {
             함께 시작해보세요
           </h2>
           <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
-            COUCH POTATO와 함께 브랜드의 이야기를 영상으로 완성해보세요. 
+            COUCH POTATO와 함께 브랜드의 이야기를 영상으로 완성해보세요.
             언제든지 연락 주시면 친절하게 상담해드리겠습니다.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link href="/contact">
               <button className="px-12 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-full hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl">

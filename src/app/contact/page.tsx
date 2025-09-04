@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import emailjs from "@emailjs/browser";
 
-const page = () => {
+const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -753,4 +753,4 @@ ${formData.message}
   );
 };
 
-export default page;
+export default ContactPage;
