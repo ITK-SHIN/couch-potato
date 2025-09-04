@@ -214,7 +214,7 @@ export default function Home() {
               <div className="lg:col-span-5 animate-slide-up-delayed">
                 <div className="relative group">
                   {/* Enhanced Glassmorphism Frame */}
-                  <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/20 shadow-2xl transform hover:scale-105 transition-all duration-500">
+                  <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/20 shadow-2xl transform hover:scale-150 transition-all duration-700 hover:shadow-3xl">
                     {/* Video Player */}
                     <div
                       ref={(ref) => setVideoContainerRef(ref)}
