@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-4  text-gray-400 pt-10 bg-white h-50">
+    <footer className="footer footer-center p-4 text-gray-700 pt-10 bg-white h-50 border-t border-gray-200">
       <aside>
         <Image src="/imgs/logo_new_v2.png" alt={"logoImage"} className="block " width={200} height={80} />
         <p className="font-bold">
@@ -22,16 +22,16 @@ const Footer = () => {
       <nav>
         <div className="grid grid-flow-col gap-4">
           <a href="/">
-            <IoLogoFacebook className="text-3xl" />
+            <IoLogoFacebook className="text-3xl text-gray-600 hover:text-blue-600 transition-colors duration-300" />
           </a>
           <a
             href="https://www.youtube.com/@TryToShinDirect./videos"
             target="_blank"
           >
-            <IoLogoYoutube className="text-3xl" />
+            <IoLogoYoutube className="text-3xl text-gray-600 hover:text-red-600 transition-colors duration-300" />
           </a>
           <a href="/">
-            <IoLogoInstagram className="text-3xl" />
+            <IoLogoInstagram className="text-3xl text-gray-600 hover:text-pink-600 transition-colors duration-300" />
           </a>
         </div>
       </nav>

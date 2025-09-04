@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="w-60">
         <Link
           href="/"
-          className="text-white font-black"
+          className="text-black font-black"
           onClick={() => setIsActive(false)}
         >
           <Image
@@ -75,9 +75,9 @@ const Navbar = () => {
               CONTACT
             </Link>
           </li>
-        </ul>
+        </ul> 
 
-        <div className="lg:hidden  z-90">
+        <div className="lg:hidden  z-40">
           {isActive ? (
             <>
               <Sidebar toggleSidebar={toggleSidebar} />
