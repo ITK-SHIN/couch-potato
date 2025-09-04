@@ -239,7 +239,7 @@ const PortfolioPage = () => {
         console.error("Error creating YouTube player:", error);
       }
     }
-  }, [isPlayerReady, iframeRef, player]);
+  }, [isPlayerReady, iframeRef, player, isMuted, volume]);
 
   // 폴백 데이터 (API가 작동하지 않을 때 사용)
   const getFallbackPortfolioData = () => [

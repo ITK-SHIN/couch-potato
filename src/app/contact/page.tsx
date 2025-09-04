@@ -451,7 +451,7 @@ ${formData.message}
                     <textarea
                       name="message"
                       required
-                      rows="3"
+                      rows={3}
                       value={formData.message}
                       onChange={handleChange}
                       className="w-full pl-10 pr-8 py-3 bg-white/90 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 resize-none text-black placeholder-gray-500 shadow-lg backdrop-blur-sm hover:bg-white/95 hover:shadow-xl text-sm"
