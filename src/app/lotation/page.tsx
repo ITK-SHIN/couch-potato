@@ -12,7 +12,7 @@ const page = () => {
       description: "최신 장비를 갖춘 메인 촬영 스튜디오",
       features: ["4K 촬영 장비", "전문 조명 시설", "음향 녹음실", "편집실"],
       image: "/imgs/lotation.jpg",
-      icon: "🏢"
+      icon: "🏢",
     },
     {
       name: "야외 촬영 지역",
@@ -21,7 +21,7 @@ const page = () => {
       description: "다양한 야외 촬영 로케이션 지원",
       features: ["한강공원", "남산타워", "경복궁", "홍대거리"],
       image: "/imgs/about.jpg",
-      icon: "🌳"
+      icon: "🌳",
     },
     {
       name: "웨딩 전용 공간",
@@ -30,15 +30,15 @@ const page = () => {
       description: "웨딩 촬영 전문 파트너 업체들",
       features: ["채플", "가든", "연회장", "스몰웨딩홀"],
       image: "/imgs/about2.jpg",
-      icon: "💒"
-    }
+      icon: "💒",
+    },
   ];
 
   const serviceAreas = [
     { area: "서울특별시", coverage: "100%", icon: "🏙️" },
     { area: "경기도", coverage: "95%", icon: "🏘️" },
     { area: "인천광역시", coverage: "90%", icon: "🌊" },
-    { area: "기타 지역", coverage: "협의", icon: "🚗" }
+    { area: "기타 지역", coverage: "협의", icon: "🚗" },
   ];
 
   return (
@@ -63,20 +63,28 @@ const page = () => {
                 📍 OUR LOCATIONS
               </span>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight animate-slide-up drop-shadow-2xl">
               촬영 위치
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-yellow-300 max-w-3xl mx-auto leading-relaxed mb-12 animate-fade-in-delayed font-bold drop-shadow-lg">
               서울 및 수도권 전 지역 촬영 서비스 제공
             </p>
+
+            <div className="animate-slide-up-delayed">
+              <Link href="#locations">
+                <button className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
+                  📍 촬영 장소 보기
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
 
       {/* Locations Section */}
-      <section className="py-24 bg-white">
+      <section id="locations" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
@@ -90,7 +98,10 @@ const page = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {locations.map((location, index) => (
-              <div key={index} className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 overflow-hidden">
+              <div
+                key={index}
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 overflow-hidden"
+              >
                 <div className="relative aspect-video overflow-hidden">
                   <Image
                     src={location.image}
@@ -103,20 +114,28 @@ const page = () => {
                     <span className="text-4xl">{location.icon}</span>
                   </div>
                 </div>
-                
+
                 <div className="p-8">
-                  <h3 className="text-2xl font-black text-black mb-2">{location.name}</h3>
-                  <p className="text-blue-600 font-semibold mb-4">{location.type}</p>
-                  
+                  <h3 className="text-2xl font-black text-black mb-2">
+                    {location.name}
+                  </h3>
+                  <p className="text-blue-600 font-semibold mb-4">
+                    {location.type}
+                  </p>
+
                   <div className="flex items-start gap-2 mb-4">
                     <span className="text-gray-500 mt-1">📍</span>
                     <p className="text-gray-700">{location.address}</p>
                   </div>
-                  
-                  <p className="text-gray-600 mb-6 leading-relaxed">{location.description}</p>
-                  
+
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {location.description}
+                  </p>
+
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-black mb-3">주요 특징:</h4>
+                    <h4 className="font-semibold text-black mb-3">
+                      주요 특징:
+                    </h4>
                     {location.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-3">
                         <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
@@ -146,10 +165,17 @@ const page = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {serviceAreas.map((area, index) => (
-              <div key={index} className="bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <div
+                key={index}
+                className="bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
                 <div className="text-5xl mb-4">{area.icon}</div>
-                <h3 className="text-xl font-bold text-black mb-2">{area.area}</h3>
-                <div className="text-3xl font-black text-blue-600 mb-2">{area.coverage}</div>
+                <h3 className="text-xl font-bold text-black mb-2">
+                  {area.area}
+                </h3>
+                <div className="text-3xl font-black text-blue-600 mb-2">
+                  {area.coverage}
+                </div>
                 <p className="text-gray-600">서비스 가능</p>
               </div>
             ))}
@@ -173,34 +199,52 @@ const page = () => {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-6xl mb-4">🗺️</div>
-                  <h3 className="text-2xl font-bold text-gray-700 mb-2">지도 위치</h3>
-                  <p className="text-gray-600">서울특별시 강남구 테헤란로 123</p>
+                  <h3 className="text-2xl font-bold text-gray-700 mb-2">
+                    지도 위치
+                  </h3>
+                  <p className="text-gray-600">
+                    서울특별시 강남구 테헤란로 123
+                  </p>
                 </div>
               </div>
             </div>
-            
+
             {/* Location Info */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-black mb-4">🏢 본사 위치</h3>
+                <h3 className="text-2xl font-bold text-black mb-4">
+                  🏢 본사 위치
+                </h3>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">📍</span>
-                    <span className="text-gray-700">서울특별시 강남구 테헤란로 123</span>
+                    <span className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                      📍
+                    </span>
+                    <span className="text-gray-700">
+                      서울특별시 강남구 테헤란로 123
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">🚇</span>
-                    <span className="text-gray-700">강남역 3번 출구 도보 5분</span>
+                    <span className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                      🚇
+                    </span>
+                    <span className="text-gray-700">
+                      강남역 3번 출구 도보 5분
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">🚗</span>
+                    <span className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                      🚗
+                    </span>
                     <span className="text-gray-700">주차 공간 완비</span>
                   </div>
                 </div>
               </div>
-              
+
               <div>
-                <h3 className="text-2xl font-bold text-black mb-4">🕐 운영 시간</h3>
+                <h3 className="text-2xl font-bold text-black mb-4">
+                  🕐 운영 시간
+                </h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-700">평일</span>
@@ -228,9 +272,10 @@ const page = () => {
             방문 상담 예약하기
           </h2>
           <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
-            직접 방문하셔서 스튜디오 시설을 둘러보고 프로젝트에 대해 상담받으세요
+            직접 방문하셔서 스튜디오 시설을 둘러보고 프로젝트에 대해
+            상담받으세요
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link href="/contact">
               <button className="px-12 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-full hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
