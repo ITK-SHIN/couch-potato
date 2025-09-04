@@ -7,10 +7,11 @@ import Link from "next/link";
 export default function Home() {
   const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(75);
-  const [iframeRef, setIframeRef] = useState(null);
-  const [videoContainerRef, setVideoContainerRef] = useState(null);
-  const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const [player, setPlayer] = useState(null);
+  const [iframeRef, setIframeRef] = useState<HTMLDivElement | null>(null);
+  const [videoContainerRef, setVideoContainerRef] =
+    useState<HTMLDivElement | null>(null);
+  const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
+  const [player, setPlayer] = useState<any>(null);
 
   // YouTube Player API 로드 및 초기화
   useEffect(() => {
@@ -349,7 +350,9 @@ export default function Home() {
                               min="0"
                               max="100"
                               value={volume}
-                              onChange={(e) => {
+                              onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                              ) => {
                                 const newVolume = parseInt(e.target.value);
                                 setVolume(newVolume);
                                 setIsMuted(newVolume === 0);

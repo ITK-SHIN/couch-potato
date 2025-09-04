@@ -6,20 +6,21 @@ import { getChannelVideos, isYouTubeAPIConfigured } from "@/utils/youtube";
 
 const PortfolioPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [portfolioItems, setPortfolioItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [portfolioItems, setPortfolioItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(75);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
-  const [iframeRef, setIframeRef] = useState(null);
-  const [videoContainerRef, setVideoContainerRef] = useState(null);
-  const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const [player, setPlayer] = useState(null);
+  const [iframeRef, setIframeRef] = useState<HTMLDivElement | null>(null);
+  const [videoContainerRef, setVideoContainerRef] =
+    useState<HTMLDivElement | null>(null);
+  const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
+  const [player, setPlayer] = useState<any>(null);
 
-  const openVideoModal = (videoId) => {
+  const openVideoModal = (videoId: string) => {
     setSelectedVideo(videoId);
     setIsModalOpen(true);
   };
@@ -44,7 +45,7 @@ const PortfolioPage = () => {
     }
   };
 
-  const handleVolumeChange = (newVolume) => {
+  const handleVolumeChange = (newVolume: number) => {
     setVolume(newVolume);
 
     // 볼륨이 0이면 음소거, 아니면 음소거 해제
@@ -560,7 +561,9 @@ const PortfolioPage = () => {
                               min="0"
                               max="100"
                               value={volume}
-                              onChange={(e) => {
+                              onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                              ) => {
                                 const newVolume = parseInt(e.target.value);
                                 setVolume(newVolume);
                                 setIsMuted(newVolume === 0);
@@ -815,7 +818,7 @@ const PortfolioPage = () => {
         >
           <div
             className="relative w-full max-w-4xl bg-black rounded-lg overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
