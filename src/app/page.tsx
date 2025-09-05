@@ -120,25 +120,25 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 via-transparent to-orange-600/20 opacity-50 animate-pulse"></div>
         </div>
 
-        {/* Hero Content - Asymmetric Impact Layout */}
-        <div className="relative z-10 min-h-screen px-4 flex items-center justify-center">
+        {/* Hero Content - Enhanced Responsive Layout with Mobile Nav Spacing */}
+        <div className="relative z-10 min-h-screen px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 lg:pt-0 flex items-center justify-center">
           <div className="max-w-7xl w-full mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Left Content - 7 columns for more impact */}
-              <div className="lg:col-span-7 text-center lg:text-left space-y-8">
-                {/* Enhanced Badge */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Left Content - Responsive Typography & Spacing */}
+              <div className="lg:col-span-7 text-center lg:text-left space-y-6 sm:space-y-8 lg:space-y-10">
+                {/* Enhanced Badge - Better Mobile */}
                 <div className="animate-fade-in">
-                  <div className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 backdrop-blur-xl rounded-full border border-yellow-400/30 shadow-2xl mb-6">
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full animate-ping"></div>
-                    <span className="text-yellow-300 font-bold text-sm tracking-wider">
+                  <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 backdrop-blur-xl rounded-full border border-yellow-400/30 shadow-2xl mb-4 sm:mb-6">
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full animate-ping"></div>
+                    <span className="text-yellow-300 font-bold text-xs sm:text-sm tracking-wider">
                       ⭐ CREATIVE VIDEO PRODUCTION
                     </span>
                   </div>
                 </div>
 
-                {/* Massive Brand Title */}
+                {/* Massive Brand Title - Better Mobile Typography */}
                 <div className="animate-slide-up">
-                  <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white mb-6 leading-none">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-white mb-4 sm:mb-6 leading-[0.9] sm:leading-none">
                     <span className="inline-block transform hover:scale-105 transition-transform duration-300">
                       COUCH
                     </span>
@@ -147,38 +147,38 @@ export default function Home() {
                       POTATO
                     </span>
                   </h1>
-                  {/* Decorative Line */}
-                  <div className="w-32 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mb-8 mx-auto lg:mx-0"></div>
+                  {/* Decorative Line - Responsive Width */}
+                  <div className="w-20 sm:w-24 lg:w-32 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mb-6 sm:mb-8 mx-auto lg:mx-0"></div>
                 </div>
 
-                {/* Enhanced Tagline */}
-                <div className="animate-fade-in-delayed">
-                  <p className="text-2xl md:text-3xl lg:text-4xl text-white/95 leading-relaxed font-light mb-4">
+                {/* Enhanced Tagline - Better Mobile Typography */}
+                <div className="animate-fade-in-delayed space-y-2 sm:space-y-4">
+                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white/95 leading-relaxed font-light">
                     브랜드의 이야기를
                   </p>
-                  <p className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
                     <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent">
                       영상으로 완성하는
                     </span>
                   </p>
-                  <p className="text-2xl md:text-3xl lg:text-4xl text-white/95 leading-relaxed font-light">
+                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white/95 leading-relaxed font-light">
                     크리에이티브 스튜디오
                   </p>
                 </div>
 
-                {/* Enhanced CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center animate-slide-up-delayed">
-                  <Link href="/contact">
-                    <button className="group px-12 py-5 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 hover:rotate-1 transition-all duration-300 shadow-2xl border-2 border-yellow-300 relative overflow-hidden">
-                      <span className="relative z-10 flex items-center gap-3 text-lg">
+                {/* Enhanced CTA Buttons - Better Mobile Layout */}
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start items-center animate-slide-up-delayed pt-4 sm:pt-6">
+                  <Link href="/contact" className="w-full sm:w-auto">
+                    <button className="group w-full sm:w-auto px-8 sm:px-10 lg:px-12 py-4 sm:py-5 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 hover:rotate-1 transition-all duration-300 shadow-2xl border-2 border-yellow-300 relative overflow-hidden">
+                      <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg">
                         🚀 프로젝트 시작하기
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </button>
                   </Link>
-                  <Link href="/portfolio">
-                    <button className="group px-12 py-5 border-3 border-yellow-400 text-yellow-400 font-black rounded-full hover:bg-yellow-400 hover:text-black transform hover:scale-110 hover:-rotate-1 transition-all duration-300 shadow-xl relative overflow-hidden">
-                      <span className="relative z-10 flex items-center gap-3 text-lg">
+                  <Link href="/portfolio" className="w-full sm:w-auto">
+                    <button className="group w-full sm:w-auto px-8 sm:px-10 lg:px-12 py-4 sm:py-5 border-3 border-yellow-400 text-yellow-400 font-black rounded-full hover:bg-yellow-400 hover:text-black transform hover:scale-110 hover:-rotate-1 transition-all duration-300 shadow-xl relative overflow-hidden">
+                      <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg">
                         🎬 포트폴리오 보기
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -186,14 +186,14 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Additional CTA */}
-                <div className="animate-slide-up-delayed">
+                {/* Additional CTA - Better Mobile */}
+                <div className="animate-slide-up-delayed pt-2 sm:pt-4">
                   <Link href="#services">
-                    <button className="group px-10 py-4 bg-gradient-to-r from-purple-600/80 to-blue-600/80 backdrop-blur-sm text-white font-bold rounded-full hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl border border-white/20">
-                      <span className="flex items-center gap-3">
+                    <button className="group px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gradient-to-r from-purple-600/80 to-blue-600/80 backdrop-blur-sm text-white font-bold rounded-full hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl border border-white/20">
+                      <span className="flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base">
                         📋 서비스 보기
                         <svg
-                          className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                          className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -211,30 +211,30 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right Content - 5 columns for balanced video */}
-              <div className="lg:col-span-5 animate-slide-up-delayed">
+              {/* Right Content - Enhanced Responsive Video */}
+              <div className="lg:col-span-5 animate-slide-up-delayed mt-8 lg:mt-0">
                 <div className="relative group">
-                  {/* Enhanced Glassmorphism Frame */}
-                  <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/20 shadow-2xl transform hover:scale-150 transition-all duration-700 hover:shadow-3xl">
-                    {/* Video Player */}
+                  {/* Enhanced Glassmorphism Frame - Better Mobile Padding */}
+                  <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-white/20 shadow-2xl hover:scale-105 lg:hover:scale-110 transition-all duration-700 hover:shadow-3xl">
+                    {/* Video Player - Better Mobile Aspect */}
                     <div
                       ref={(ref) => setVideoContainerRef(ref)}
-                      className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black/30 border border-white/10"
+                      className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl bg-black/30 border border-white/10"
                     >
                       <div
                         ref={(ref) => setIframeRef(ref)}
-                        className="w-full h-full rounded-2xl"
+                        className="w-full h-full rounded-xl sm:rounded-2xl"
                         id="youtube-player-home"
                       ></div>
 
-                      {/* Enhanced Fullscreen Button */}
+                      {/* Enhanced Fullscreen Button - Mobile Optimized */}
                       <button
                         onClick={toggleFullscreen}
-                        className="absolute top-4 right-4 w-12 h-12 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-all duration-300 backdrop-blur-sm opacity-0 group-hover:opacity-100 z-10 border border-white/20"
+                        className="absolute top-2 sm:top-4 right-2 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-all duration-300 backdrop-blur-sm opacity-0 group-hover:opacity-100 z-10 border border-white/20"
                         title="전체화면"
                       >
                         <svg
-                          className="w-6 h-6 text-white"
+                          className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -249,40 +249,40 @@ export default function Home() {
                       </button>
                     </div>
 
-                    {/* Enhanced Video Information */}
-                    <div className="mt-8 space-y-6">
-                      {/* Title and Tags */}
+                    {/* Enhanced Video Information - Better Mobile Layout */}
+                    <div className="mt-4 sm:mt-6 lg:mt-8 space-y-4 sm:space-y-6">
+                      {/* Title and Tags - Responsive Layout */}
                       <div>
-                        <div className="flex flex-wrap gap-3 mb-4">
-                          <span className="px-4 py-2 bg-yellow-400/20 text-yellow-300 text-sm font-bold rounded-full border border-yellow-400/30 backdrop-blur-sm">
+                        <div className="flex flex-wrap gap-2 sm:gap-3 mb-3 sm:mb-4">
+                          <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-yellow-400/20 text-yellow-300 text-xs sm:text-sm font-bold rounded-full border border-yellow-400/30 backdrop-blur-sm">
                             #패션
                           </span>
-                          <span className="px-4 py-2 bg-blue-400/20 text-blue-300 text-sm font-bold rounded-full border border-blue-400/30 backdrop-blur-sm">
+                          <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-400/20 text-blue-300 text-xs sm:text-sm font-bold rounded-full border border-blue-400/30 backdrop-blur-sm">
                             #브랜드영상
                           </span>
-                          <span className="px-4 py-2 bg-purple-400/20 text-purple-300 text-sm font-bold rounded-full border border-purple-400/30 backdrop-blur-sm">
+                          <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-purple-400/20 text-purple-300 text-xs sm:text-sm font-bold rounded-full border border-purple-400/30 backdrop-blur-sm">
                             #대표작
                           </span>
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-3">
+                        <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3">
                           패션을 파는 것은 어떨까요?
                         </h3>
                       </div>
 
-                      {/* Stats and Controls */}
-                      <div className="flex items-center justify-between text-sm border-t border-white/10 pt-6">
-                        <div className="flex items-center gap-6 text-gray-300">
+                      {/* Stats and Controls - Mobile Optimized */}
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm border-t border-white/10 pt-4 sm:pt-6 gap-4 sm:gap-0">
+                        <div className="flex items-center gap-4 sm:gap-6 text-gray-300">
                           <span className="flex items-center gap-2">
-                            👁 <span className="font-medium">조회수</span>
+                            👁 <span className="font-medium hidden sm:inline">조회수</span>
                           </span>
                           <span className="flex items-center gap-2">
-                            ❤️ <span className="font-medium">좋아요</span>
+                            ❤️ <span className="font-medium hidden sm:inline">좋아요</span>
                           </span>
                         </div>
 
-                        {/* Enhanced Volume Control */}
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-3">
+                        {/* Enhanced Volume Control - Mobile Friendly */}
+                        <div className="flex items-center gap-3 sm:gap-4">
+                          <div className="flex items-center gap-2 sm:gap-3">
                             <button
                               onClick={() => {
                                 if (player && player.isMuted !== undefined) {
@@ -304,12 +304,12 @@ export default function Home() {
                                   console.warn("YouTube player not ready");
                                 }
                               }}
-                              className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 border border-white/20"
+                              className="w-8 h-8 sm:w-10 sm:h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 border border-white/20"
                               title={isMuted ? "음소거 해제" : "음소거"}
                             >
                               {isMuted || volume === 0 ? (
                                 <svg
-                                  className="w-5 h-5 text-white"
+                                  className="w-4 h-4 sm:w-5 sm:h-5 text-white"
                                   fill="none"
                                   stroke="currentColor"
                                   viewBox="0 0 24 24"
@@ -330,7 +330,7 @@ export default function Home() {
                                 </svg>
                               ) : (
                                 <svg
-                                  className="w-5 h-5 text-white"
+                                  className="w-4 h-4 sm:w-5 sm:h-5 text-white"
                                   fill="none"
                                   stroke="currentColor"
                                   viewBox="0 0 24 24"
@@ -373,16 +373,16 @@ export default function Home() {
                                   );
                                 }
                               }}
-                              className="w-20 h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
+                              className="w-16 sm:w-20 h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
                               style={{
                                 background: `linear-gradient(to right, #fbbf24 0%, #fbbf24 ${volume}%, rgba(255,255,255,0.2) ${volume}%, rgba(255,255,255,0.2) 100%)`,
                               }}
                             />
                           </div>
 
-                          <span className="text-sm text-white/80 font-medium min-w-[3rem]">
+                          <span className="text-xs sm:text-sm text-white/80 font-medium min-w-[3rem]">
                             {isMuted || volume === 0
-                              ? "🔇 음소거"
+                              ? "🔇"
                               : `${volume}%`}
                           </span>
                         </div>
@@ -390,10 +390,10 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Enhanced Decorative Elements */}
-                  <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse shadow-lg"></div>
-                  <div className="absolute -bottom-6 -left-6 w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-bounce shadow-lg"></div>
-                  <div className="absolute top-1/2 -left-4 w-6 h-6 bg-gradient-to-r from-pink-400 to-red-500 rounded-full animate-ping opacity-75"></div>
+                  {/* Enhanced Decorative Elements - Mobile Responsive */}
+                  <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse shadow-lg"></div>
+                  <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full animate-bounce shadow-lg"></div>
+                  <div className="absolute top-1/2 -left-3 sm:-left-4 w-4 h-4 sm:w-6 sm:h-6 bg-gradient-to-r from-pink-400 to-red-500 rounded-full animate-ping opacity-75"></div>
                 </div>
               </div>
             </div>
@@ -401,7 +401,7 @@ export default function Home() {
         </div>
 
         {/* Enhanced Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+        <div className="absolute bottom-8 sm:bottom-12 lg:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
           <Link href="#services">
             <div className="flex flex-col items-center gap-3 cursor-pointer group">
               <div className="w-8 h-12 border-2 border-yellow-400/60 rounded-full flex justify-center bg-gradient-to-b from-yellow-400/20 to-orange-500/20 backdrop-blur-sm group-hover:border-yellow-400 group-hover:bg-yellow-400/30 transition-all duration-300 shadow-lg">
@@ -415,20 +415,20 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Services Section */}
-      <section id="services" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-black mb-6">
+      {/* Services Section - Enhanced Responsive */}
+      <section id="services" className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-black mb-4 sm:mb-6">
               SERVICES
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0">
               다양한 영상 콘텐츠 제작 서비스를 통해 브랜드의 가치를 극대화합니다
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 title: "브랜드 영상",
@@ -463,11 +463,11 @@ export default function Home() {
             ].map((service, index) => (
               <div
                 key={index}
-                className="group p-8 bg-gray-50 rounded-2xl hover:bg-black hover:text-white transition-all duration-500 transform hover:scale-105"
+                className="group p-6 sm:p-8 bg-gray-50 rounded-2xl hover:bg-black hover:text-white transition-all duration-500 transform hover:scale-105 hover:shadow-2xl"
               >
-                <div className="text-4xl mb-6">{service.icon}</div>
-                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-600 group-hover:text-gray-300 leading-relaxed">
+                <div className="text-3xl sm:text-4xl mb-4 sm:mb-6">{service.icon}</div>
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{service.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600 group-hover:text-gray-300 leading-relaxed">
                   {service.description}
                 </p>
               </div>
@@ -476,24 +476,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Portfolio Showcase */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-black mb-6">
+      {/* Portfolio Showcase - Enhanced Responsive */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-black mb-4 sm:mb-6">
               PORTFOLIO
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto px-4 sm:px-0">
               다양한 브랜드와 함께한 프로젝트들을 만나보세요
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[1, 2, 3, 4, 5, 6].map((item) => (
               <div
                 key={item}
-                className="group relative aspect-video bg-gray-800 rounded-2xl overflow-hidden cursor-pointer"
+                className="group relative aspect-video bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500"
               >
                 <Image
                   src={`/imgs/${
@@ -504,16 +504,16 @@ export default function Home() {
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-300">
-                  <div className="absolute bottom-6 left-6">
-                    <h3 className="text-white text-xl font-bold mb-2">
+                  <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6">
+                    <h3 className="text-white text-lg sm:text-xl font-bold mb-1 sm:mb-2">
                       프로젝트 {item}
                     </h3>
-                    <p className="text-gray-300 text-sm">브랜드 영상</p>
+                    <p className="text-gray-300 text-xs sm:text-sm">브랜드 영상</p>
                   </div>
-                  <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                  <div className="absolute top-4 sm:top-6 right-4 sm:right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-200">
                       <svg
-                        className="w-6 h-6 text-black"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-black"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -532,9 +532,9 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-12 sm:mt-16">
             <Link href="/portfolio">
-              <button className="px-10 py-4 border-2 border-black text-black font-bold rounded-full hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-300">
+              <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 border-2 border-black text-black font-bold rounded-full hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 전체 포트폴리오 보기
               </button>
             </Link>
@@ -542,17 +542,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl md:text-6xl font-black text-black mb-8">
+      {/* About Section - Enhanced Responsive */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="order-2 lg:order-1">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-black mb-6 sm:mb-8">
                 ABOUT US
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mb-8"></div>
+              <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mb-6 sm:mb-8"></div>
 
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
+              <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-700 leading-relaxed">
                 <p>
                   <strong>COUCH POTATO</strong>는 브랜드의 이야기를 영상으로
                   완성하는 크리에이티브 스튜디오입니다.
@@ -568,21 +568,21 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="mt-12">
+              <div className="mt-8 sm:mt-12">
                 <Link href="/about">
-                  <button className="px-10 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transform hover:scale-105 transition-all duration-300">
+                  <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                     자세히 알아보기
                   </button>
                 </Link>
               </div>
             </div>
 
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-blue-500 via-purple-500 to-purple-700 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
+            <div className="relative order-1 lg:order-2">
+              <div className="aspect-square bg-gradient-to-br from-blue-500 via-purple-500 to-purple-700 rounded-xl sm:rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden hover:scale-105 transition-transform duration-500">
                 {/* 배경에 블러와 투명도, 그리고 둥근 테두리 효과 */}
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-2xl z-10" />
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-xl sm:rounded-2xl z-10" />
                 {/* 로고 이미지 */}
-                <div className="relative z-20 w-4/5 h-4/5 flex items-center justify-center">
+                <div className="relative z-20 w-3/4 sm:w-4/5 h-3/4 sm:h-4/5 flex items-center justify-center">
                   <img
                     src="/imgs/mainlogo.png"
                     alt="COUCH POTATO 메인 로고"
@@ -591,29 +591,29 @@ export default function Home() {
                   />
                 </div>
                 {/* 테두리 장식 */}
-                <div className="absolute inset-0 rounded-2xl border-4 border-white/30 z-30 pointer-events-none" />
+                <div className="absolute inset-0 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-white/30 z-30 pointer-events-none" />
                 {/* 빛나는 효과 */}
-                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-yellow-300/20 via-orange-400/10 to-purple-500/10 blur-2xl z-0" />
+                <div className="absolute -inset-2 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-yellow-300/20 via-orange-400/10 to-purple-500/10 blur-2xl z-0" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-black mb-6">
+      {/* Testimonial Section - Enhanced Responsive */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-black mb-4 sm:mb-6">
               CLIENT REVIEWS
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0">
               함께 작업한 클라이언트들의 생생한 후기를 들어보세요
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 name: "김대표",
@@ -636,20 +636,20 @@ export default function Home() {
             ].map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                <div className="flex items-center mb-4 sm:mb-6">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base">
                     {testimonial.name[0]}
                   </div>
-                  <div className="ml-4">
-                    <h4 className="font-bold text-black">{testimonial.name}</h4>
-                    <p className="text-gray-600 text-sm">
+                  <div className="ml-3 sm:ml-4">
+                    <h4 className="font-bold text-black text-sm sm:text-base">{testimonial.name}</h4>
+                    <p className="text-gray-600 text-xs sm:text-sm">
                       {testimonial.company}
                     </p>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed italic">
+                <p className="text-gray-700 leading-relaxed italic text-sm sm:text-base">
                   &quot;{testimonial.review}&quot;
                 </p>
               </div>
@@ -658,25 +658,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-black text-black mb-8">
+      {/* CTA Section - Enhanced Responsive */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-black mb-6 sm:mb-8">
             시작해볼까요?
           </h2>
-          <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-700 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
             브랜드의 이야기를 영상으로 완성할 준비가 되셨나요? COUCH POTATO와
             함께 특별한 프로젝트를 시작해보세요.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link href="/contact">
-              <button className="px-12 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-full hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+            <Link href="/contact" className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto px-8 sm:px-10 lg:px-12 py-4 sm:py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-full hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
                 프로젝트 문의하기
               </button>
             </Link>
-            <Link href="/process">
-              <button className="px-12 py-5 border-2 border-black text-black font-bold rounded-full hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-300">
+            <Link href="/process" className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto px-8 sm:px-10 lg:px-12 py-4 sm:py-5 border-2 border-black text-black font-bold rounded-full hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 제작 프로세스 보기
               </button>
             </Link>

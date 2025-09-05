@@ -16,6 +16,23 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem; /* 모바일에서 네비게이션 높이만큼 오프셋 */
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 8rem; /* 작은 화면에서 조금 더 큰 오프셋 */
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 6rem; /* 데스크톱에서는 네비게이션 위치에 맞춘 오프셋 */
+  }
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;

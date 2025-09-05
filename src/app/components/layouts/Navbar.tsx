@@ -16,18 +16,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed flex justify-between px-8  top-0 left-0 right-0 mb-4 z-50 lg:top-4">
+    <nav className="fixed flex justify-between px-8 top-4 sm:top-6 left-0 right-0 mb-4 z-50 lg:top-8">
       <div className="w-20 sm:w-28 md:w-36 lg:w-44 xl:w-52">
         <Link
           href="/"
           className="text-black font-black"
           onClick={() => setIsActive(false)}
         >
-          <div className="inline-block rounded-xl bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 p-3 shadow-lg">
+          <div className="inline-block rounded-xl bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 p-2 sm:p-3 shadow-lg">
             <Image
               src="/imgs/mainlogo.png"
               alt="logoImage"
-              className="block mt-1 sm:mt-2 md:mt-3 w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 h-auto"
+              className="block w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 h-auto"
               width={160}
               height={56}
               style={{ maxWidth: "100%", height: "auto" }}
