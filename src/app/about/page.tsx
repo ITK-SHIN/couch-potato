@@ -18,25 +18,25 @@ const AboutPage = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20 text-center">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 lg:pt-20 text-center">
           <div className="max-w-4xl mx-auto">
-            <div className="mb-8 animate-fade-in">
-              <span className="inline-block px-6 py-2 bg-yellow-400 rounded-full text-black text-sm font-bold border-2 border-yellow-500 mb-6 shadow-xl">
+            <div className="mb-6 sm:mb-8 animate-fade-in">
+              <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-yellow-400 rounded-full text-black text-xs sm:text-sm font-bold border-2 border-yellow-500 mb-4 sm:mb-6 shadow-xl">
                 🏢 ABOUT COUCH POTATO
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight animate-slide-up drop-shadow-2xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 sm:mb-8 leading-tight animate-slide-up drop-shadow-2xl">
               우리의 이야기
             </h1>
 
-            <p className="text-xl md:text-2xl text-yellow-300 max-w-3xl mx-auto leading-relaxed mb-12 animate-fade-in-delayed font-bold drop-shadow-lg">
+            <p className="text-lg sm:text-xl lg:text-2xl text-yellow-300 max-w-3xl mx-auto leading-relaxed mb-8 sm:mb-12 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
               창의적인 영상으로 브랜드의 가치를 전달하는 팀
             </p>
 
             <div className="animate-slide-up-delayed">
               <Link href="#story">
-                <button className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
+                <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
                   📖 스토리 보기
                 </button>
               </Link>
@@ -46,20 +46,20 @@ const AboutPage = () => {
       </main>
 
       {/* Company Story Section */}
-      <section id="story" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="animate-fade-in">
-              <h2 className="text-4xl md:text-5xl font-black text-black mb-8">
+      <section id="story" className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="animate-fade-in order-2 lg:order-1">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-6 sm:mb-8">
                 COUCH POTATO의
                 <br />
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   시작
                 </span>
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mb-8"></div>
+              <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mb-6 sm:mb-8"></div>
 
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
+              <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-700 leading-relaxed">
                 <p>
                   <strong>COUCH POTATO</strong>는 &apos;소파에서 감자&apos;라는
                   뜻으로, 편안하게 소파에 앉아 영상을 감상하는 순간을
@@ -76,12 +76,12 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-blue-500 via-purple-500 to-purple-700 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
+            <div className="relative order-1 lg:order-2">
+              <div className="aspect-square bg-gradient-to-br from-blue-500 via-purple-500 to-purple-700 rounded-xl sm:rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden hover:scale-105 transition-transform duration-500">
                 {/* 배경에 블러와 투명도, 그리고 둥근 테두리 효과 */}
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-2xl z-10" />
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-xl sm:rounded-2xl z-10" />
                 {/* 로고 이미지 */}
-                <div className="relative z-20 w-4/5 h-4/5 flex items-center justify-center">
+                <div className="relative z-20 w-3/4 sm:w-4/5 h-3/4 sm:h-4/5 flex items-center justify-center">
                   <img
                     src="/imgs/mainlogo.png"
                     alt="COUCH POTATO 메인 로고"
@@ -90,9 +90,9 @@ const AboutPage = () => {
                   />
                 </div>
                 {/* 테두리 장식 */}
-                <div className="absolute inset-0 rounded-2xl border-4 border-white/30 z-30 pointer-events-none" />
+                <div className="absolute inset-0 rounded-xl sm:rounded-2xl border-2 sm:border-4 border-white/30 z-30 pointer-events-none" />
                 {/* 빛나는 효과 */}
-                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-yellow-300/20 via-orange-400/10 to-purple-500/10 blur-2xl z-0" />
+                <div className="absolute -inset-2 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-yellow-300/20 via-orange-400/10 to-purple-500/10 blur-2xl z-0" />
               </div>
             </div>
           </div>
@@ -100,28 +100,28 @@ const AboutPage = () => {
       </section>
 
       {/* CEO Message Section */}
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
+      <section className="py-16 sm:py-20 lg:py-24 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-4 sm:mb-6">
               대표 메시지
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 sm:mb-8"></div>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-            <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 lg:p-12">
+            <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
               <div className="flex-shrink-0">
-                <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-black shadow-xl">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl sm:text-3xl lg:text-4xl font-black shadow-xl">
                   신
                 </div>
               </div>
 
-              <div className="flex-1">
-                <h3 className="text-3xl font-black text-black mb-6">
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-2xl sm:text-3xl font-black text-black mb-4 sm:mb-6">
                   신상현 대표
                 </h3>
-                <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed italic">
+                <blockquote className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed italic">
                   &quot;수많은 영상 업체들이 많지만, COUCH POTATO를 컨택해주신
                   것에는 단순히 제작 그 이상의 가치를 보셨기 때문이라고
                   생각합니다.
@@ -142,19 +142,19 @@ const AboutPage = () => {
       </section>
 
       {/* Company Values Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-4 sm:mb-6">
               우리의 가치
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4 sm:px-0">
               COUCH POTATO가 추구하는 핵심 가치들입니다
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 icon: "🎨",
@@ -177,13 +177,13 @@ const AboutPage = () => {
             ].map((value, index) => (
               <div
                 key={index}
-                className="text-center group hover:transform hover:scale-105 transition-all duration-300"
+                className="text-center group hover:transform hover:scale-105 transition-all duration-300 p-4 sm:p-6"
               >
-                <div className="text-6xl mb-6">{value.icon}</div>
-                <h3 className="text-2xl font-bold text-black mb-4">
+                <div className="text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-6">{value.icon}</div>
+                <h3 className="text-xl sm:text-2xl font-bold text-black mb-3 sm:mb-4">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   {value.description}
                 </p>
               </div>

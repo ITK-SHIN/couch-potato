@@ -219,33 +219,33 @@ ${formData.message}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center min-h-screen px-4 py-20 gap-12">
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 lg:pt-20 gap-8 lg:gap-12">
           {/* Left Side - Title and Description */}
           <div className="flex-1 max-w-2xl text-center lg:text-left">
-            <div className="mb-8 animate-fade-in">
-              <span className="inline-block px-6 py-2 bg-yellow-400 rounded-full text-black text-sm font-bold border-2 border-yellow-500 mb-6 shadow-xl">
+            <div className="mb-6 sm:mb-8 animate-fade-in">
+              <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-yellow-400 rounded-full text-black text-xs sm:text-sm font-bold border-2 border-yellow-500 mb-4 sm:mb-6 shadow-xl">
                 📞 CONTACT US
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight animate-slide-up drop-shadow-2xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 sm:mb-8 leading-tight animate-slide-up drop-shadow-2xl">
               연락하기
             </h1>
 
-            <p className="text-xl md:text-2xl text-yellow-300 leading-relaxed mb-8 animate-fade-in-delayed font-bold drop-shadow-lg">
+            <p className="text-lg sm:text-xl lg:text-2xl text-yellow-300 leading-relaxed mb-6 sm:mb-8 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
               프로젝트 상담부터 견적까지, 언제든 편하게 연락주세요
             </p>
 
-            <div className="animate-slide-up-delayed mb-8">
+            <div className="animate-slide-up-delayed mb-6 sm:mb-8">
               <Link href="#contact-info">
-                <button className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
+                <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
                   📞 연락처 정보 보기
                 </button>
               </Link>
             </div>
 
             {/* Quick Contact Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-center mb-8 sm:mb-12">
               <a
                 href="tel:010-1234-5678"
                 className="px-8 py-4 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-xl"
@@ -560,39 +560,39 @@ ${formData.message}
       </main>
 
       {/* Contact Information Cards */}
-      <section id="contact-info" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
+      <section id="contact-info" className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-4 sm:mb-6">
               연락처 정보
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-2xl mx-auto px-4 sm:px-0">
               다양한 방법으로 연락주시면 신속하게 답변드리겠습니다
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {contactInfo.map((info, index) => (
               <a
                 key={index}
                 href={info.action}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 p-8 text-center border-2 border-transparent hover:border-blue-500"
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 p-6 sm:p-8 text-center border-2 border-transparent hover:border-blue-500"
               >
-                <div className="text-5xl mb-4 group-hover:animate-bounce">
+                <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 group-hover:animate-bounce">
                   {info.icon}
                 </div>
-                <h3 className="text-xl font-black text-black mb-3">
+                <h3 className="text-lg sm:text-xl font-black text-black mb-2 sm:mb-3">
                   {info.title}
                 </h3>
-                <p className="text-2xl font-bold text-blue-600 mb-2">
+                <p className="text-xl sm:text-2xl font-bold text-blue-600 mb-2">
                   {info.content}
                 </p>
-                <p className="text-gray-600 text-sm">{info.subContent}</p>
+                <p className="text-gray-600 text-xs sm:text-sm">{info.subContent}</p>
 
                 {/* Hover Effect */}
-                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="inline-block px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-semibold">
+                <div className="mt-3 sm:mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-500 text-white rounded-full text-xs sm:text-sm font-semibold">
                     클릭하여 연결
                   </span>
                 </div>

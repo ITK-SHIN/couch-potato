@@ -362,28 +362,28 @@ const PortfolioPage = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>
 
-        <div className="relative z-10 min-h-screen px-4 flex items-center justify-center">
+        <div className="relative z-10 min-h-screen px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 lg:pt-20 flex items-center justify-center">
           <div className="max-w-7xl mx-auto w-full flex items-center justify-center">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full max-w-6xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full max-w-6xl">
               {/* Left Content */}
               <div className="text-center lg:text-left">
-                <div className="mb-8 animate-fade-in">
-                  <span className="inline-block px-6 py-2 bg-yellow-400 rounded-full text-black text-sm font-bold border-2 border-yellow-500 mb-6 shadow-xl">
+                <div className="mb-6 sm:mb-8 animate-fade-in">
+                  <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-yellow-400 rounded-full text-black text-xs sm:text-sm font-bold border-2 border-yellow-500 mb-4 sm:mb-6 shadow-xl">
                     🎬 OUR PORTFOLIO
                   </span>
                 </div>
 
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight animate-slide-up drop-shadow-2xl">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 sm:mb-8 leading-tight animate-slide-up drop-shadow-2xl">
                   작품 갤러리
                 </h1>
 
-                <p className="text-xl md:text-2xl text-yellow-300 leading-relaxed mb-12 animate-fade-in-delayed font-bold drop-shadow-lg">
+                <p className="text-lg sm:text-xl lg:text-2xl text-yellow-300 leading-relaxed mb-8 sm:mb-12 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
                   COUCH POTATO의 실제 작품들을 감상해보세요
                 </p>
 
                 <div className="animate-slide-up-delayed">
                   <Link href="#portfolio-grid">
-                    <button className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
+                    <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
                       🎬 작품 갤러리 보기
                     </button>
                   </Link>
@@ -391,10 +391,10 @@ const PortfolioPage = () => {
               </div>
 
               {/* Right Featured Video */}
-              <div className="animate-slide-up-delayed">
-                <div className="relative group transform scale-110">
+              <div className="animate-slide-up-delayed mt-8 lg:mt-0">
+                <div className="relative group transform hover:scale-105 lg:scale-110 lg:hover:scale-115 transition-transform duration-500">
                   {/* Video Container with Glassmorphism Frame */}
-                  <div className="relative bg-white/5 backdrop-blur-2xl rounded-3xl p-6 border border-white/20 shadow-2xl">
+                  <div className="relative bg-white/5 backdrop-blur-2xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/20 shadow-2xl">
                     {/* Video Player */}
                     <div
                       ref={(ref) => setVideoContainerRef(ref)}
@@ -589,14 +589,14 @@ const PortfolioPage = () => {
       </main>
 
       {/* Filter Section */}
-      <section className="py-16 bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
+      <section className="py-12 sm:py-16 bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
+                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base ${
                   selectedCategory === category.id
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -610,13 +610,13 @@ const PortfolioPage = () => {
       </section>
 
       {/* Portfolio Grid */}
-      <section id="portfolio-grid" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+      <section id="portfolio-grid" className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Loading State */}
           {loading && (
-            <div className="text-center py-16">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mb-4"></div>
-              <p className="text-gray-600 text-lg">
+            <div className="text-center py-12 sm:py-16">
+              <div className="inline-block animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-4 border-blue-500 border-t-transparent mb-4"></div>
+              <p className="text-gray-600 text-base sm:text-lg">
                 YouTube 채널에서 영상을 불러오는 중...
               </p>
             </div>
@@ -624,11 +624,11 @@ const PortfolioPage = () => {
 
           {/* Error State */}
           {error && (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">⚠️</div>
-              <h3 className="text-xl font-bold text-red-600 mb-2">오류 발생</h3>
-              <p className="text-gray-600 mb-4">{error}</p>
-              <p className="text-sm text-gray-500">
+            <div className="text-center py-12 sm:py-16">
+              <div className="text-4xl sm:text-6xl mb-4">⚠️</div>
+              <h3 className="text-lg sm:text-xl font-bold text-red-600 mb-2">오류 발생</h3>
+              <p className="text-gray-600 mb-4 text-sm sm:text-base">{error}</p>
+              <p className="text-xs sm:text-sm text-gray-500">
                 기본 포트폴리오 데이터를 표시합니다.
               </p>
             </div>
@@ -636,7 +636,7 @@ const PortfolioPage = () => {
 
           {/* Portfolio Grid */}
           {!loading && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {filteredItems.map((item) => (
                 <div
                   key={item.id}
@@ -680,27 +680,27 @@ const PortfolioPage = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm text-blue-600 font-semibold">
+                      <span className="text-xs sm:text-sm text-blue-600 font-semibold">
                         {item.client}
                       </span>
-                      <span className="text-sm text-gray-500">{item.year}</span>
+                      <span className="text-xs sm:text-sm text-gray-500">{item.year}</span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-black mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl font-bold text-black mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
                       {item.title}
                     </h3>
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                    <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
                       {item.description}
                     </p>
 
                     {/* Action Buttons */}
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <button
                         onClick={() => openVideoModal(item.videoId)}
-                        className="flex-1 bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"
+                        className="flex-1 bg-blue-600 text-white text-center py-2 px-3 sm:px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-sm"
                       >
                         🎬 영상 재생
                       </button>

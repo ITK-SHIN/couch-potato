@@ -67,25 +67,25 @@ const ProcessPage = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20 text-center">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-36 lg:pt-20 text-center">
           <div className="max-w-4xl mx-auto">
-            <div className="mb-8 animate-fade-in">
-              <span className="inline-block px-6 py-2 bg-yellow-400 rounded-full text-black text-sm font-bold border-2 border-yellow-500 mb-6 shadow-xl">
+            <div className="mb-6 sm:mb-8 animate-fade-in">
+              <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-yellow-400 rounded-full text-black text-xs sm:text-sm font-bold border-2 border-yellow-500 mb-4 sm:mb-6 shadow-xl">
                 📋 OUR PROCESS
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight animate-slide-up drop-shadow-2xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 sm:mb-8 leading-tight animate-slide-up drop-shadow-2xl">
               제작 과정
             </h1>
 
-            <p className="text-xl md:text-2xl text-yellow-300 max-w-3xl mx-auto leading-relaxed mb-12 animate-fade-in-delayed font-bold drop-shadow-lg">
+            <p className="text-lg sm:text-xl lg:text-2xl text-yellow-300 max-w-3xl mx-auto leading-relaxed mb-8 sm:mb-12 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
               체계적이고 전문적인 5단계 제작 프로세스
             </p>
 
             <div className="animate-slide-up-delayed">
               <Link href="#process-steps">
-                <button className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
+                <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
                   📋 제작 단계 보기
                 </button>
               </Link>
@@ -95,78 +95,78 @@ const ProcessPage = () => {
       </main>
 
       {/* Process Steps */}
-      <section id="process-steps" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
+      <section id="process-steps" className="py-16 sm:py-20 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-4 sm:mb-6">
               제작 단계
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-2xl mx-auto px-4 sm:px-0">
               각 단계별 전문적인 프로세스로 최고 품질의 영상을 제작합니다
             </p>
           </div>
 
-          <div className="space-y-24">
+          <div className="space-y-16 sm:space-y-20 lg:space-y-24">
             {processSteps.map((process, index) => (
               <div
                 key={index}
-                className={`flex flex-col lg:flex-row items-center gap-12 ${
+                className={`flex flex-col lg:flex-row items-center gap-8 sm:gap-12 ${
                   index % 2 === 1 ? "lg:flex-row-reverse" : ""
                 }`}
               >
                 {/* Content */}
-                <div className="flex-1 space-y-6">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-black">
+                <div className="flex-1 space-y-4 sm:space-y-6 text-center lg:text-left">
+                  <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-4 sm:mb-6 justify-center lg:justify-start">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-lg sm:text-xl lg:text-2xl font-black">
                       {process.step}
                     </div>
                     <div>
-                      <h3 className="text-3xl font-black text-black">
+                      <h3 className="text-2xl sm:text-3xl font-black text-black">
                         {process.title}
                       </h3>
-                      <p className="text-lg text-gray-600 font-medium">
+                      <p className="text-base sm:text-lg text-gray-600 font-medium">
                         {process.subtitle}
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                  <p className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed mb-4 sm:mb-6">
                     {process.description}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                     {process.details.map((detail, idx) => (
-                      <div key={idx} className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span className="text-gray-700">{detail}</span>
+                      <div key={idx} className="flex items-center gap-3 justify-center lg:justify-start">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+                        <span className="text-sm sm:text-base text-gray-700">{detail}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="inline-flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full">
-                    <span className="text-2xl">{process.icon}</span>
-                    <span className="font-semibold text-gray-800">
+                  <div className="inline-flex items-center gap-2 bg-gray-100 px-3 sm:px-4 py-2 rounded-full">
+                    <span className="text-xl sm:text-2xl">{process.icon}</span>
+                    <span className="font-semibold text-gray-800 text-sm sm:text-base">
                       소요시간: {process.duration}
                     </span>
                   </div>
                 </div>
 
                 {/* Visual */}
-                <div className="flex-1">
-                  <div className="relative aspect-video bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
+                <div className="flex-1 w-full">
+                  <div className="relative aspect-video bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-white hover:scale-105 transition-transform duration-300">
                     <div className="text-center">
-                      <div className="text-6xl mb-4">{process.icon}</div>
-                      <h4 className="text-2xl font-bold mb-2">
+                      <div className="text-4xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4">{process.icon}</div>
+                      <h4 className="text-xl sm:text-2xl font-bold mb-2">
                         {process.title}
                       </h4>
-                      <p className="text-blue-100">{process.subtitle}</p>
+                      <p className="text-blue-100 text-sm sm:text-base">{process.subtitle}</p>
                     </div>
 
                     {/* Decorative elements */}
-                    <div className="absolute top-4 right-4 w-8 h-8 border-2 border-white/30 rounded-full"></div>
-                    <div className="absolute bottom-4 left-4 w-6 h-6 border-2 border-white/30 rounded-full"></div>
-                    <div className="absolute top-1/2 left-4 w-4 h-4 bg-white/20 rounded-full"></div>
+                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 border-2 border-white/30 rounded-full"></div>
+                    <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 w-4 h-4 sm:w-6 sm:h-6 border-2 border-white/30 rounded-full"></div>
+                    <div className="absolute top-1/2 left-3 sm:left-4 w-3 h-3 sm:w-4 sm:h-4 bg-white/20 rounded-full"></div>
                   </div>
                 </div>
               </div>
