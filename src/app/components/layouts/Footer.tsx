@@ -11,7 +11,16 @@ const Footer = () => {
   return (
     <footer className="footer footer-center p-4 text-gray-700 pt-10 bg-white h-50 border-t border-gray-200">
       <aside>
-        <Image src="/imgs/logo_new_v2.png" alt={"logoImage"} className="block " width={200} height={80} />
+        <div className="inline-block rounded-xl bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 p-3 shadow-lg">
+          <Image
+            src="/imgs/mainlogo.png"
+            alt="logoImage"
+            className="block"
+            width={200}
+            height={80}
+            style={{ background: "transparent" }}
+          />
+        </div>
         <p className="font-bold">
           대표: 신상현 <br />
           사업자번호: 111-11-11111 | 메일: bano1123@naver.com | 전화:

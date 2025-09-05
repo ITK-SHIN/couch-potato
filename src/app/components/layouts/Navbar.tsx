@@ -23,13 +23,15 @@ const Navbar = () => {
           className="text-black font-black"
           onClick={() => setIsActive(false)}
         >
+                  <div className="inline-block rounded-xl bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 p-3 shadow-lg">
           <Image
-            src="/imgs/logo_new_v2.png"
+            src="/imgs/mainlogo.png"
             alt={"logoImage"}
             className="block  mt-4 w-44 lg:w-60 lg:mt-0"
             width={230}
             height={100}
           />
+          </div>
         </Link>
       </div>
 

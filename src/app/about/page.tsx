@@ -76,19 +76,23 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <div className="relative animate-slide-up">
-              <div className="aspect-square bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-8 shadow-2xl">
-                <div className="bg-white rounded-2xl h-full flex flex-col items-center justify-center p-8">
-                  <div className="text-center">
-                    <div className="text-8xl font-black text-black mb-6">
-                      CP
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                      COUCH POTATO
-                    </h3>
-                    <p className="text-gray-600">Creative Video Production</p>
-                  </div>
+            <div className="relative">
+              <div className="aspect-square bg-gradient-to-br from-blue-500 via-purple-500 to-purple-700 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
+                {/* 배경에 블러와 투명도, 그리고 둥근 테두리 효과 */}
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-2xl z-10" />
+                {/* 로고 이미지 */}
+                <div className="relative z-20 w-4/5 h-4/5 flex items-center justify-center">
+                  <img
+                    src="/imgs/mainlogo.png"
+                    alt="COUCH POTATO 메인 로고"
+                    className="object-contain w-full h-full drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)]"
+                    style={{ borderRadius: "1.25rem" }}
+                  />
                 </div>
+                {/* 테두리 장식 */}
+                <div className="absolute inset-0 rounded-2xl border-4 border-white/30 z-30 pointer-events-none" />
+                {/* 빛나는 효과 */}
+                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-yellow-300/20 via-orange-400/10 to-purple-500/10 blur-2xl z-0" />
               </div>
             </div>
           </div>
