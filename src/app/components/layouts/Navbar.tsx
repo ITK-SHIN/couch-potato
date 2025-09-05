@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed flex justify-between px-8 top-4 sm:top-6 left-0 right-0 mb-4 z-50 lg:top-8">
-      <div className="w-20 sm:w-28 md:w-36 lg:w-44 xl:w-52">
+      <div className="w-20 sm:w-20 md:w-28 lg:w-28 xl:w-36">
         <Link
           href="/"
           className="text-white font-black"

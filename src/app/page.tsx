@@ -126,24 +126,13 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Content - Responsive Typography & Spacing */}
               <div className="lg:col-span-7 text-center lg:text-left space-y-6 sm:space-y-8 lg:space-y-10">
-                {/* Enhanced Badge - Better Mobile */}
-                <div className="animate-fade-in">
-                  <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-gradient-to-r from-potato-orange/20 to-potato-orange-light/20 backdrop-blur-xl rounded-full border border-potato-orange/30 shadow-2xl mb-4 sm:mb-6">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-potato-orange rounded-full animate-ping"></div>
-                    <span className="text-potato-orange-light font-bold text-xs sm:text-sm tracking-wider">
-                      ⭐ CREATIVE VIDEO PRODUCTION
-                    </span>
-                  </div>
-                </div>
-
                 {/* Massive Brand Title - Better Mobile Typography */}
                 <div className="animate-slide-up">
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-white mb-4 sm:mb-6 leading-[0.9] sm:leading-none">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-white mb-4 sm:mb-6 leading-tight">
                     <span className="inline-block transform hover:scale-105 transition-transform duration-300">
                       COUCH
                     </span>
-                    <br />
-                    <span className="inline-block bg-gradient-to-r from-potato-orange via-potato-orange-light to-potato-orange-dark bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
+                    <span className="inline-block ml-2 sm:ml-3 md:ml-4 bg-gradient-to-r from-potato-orange via-potato-orange-light to-potato-orange-dark bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300">
                       POTATO
                     </span>
                   </h1>
