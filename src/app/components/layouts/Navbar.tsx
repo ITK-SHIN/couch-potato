@@ -36,61 +36,100 @@ const Navbar = () => {
       </div>
 
       <div>
-        <ul className="flex">
-          <li className={`${pathname === "/about" ? "text-primary" : ""}`}>
-            <Link
-              href="/about"
-              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block "
-            >
-              ABOUT
-            </Link>
-          </li>
-          <li className={`${pathname === "/portfolio" ? "text-primary" : ""}`}>
-            <Link
-              href="/portfolio"
-              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block"
-            >
-              PORTFOLIO
-            </Link>
-          </li>
-          <li className={`${pathname === "/process" ? "text-primary" : ""}`}>
-            <Link
-              href="/process"
-              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block"
-            >
-              PROCESS
-            </Link>
-          </li>
-          <li className={`${pathname === "/lotation" ? "text-primary" : ""}`}>
-            <Link
-              href="/lotation"
-              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block"
-            >
-              LOTATION
-            </Link>
-          </li>
-          <li className={`${pathname === "/contact" ? "text-primary" : ""}`}>
-            <Link
-              href="/contact"
-              className=" btn btn-ghost text-black font-bold  text-lg leading-10 hidden lg:block"
-            >
-              CONTACT
-            </Link>
-          </li>
-        </ul>
+        {/* 네비게이션 바 디자인 개선: 더 세련된 투명+그라데이션+글로우 효과, 메뉴 간격 넓힘, 폰트 강조 */}
+        <div
+          className="hidden lg:flex items-center px-12 py-3 rounded-full shadow-2xl border border-white/30 bg-gradient-to-r from-white/70 via-white/40 to-white/70 bg-clip-padding backdrop-blur-lg"
+          style={{
+            backdropFilter: "blur(18px) saturate(180%)",
+            WebkitBackdropFilter: "blur(18px) saturate(180%)",
+            boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 1.5px 8px 0 rgba(255, 200, 80, 0.10)",
+            border: "1.5px solid rgba(255,255,255,0.25)",
+          }}
+        >
+          <ul className="flex gap-6">
+            <li>
+              <Link
+                href="/about"
+                className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
+                  pathname === "/about"
+                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                }`}
+              >
+                ABOUT
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/portfolio"
+                className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
+                  pathname === "/portfolio"
+                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                }`}
+              >
+                PORTFOLIO
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/process"
+                className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
+                  pathname === "/process"
+                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                }`}
+              >
+                PROCESS
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/lotation"
+                className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
+                  pathname === "/lotation"
+                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                }`}
+              >
+                LOTATION
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
+                  pathname === "/contact"
+                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
+                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                }`}
+              >
+                CONTACT
+              </Link>
+            </li>
+          </ul>
+        </div>
 
-        <div className="lg:hidden  z-40">
+        {/* 모바일 메뉴: 더 둥글고 그림자 강조, 아이콘에 그라데이션 효과 */}
+        <div className="lg:hidden z-40">
           {isActive ? (
             <>
               <Sidebar toggleSidebar={toggleSidebar} />
             </>
           ) : (
-            <>
+            <div className="bg-white/90 rounded-full shadow-2xl p-3 border border-white/30 flex items-center justify-center">
               <IoMenu
                 onClick={toggleSidebar}
-                className="cursor-pointer text-4xl mt-4"
+                className="cursor-pointer text-4xl"
+                style={{
+                  color: "transparent",
+                  background: "linear-gradient(90deg, #facc15 0%, #fb923c 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  filter: "drop-shadow(0 2px 8px #facc1555)",
+                }}
               />
-            </>
+            </div>
           )}
         </div>
       </div>
