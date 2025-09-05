@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed flex justify-between px-8  top-0 left-0 right-0 mb-4 z-50 lg:top-4">
-      <div className="w-40 sm:w-48 md:w-56 lg:w-60 xl:w-72">
+      <div className="w-20 sm:w-28 md:w-36 lg:w-44 xl:w-52">
         <Link
           href="/"
           className="text-black font-black"
@@ -27,9 +27,9 @@ const Navbar = () => {
             <Image
               src="/imgs/mainlogo.png"
               alt="logoImage"
-              className="block mt-2 sm:mt-3 md:mt-4 w-32 sm:w-40 md:w-48 lg:w-60 xl:w-72 h-auto"
-              width={288}
-              height={100}
+              className="block mt-1 sm:mt-2 md:mt-3 w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 h-auto"
+              width={160}
+              height={56}
               style={{ maxWidth: "100%", height: "auto" }}
               priority
             />
