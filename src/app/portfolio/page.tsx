@@ -368,7 +368,7 @@ const PortfolioPage = () => {
               {/* Left Content */}
               <div className="text-center lg:text-left">
                 <div className="mb-6 sm:mb-8 animate-fade-in">
-                  <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-yellow-400 rounded-full text-black text-xs sm:text-sm font-bold border-2 border-yellow-500 mb-4 sm:mb-6 shadow-xl">
+                  <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-potato-orange rounded-full text-white text-xs sm:text-sm font-bold border-2 border-potato-orange-light mb-4 sm:mb-6 shadow-xl">
                     🎬 OUR PORTFOLIO
                   </span>
                 </div>
@@ -377,13 +377,13 @@ const PortfolioPage = () => {
                   작품 갤러리
                 </h1>
 
-                <p className="text-lg sm:text-xl lg:text-2xl text-yellow-300 leading-relaxed mb-8 sm:mb-12 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
+                <p className="text-lg sm:text-xl lg:text-2xl text-potato-orange-light leading-relaxed mb-8 sm:mb-12 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
                   COUCH POTATO의 실제 작품들을 감상해보세요
                 </p>
 
                 <div className="animate-slide-up-delayed">
                   <Link href="#portfolio-grid">
-                    <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
+                    <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange-light">
                       🎬 작품 갤러리 보기
                     </button>
                   </Link>
@@ -432,13 +432,13 @@ const PortfolioPage = () => {
                     <div className="mt-6">
                       {/* Tags */}
                       <div className="flex flex-wrap items-center gap-2 mb-4">
-                        <span className="px-3 py-1 bg-red-500/80 backdrop-blur-sm text-white text-xs font-bold rounded-full">
+                        <span className="px-3 py-1 bg-potato-orange/80 backdrop-blur-sm text-white text-xs font-bold rounded-full">
                           🏆 대표작
                         </span>
-                        <span className="px-3 py-1 bg-blue-500/80 backdrop-blur-sm text-white text-xs font-bold rounded-full">
+                        <span className="px-3 py-1 bg-clapperboard-gray/80 backdrop-blur-sm text-white text-xs font-bold rounded-full">
                           👗 패션 광고
                         </span>
-                        <span className="px-3 py-1 bg-emerald-500/80 backdrop-blur-sm text-white text-xs font-bold rounded-full">
+                        <span className="px-3 py-1 bg-potato-orange-light/80 backdrop-blur-sm text-white text-xs font-bold rounded-full">
                           ▶️ 자동재생
                         </span>
                       </div>
@@ -578,8 +578,8 @@ const PortfolioPage = () => {
                     </div>
 
                     {/* Decorative Elements */}
-                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full animate-pulse shadow-lg"></div>
-                    <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full animate-pulse delay-1000 shadow-lg"></div>
+                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-br from-potato-orange to-potato-orange-dark rounded-full animate-pulse shadow-lg"></div>
+                    <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-gradient-to-br from-clapperboard-gray to-clapperboard-gray-dark rounded-full animate-pulse delay-1000 shadow-lg"></div>
                   </div>
                 </div>
               </div>
@@ -589,7 +589,7 @@ const PortfolioPage = () => {
       </main>
 
       {/* Filter Section */}
-      <section className="py-12 sm:py-16 bg-white border-b border-gray-200">
+      <section className="py-12 sm:py-16 bg-clapperboard-gray-light border-b border-clapperboard-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {categories.map((category) => (
@@ -598,8 +598,8 @@ const PortfolioPage = () => {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base ${
                   selectedCategory === category.id
-                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white shadow-lg"
+                    : "bg-clapperboard-gray text-white hover:bg-clapperboard-gray-light"
                 }`}
               >
                 {category.icon} {category.name}
@@ -610,13 +610,16 @@ const PortfolioPage = () => {
       </section>
 
       {/* Portfolio Grid */}
-      <section id="portfolio-grid" className="py-16 sm:py-20 lg:py-24 bg-white">
+      <section
+        id="portfolio-grid"
+        className="py-16 sm:py-20 lg:py-24 bg-clapperboard-gray"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Loading State */}
           {loading && (
             <div className="text-center py-12 sm:py-16">
               <div className="inline-block animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-4 border-blue-500 border-t-transparent mb-4"></div>
-              <p className="text-gray-600 text-base sm:text-lg">
+              <p className="text-gray-300 text-base sm:text-lg">
                 YouTube 채널에서 영상을 불러오는 중...
               </p>
             </div>
@@ -626,9 +629,11 @@ const PortfolioPage = () => {
           {error && (
             <div className="text-center py-12 sm:py-16">
               <div className="text-4xl sm:text-6xl mb-4">⚠️</div>
-              <h3 className="text-lg sm:text-xl font-bold text-red-600 mb-2">오류 발생</h3>
-              <p className="text-gray-600 mb-4 text-sm sm:text-base">{error}</p>
-              <p className="text-xs sm:text-sm text-gray-500">
+              <h3 className="text-lg sm:text-xl font-bold text-potato-orange mb-2">
+                오류 발생
+              </h3>
+              <p className="text-gray-300 mb-4 text-sm sm:text-base">{error}</p>
+              <p className="text-xs sm:text-sm text-gray-400">
                 기본 포트폴리오 데이터를 표시합니다.
               </p>
             </div>
@@ -640,7 +645,7 @@ const PortfolioPage = () => {
               {filteredItems.map((item) => (
                 <div
                   key={item.id}
-                  className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 overflow-hidden"
+                  className="group relative bg-clapperboard-gray-light rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 overflow-hidden"
                 >
                   {/* Thumbnail */}
                   <div className="relative aspect-video overflow-hidden">
@@ -682,17 +687,19 @@ const PortfolioPage = () => {
                   {/* Content */}
                   <div className="p-4 sm:p-6">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs sm:text-sm text-blue-600 font-semibold">
+                      <span className="text-xs sm:text-sm text-potato-orange font-semibold">
                         {item.client}
                       </span>
-                      <span className="text-xs sm:text-sm text-gray-500">{item.year}</span>
+                      <span className="text-xs sm:text-sm text-gray-400">
+                        {item.year}
+                      </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-bold text-black mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3 group-hover:text-potato-orange transition-colors duration-300 line-clamp-2">
                       {item.title}
                     </h3>
 
-                    <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
                       {item.description}
                     </p>
 
@@ -700,7 +707,7 @@ const PortfolioPage = () => {
                     <div className="flex flex-col sm:flex-row gap-2">
                       <button
                         onClick={() => openVideoModal(item.videoId)}
-                        className="flex-1 bg-blue-600 text-white text-center py-2 px-3 sm:px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-sm"
+                        className="flex-1 bg-potato-orange text-white text-center py-2 px-3 sm:px-4 rounded-lg font-semibold hover:bg-potato-orange-dark transition-colors duration-300 text-sm"
                       >
                         🎬 영상 재생
                       </button>
@@ -708,7 +715,7 @@ const PortfolioPage = () => {
                         href={item.videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 bg-red-600 text-white text-center py-2 px-4 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300"
+                        className="flex-1 bg-clapperboard-gray-dark text-white text-center py-2 px-4 rounded-lg font-semibold hover:bg-clapperboard-gray transition-colors duration-300"
                       >
                         채널 방문
                       </a>
@@ -722,13 +729,13 @@ const PortfolioPage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-clapperboard-gray-dark">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               우리의 성과
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-dark mx-auto mb-8"></div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -740,10 +747,10 @@ const PortfolioPage = () => {
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-4xl mb-4">{stat.icon}</div>
-                <div className="text-4xl md:text-5xl font-black text-black mb-2">
+                <div className="text-4xl md:text-5xl font-black text-white mb-2">
                   {stat.number}
                 </div>
-                <p className="text-gray-600 font-medium">{stat.label}</p>
+                <p className="text-gray-300 font-medium">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -751,19 +758,19 @@ const PortfolioPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-clapperboard-gray">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-black mb-8">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-8">
             다음 작품의 주인공은?
           </h2>
-          <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
             여러분의 브랜드 스토리를 COUCH POTATO만의 스타일로 완성해보세요.
             다음 포트폴리오의 주인공이 되어보시지 않으시겠어요?
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link href="/contact">
-              <button className="px-12 py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-full hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
+              <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-105 transition-all duration-300 shadow-xl">
                 🚀 프로젝트 시작하기
               </button>
             </Link>
@@ -772,12 +779,12 @@ const PortfolioPage = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-12 py-5 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
+              <button className="px-12 py-5 bg-clapperboard-gray-dark text-white font-bold rounded-full hover:bg-clapperboard-gray transform hover:scale-105 transition-all duration-300 shadow-xl">
                 🎬 YouTube 채널 구독
               </button>
             </a>
             <Link href="/process">
-              <button className="px-12 py-5 border-2 border-black text-black font-bold rounded-full hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-300">
+              <button className="px-12 py-5 border-2 border-potato-orange text-potato-orange font-bold rounded-full hover:bg-potato-orange hover:text-white transform hover:scale-105 transition-all duration-300">
                 📋 제작 과정 보기
               </button>
             </Link>

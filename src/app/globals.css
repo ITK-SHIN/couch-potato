@@ -3,15 +3,26 @@
 @tailwind utilities;
 
 :root {
+  /* 로고 색상 기반 컬러 팔레트 */
+  --potato-orange: #d2691e;
+  --potato-orange-light: #f4a460;
+  --potato-orange-dark: #cd853f;
+  --clapperboard-gray: #2f2f2f;
+  --clapperboard-gray-light: #404040;
+  --clapperboard-gray-dark: #1a1a1a;
+  --text-black: #000000;
+  --text-white: #ffffff;
+  --text-gray: #666666;
+
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: 47, 47, 47;
+  --background-end-rgb: 26, 26, 26;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
+    --background-start-rgb: 26, 26, 26;
     --background-end-rgb: 0, 0, 0;
   }
 }
@@ -36,7 +47,12 @@ html {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: white;
+  background: linear-gradient(
+    135deg,
+    var(--clapperboard-gray) 0%,
+    var(--clapperboard-gray-dark) 100%
+  );
+  color: var(--text-white);
 
   height: 100vh;
 
@@ -151,12 +167,36 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Custom gradient text */
+/* Custom gradient text - 로고 색상 기반 */
 .gradient-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(
+    135deg,
+    var(--potato-orange) 0%,
+    var(--potato-orange-light) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* 감자칩 오렌지 그라데이션 */
+.potato-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--potato-orange) 0%,
+    var(--potato-orange-light) 50%,
+    var(--potato-orange-dark) 100%
+  );
+}
+
+/* 클래퍼보드 그레이 그라데이션 */
+.clapperboard-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--clapperboard-gray) 0%,
+    var(--clapperboard-gray-light) 50%,
+    var(--clapperboard-gray-dark) 100%
+  );
 }
 
 /* Hover effects */
@@ -188,12 +228,21 @@ html {
   -webkit-backdrop-filter: blur(15px) saturate(180%);
 }
 
-/* Dark overlay with better contrast */
+/* Dark overlay with better contrast - 로고 색상 기반 */
 .dark-overlay {
   background: linear-gradient(
     135deg,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.4) 100%
+    rgba(26, 26, 26, 0.8) 0%,
+    rgba(47, 47, 47, 0.6) 100%
+  );
+}
+
+/* 감자칩 오렌지 오버레이 */
+.potato-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(210, 105, 30, 0.2) 0%,
+    rgba(244, 164, 96, 0.1) 100%
   );
 }
 
@@ -212,10 +261,10 @@ html {
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 20px rgba(210, 105, 30, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+    box-shadow: 0 0 30px rgba(244, 164, 96, 0.5);
   }
 }
 
@@ -257,7 +306,12 @@ html {
   position: absolute;
   inset: -2px;
   padding: 2px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+  background: linear-gradient(
+    45deg,
+    var(--potato-orange),
+    var(--potato-orange-light),
+    var(--potato-orange-dark)
+  );
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.3s;
@@ -268,13 +322,13 @@ html {
   opacity: 1;
 }
 
-/* Volume Slider Styles */
+/* Volume Slider Styles - 로고 색상 기반 */
 .slider::-webkit-slider-thumb {
   appearance: none;
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: #3b82f6;
+  background: var(--potato-orange);
   cursor: pointer;
   border: 2px solid #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -282,7 +336,7 @@ html {
 }
 
 .slider::-webkit-slider-thumb:hover {
-  background: #2563eb;
+  background: var(--potato-orange-dark);
   transform: scale(1.1);
 }
 
@@ -296,7 +350,7 @@ html {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background: #3b82f6;
+  background: var(--potato-orange);
   cursor: pointer;
   border: 2px solid #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -304,7 +358,7 @@ html {
 }
 
 .slider::-moz-range-thumb:hover {
-  background: #2563eb;
+  background: var(--potato-orange-dark);
   transform: scale(1.1);
 }
 

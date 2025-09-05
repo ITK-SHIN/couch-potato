@@ -20,10 +20,10 @@ const Navbar = () => {
       <div className="w-20 sm:w-28 md:w-36 lg:w-44 xl:w-52">
         <Link
           href="/"
-          className="text-black font-black"
+          className="text-white font-black"
           onClick={() => setIsActive(false)}
         >
-          <div className="inline-block rounded-xl bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 p-2 sm:p-3 shadow-lg">
+          <div className="inline-block">
             <Image
               src="/imgs/mainlogo.png"
               alt="logoImage"
@@ -40,12 +40,13 @@ const Navbar = () => {
       <div>
         {/* 네비게이션 바 디자인 개선: 더 세련된 투명+그라데이션+글로우 효과, 메뉴 간격 넓힘, 폰트 강조 */}
         <div
-          className="hidden lg:flex items-center px-12 py-3 rounded-full shadow-2xl border border-white/30 bg-gradient-to-r from-white/70 via-white/40 to-white/70 bg-clip-padding backdrop-blur-lg"
+          className="hidden lg:flex items-center px-12 py-3 rounded-full shadow-2xl border border-potato-orange/30 bg-gradient-to-r from-clapperboard-gray/80 via-clapperboard-gray-light/60 to-clapperboard-gray/80 bg-clip-padding backdrop-blur-lg"
           style={{
             backdropFilter: "blur(18px) saturate(180%)",
             WebkitBackdropFilter: "blur(18px) saturate(180%)",
-            boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 1.5px 8px 0 rgba(255, 200, 80, 0.10)",
-            border: "1.5px solid rgba(255,255,255,0.25)",
+            boxShadow:
+              "0 8px 32px 0 rgba(210, 105, 30, 0.3), 0 1.5px 8px 0 rgba(244, 164, 96, 0.2)",
+            border: "1.5px solid rgba(210, 105, 30, 0.4)",
           }}
         >
           <ul className="flex gap-6">
@@ -54,8 +55,8 @@ const Navbar = () => {
                 href="/about"
                 className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
                   pathname === "/about"
-                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
-                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                    ? "bg-gradient-to-r from-potato-orange via-potato-orange-light to-potato-orange-dark text-white shadow-lg scale-105 ring-2 ring-potato-orange/50"
+                    : "text-white hover:bg-gradient-to-r hover:from-potato-orange/20 hover:to-potato-orange-light/20 hover:text-white hover:scale-105"
                 }`}
               >
                 ABOUT
@@ -66,8 +67,8 @@ const Navbar = () => {
                 href="/portfolio"
                 className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
                   pathname === "/portfolio"
-                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
-                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                    ? "bg-gradient-to-r from-potato-orange via-potato-orange-light to-potato-orange-dark text-white shadow-lg scale-105 ring-2 ring-potato-orange/50"
+                    : "text-white hover:bg-gradient-to-r hover:from-potato-orange/20 hover:to-potato-orange-light/20 hover:text-white hover:scale-105"
                 }`}
               >
                 PORTFOLIO
@@ -78,8 +79,8 @@ const Navbar = () => {
                 href="/process"
                 className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
                   pathname === "/process"
-                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
-                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                    ? "bg-gradient-to-r from-potato-orange via-potato-orange-light to-potato-orange-dark text-white shadow-lg scale-105 ring-2 ring-potato-orange/50"
+                    : "text-white hover:bg-gradient-to-r hover:from-potato-orange/20 hover:to-potato-orange-light/20 hover:text-white hover:scale-105"
                 }`}
               >
                 PROCESS
@@ -87,14 +88,14 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                href="/lotation"
+                href="/location"
                 className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
-                  pathname === "/lotation"
-                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
-                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                  pathname === "/location"
+                    ? "bg-gradient-to-r from-potato-orange via-potato-orange-light to-potato-orange-dark text-white shadow-lg scale-105 ring-2 ring-potato-orange/50"
+                    : "text-white hover:bg-gradient-to-r hover:from-potato-orange/20 hover:to-potato-orange-light/20 hover:text-white hover:scale-105"
                 }`}
               >
-                LOTATION
+                LOCATION
               </Link>
             </li>
             <li>
@@ -102,8 +103,8 @@ const Navbar = () => {
                 href="/contact"
                 className={`font-extrabold text-lg tracking-wide px-6 py-2 rounded-full transition-all duration-200 shadow-sm ${
                   pathname === "/contact"
-                    ? "bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 text-black shadow-lg scale-105 ring-2 ring-yellow-200"
-                    : "text-gray-800 hover:bg-gradient-to-r hover:from-yellow-100 hover:to-orange-100 hover:text-black hover:scale-105"
+                    ? "bg-gradient-to-r from-potato-orange via-potato-orange-light to-potato-orange-dark text-white shadow-lg scale-105 ring-2 ring-potato-orange/50"
+                    : "text-white hover:bg-gradient-to-r hover:from-potato-orange/20 hover:to-potato-orange-light/20 hover:text-white hover:scale-105"
                 }`}
               >
                 CONTACT
@@ -116,30 +117,34 @@ const Navbar = () => {
         <div className="lg:hidden z-40">
           {isActive && <Sidebar toggleSidebar={toggleSidebar} />}
           {!isActive && (
-            <div 
-              className="relative overflow-hidden rounded-2xl shadow-2xl p-4 border border-white/40 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"
+            <div
+              className="relative overflow-hidden rounded-2xl shadow-2xl p-4 border border-potato-orange/40 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"
               style={{
-                background: "linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 100%)",
+                background:
+                  "linear-gradient(135deg, rgba(47,47,47,0.8) 0%, rgba(64,64,64,0.6) 50%, rgba(26,26,26,0.4) 100%)",
                 backdropFilter: "blur(20px) saturate(180%)",
                 WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                boxShadow: "0 12px 40px 0 rgba(31, 38, 135, 0.25), inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 16px 0 rgba(255, 200, 80, 0.15)",
+                boxShadow:
+                  "0 12px 40px 0 rgba(210, 105, 30, 0.3), inset 0 1px 0 rgba(244, 164, 96, 0.2), 0 4px 16px 0 rgba(210, 105, 30, 0.2)",
               }}
             >
               {/* 배경 장식 요소 */}
-              <div 
+              <div
                 className="absolute inset-0 opacity-20"
                 style={{
-                  background: "linear-gradient(45deg, transparent 30%, rgba(255,204,21,0.1) 50%, transparent 70%)",
+                  background:
+                    "linear-gradient(45deg, transparent 30%, rgba(210,105,30,0.1) 50%, transparent 70%)",
                 }}
               />
               <IoMenu
                 onClick={toggleSidebar}
                 className="cursor-pointer text-4xl relative z-10 transition-transform duration-200 hover:rotate-90"
                 style={{
-                  background: "linear-gradient(135deg, #facc15 0%, #fb923c 50%, #f97316 100%)",
+                  background:
+                    "linear-gradient(135deg, #D2691E 0%, #F4A460 50%, #CD853F 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  filter: "drop-shadow(0 3px 12px rgba(251, 146, 60, 0.4))",
+                  filter: "drop-shadow(0 3px 12px rgba(210, 105, 30, 0.4))",
                 }}
               />
             </div>

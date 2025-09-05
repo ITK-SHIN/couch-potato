@@ -223,7 +223,7 @@ ${formData.message}
           {/* Left Side - Title and Description */}
           <div className="flex-1 max-w-2xl text-center lg:text-left">
             <div className="mb-6 sm:mb-8 animate-fade-in">
-              <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-yellow-400 rounded-full text-black text-xs sm:text-sm font-bold border-2 border-yellow-500 mb-4 sm:mb-6 shadow-xl">
+              <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-potato-orange rounded-full text-white text-xs sm:text-sm font-bold border-2 border-potato-orange-light mb-4 sm:mb-6 shadow-xl">
                 📞 CONTACT US
               </span>
             </div>
@@ -232,13 +232,13 @@ ${formData.message}
               연락하기
             </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl text-yellow-300 leading-relaxed mb-6 sm:mb-8 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
+            <p className="text-lg sm:text-xl lg:text-2xl text-potato-orange-light leading-relaxed mb-6 sm:mb-8 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
               프로젝트 상담부터 견적까지, 언제든 편하게 연락주세요
             </p>
 
             <div className="animate-slide-up-delayed mb-6 sm:mb-8">
               <Link href="#contact-info">
-                <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-yellow-300">
+                <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange-dark transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange">
                   📞 연락처 정보 보기
                 </button>
               </Link>
@@ -560,14 +560,17 @@ ${formData.message}
       </main>
 
       {/* Contact Information Cards */}
-      <section id="contact-info" className="py-16 sm:py-20 lg:py-24 bg-white">
+      <section
+        id="contact-info"
+        className="py-16 sm:py-20 lg:py-24 bg-clapperboard-gray-light"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-4 sm:mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6">
               연락처 정보
             </h2>
-            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 sm:mb-8"></div>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-2xl mx-auto px-4 sm:px-0">
+            <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
               다양한 방법으로 연락주시면 신속하게 답변드리겠습니다
             </p>
           </div>
@@ -577,22 +580,24 @@ ${formData.message}
               <a
                 key={index}
                 href={info.action}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 p-6 sm:p-8 text-center border-2 border-transparent hover:border-blue-500"
+                className="group bg-clapperboard-gray rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 p-6 sm:p-8 text-center border-2 border-transparent hover:border-potato-orange"
               >
                 <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 group-hover:animate-bounce">
                   {info.icon}
                 </div>
-                <h3 className="text-lg sm:text-xl font-black text-black mb-2 sm:mb-3">
+                <h3 className="text-lg sm:text-xl font-black text-white mb-2 sm:mb-3">
                   {info.title}
                 </h3>
-                <p className="text-xl sm:text-2xl font-bold text-blue-600 mb-2">
+                <p className="text-xl sm:text-2xl font-bold text-potato-orange mb-2">
                   {info.content}
                 </p>
-                <p className="text-gray-600 text-xs sm:text-sm">{info.subContent}</p>
+                <p className="text-gray-300 text-xs sm:text-sm">
+                  {info.subContent}
+                </p>
 
                 {/* Hover Effect */}
                 <div className="mt-3 sm:mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-500 text-white rounded-full text-xs sm:text-sm font-semibold">
+                  <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-potato-orange text-white rounded-full text-xs sm:text-sm font-semibold">
                     클릭하여 연결
                   </span>
                 </div>
@@ -603,14 +608,14 @@ ${formData.message}
       </section>
 
       {/* Service Features */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-clapperboard-gray">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               왜 COUCH POTATO인가요?
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            <div className="w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-8"></div>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               전문성과 창의성을 바탕으로 최고의 영상을 제작합니다
             </p>
           </div>
@@ -653,21 +658,21 @@ ${formData.message}
             ].map((service, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 p-8"
+                className="bg-clapperboard-gray-light rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 p-8"
               >
                 <div className="text-5xl mb-6 text-center">{service.icon}</div>
-                <h3 className="text-2xl font-black text-black mb-4 text-center">
+                <h3 className="text-2xl font-black text-white mb-4 text-center">
                   {service.title}
                 </h3>
-                <p className="text-gray-700 text-center mb-6 leading-relaxed">
+                <p className="text-gray-300 text-center mb-6 leading-relaxed">
                   {service.description}
                 </p>
 
                 <ul className="space-y-3">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-3">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-                      <span className="text-gray-700 text-sm">{feature}</span>
+                      <span className="w-2 h-2 bg-potato-orange rounded-full flex-shrink-0"></span>
+                      <span className="text-gray-300 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -678,13 +683,13 @@ ${formData.message}
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-clapperboard-gray-dark">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-6">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               자주 묻는 질문
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-8"></div>
           </div>
 
           <div className="space-y-6">
@@ -708,14 +713,14 @@ ${formData.message}
             ].map((faq, index) => (
               <div
                 key={index}
-                className="bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors duration-300"
+                className="bg-clapperboard-gray rounded-xl p-6 hover:bg-clapperboard-gray-light transition-colors duration-300"
               >
-                <h3 className="text-lg font-bold text-black mb-3 flex items-center gap-3">
-                  <span className="text-blue-500">Q.</span>
+                <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-3">
+                  <span className="text-potato-orange">Q.</span>
                   {faq.q}
                 </h3>
-                <p className="text-gray-700 leading-relaxed pl-8">
-                  <span className="text-blue-500 font-semibold">A.</span>{" "}
+                <p className="text-gray-300 leading-relaxed pl-8">
+                  <span className="text-potato-orange font-semibold">A.</span>{" "}
                   {faq.a}
                 </p>
               </div>
@@ -725,7 +730,7 @@ ${formData.message}
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+      <section className="py-24 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-black mb-8">
             지금 바로 시작하세요!
@@ -737,12 +742,12 @@ ${formData.message}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <a
               href="tel:010-1234-5678"
-              className="px-12 py-5 bg-white text-blue-600 font-bold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl"
+              className="px-12 py-5 bg-white text-potato-orange font-bold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl"
             >
               📞 010-1234-5678
             </a>
             <Link href="/portfolio">
-              <button className="px-12 py-5 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-blue-600 transform hover:scale-105 transition-all duration-300">
+              <button className="px-12 py-5 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-potato-orange transform hover:scale-105 transition-all duration-300">
                 🎬 포트폴리오 보기
               </button>
             </Link>
