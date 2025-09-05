@@ -18,6 +18,8 @@ const config: Config = {
         "slide-up": "slide-up 1s ease-out forwards",
         "fade-in-delayed": "fade-in-delayed 0.8s ease-out forwards",
         "slide-up-delayed": "slide-up-delayed 1s ease-out forwards",
+        "slide-in-left": "slide-in-left 0.5s ease-out forwards",
+        "menu-item-slide-in": "menu-item-slide-in 0.3s ease-out forwards",
         float: "float 3s ease-in-out infinite",
         glow: "glow 2s ease-in-out infinite alternate",
       },
@@ -45,6 +47,14 @@ const config: Config = {
         glow: {
           "0%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)" },
           "100%": { boxShadow: "0 0 30px rgba(147, 51, 234, 0.8)" },
+        },
+        "slide-in-left": {
+          "0%": { opacity: "0", transform: "translateX(-100%)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        "menu-item-slide-in": {
+          "0%": { opacity: "0", transform: "translateX(-20px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
         },
       },
       colors: {

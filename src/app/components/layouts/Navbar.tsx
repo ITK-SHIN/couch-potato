@@ -17,20 +17,22 @@ const Navbar = () => {
 
   return (
     <nav className="fixed flex justify-between px-8  top-0 left-0 right-0 mb-4 z-50 lg:top-4">
-      <div className="w-60">
+      <div className="w-40 sm:w-48 md:w-56 lg:w-60 xl:w-72">
         <Link
           href="/"
           className="text-black font-black"
           onClick={() => setIsActive(false)}
         >
-                  <div className="inline-block rounded-xl bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 p-3 shadow-lg">
-          <Image
-            src="/imgs/mainlogo.png"
-            alt={"logoImage"}
-            className="block  mt-4 w-44 lg:w-60 lg:mt-0"
-            width={230}
-            height={100}
-          />
+          <div className="inline-block rounded-xl bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 p-3 shadow-lg">
+            <Image
+              src="/imgs/mainlogo.png"
+              alt="logoImage"
+              className="block mt-2 sm:mt-3 md:mt-4 w-32 sm:w-40 md:w-48 lg:w-60 xl:w-72 h-auto"
+              width={288}
+              height={100}
+              style={{ maxWidth: "100%", height: "auto" }}
+              priority
+            />
           </div>
         </Link>
       </div>
@@ -110,23 +112,34 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* 모바일 메뉴: 더 둥글고 그림자 강조, 아이콘에 그라데이션 효과 */}
+        {/* 모바일 메뉴: 고급스러운 글라스모피즘 디자인 */}
         <div className="lg:hidden z-40">
-          {isActive ? (
-            <>
-              <Sidebar toggleSidebar={toggleSidebar} />
-            </>
-          ) : (
-            <div className="bg-white/90 rounded-full shadow-2xl p-3 border border-white/30 flex items-center justify-center">
+          {isActive && <Sidebar toggleSidebar={toggleSidebar} />}
+          {!isActive && (
+            <div 
+              className="relative overflow-hidden rounded-2xl shadow-2xl p-4 border border-white/40 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"
+              style={{
+                background: "linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 100%)",
+                backdropFilter: "blur(20px) saturate(180%)",
+                WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                boxShadow: "0 12px 40px 0 rgba(31, 38, 135, 0.25), inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 16px 0 rgba(255, 200, 80, 0.15)",
+              }}
+            >
+              {/* 배경 장식 요소 */}
+              <div 
+                className="absolute inset-0 opacity-20"
+                style={{
+                  background: "linear-gradient(45deg, transparent 30%, rgba(255,204,21,0.1) 50%, transparent 70%)",
+                }}
+              />
               <IoMenu
                 onClick={toggleSidebar}
-                className="cursor-pointer text-4xl"
+                className="cursor-pointer text-4xl relative z-10 transition-transform duration-200 hover:rotate-90"
                 style={{
-                  color: "transparent",
-                  background: "linear-gradient(90deg, #facc15 0%, #fb923c 100%)",
+                  background: "linear-gradient(135deg, #facc15 0%, #fb923c 50%, #f97316 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  filter: "drop-shadow(0 2px 8px #facc1555)",
+                  filter: "drop-shadow(0 3px 12px rgba(251, 146, 60, 0.4))",
                 }}
               />
             </div>
