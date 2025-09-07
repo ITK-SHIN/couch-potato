@@ -143,7 +143,7 @@ export default function Home() {
                 {/* Enhanced Tagline - Better Mobile Typography */}
                 <div className="animate-fade-in-delayed space-y-2 sm:space-y-4">
                   <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white/95 leading-relaxed font-light">
-                    브랜드의 이야기를
+                    브랜드의 이야기를(test)
                   </p>
                   <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
                     <span className="bg-gradient-to-r from-potato-orange-light via-potato-orange to-potato-orange-dark bg-clip-text text-transparent">
