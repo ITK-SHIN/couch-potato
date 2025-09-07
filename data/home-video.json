@@ -1,0 +1,33 @@
+{
+  "id": "home-main-video",
+  "videoId": "1CUt84BK_p0",
+  "title": "패션을 파는 것은 어떨까요?",
+  "description": "패션 브랜드의 마케팅을 위한 창의적인 광고 영상입니다. 브랜드의 정체성과 가치를 시각적으로 표현하여 고객과의 감정적 연결을 만들어내는 작품입니다.",
+  "tags": [
+    {
+      "id": "tag1",
+      "text": "#패션",
+      "color": "potato-orange"
+    },
+    {
+      "id": "tag2",
+      "text": "#브랜드영상",
+      "color": "clapperboard-gray"
+    },
+    {
+      "id": "tag3",
+      "text": "#대표작",
+      "color": "potato-orange-light"
+    }
+  ],
+  "stats": {
+    "views": "150K+",
+    "likes": "2.5K+"
+  },
+  "client": "패션 브랜드",
+  "year": "2024",
+  "category": "commercial",
+  "thumbnail": "https://img.youtube.com/vi/1CUt84BK_p0/maxresdefault.jpg",
+  "videoUrl": "https://www.youtube.com/watch?v=1CUt84BK_p0",
+  "lastUpdated": "2025-09-07T08:45:10.548Z"
+}

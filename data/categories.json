@@ -1,0 +1,50 @@
+[
+  {
+    "id": "all",
+    "name": "전체",
+    "icon": "🎬",
+    "order": 0
+  },
+  {
+    "id": "youtube",
+    "name": "YouTube",
+    "icon": "📹",
+    "order": 1
+  },
+  {
+    "id": "wedding",
+    "name": "웨딩",
+    "icon": "💒",
+    "order": 2
+  },
+  {
+    "id": "brand",
+    "name": "브랜드",
+    "icon": "🏢",
+    "order": 3
+  },
+  {
+    "id": "commercial",
+    "name": "광고",
+    "icon": "📺",
+    "order": 5
+  },
+  {
+    "id": "corporate",
+    "name": "기업홍보",
+    "icon": "🏭",
+    "order": 6
+  },
+  {
+    "id": "test",
+    "name": "test",
+    "icon": "📹",
+    "order": 4
+  },
+  {
+    "id": "test2",
+    "name": "test2",
+    "icon": "📚",
+    "order": 9
+  }
+]

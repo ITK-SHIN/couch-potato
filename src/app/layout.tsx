@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/layouts/Navbar";
 import Footer from "./components/layouts/Footer";
+import { AdminProvider } from "@/contexts/AdminContext";
 
 export const metadata: Metadata = {
   title: {
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <AdminProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </AdminProvider>
       </body>
     </html>
   );

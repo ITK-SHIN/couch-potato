@@ -1,8 +1,14 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import UniversalContent from "@/components/UniversalContent";
+import { useAdmin } from "@/contexts/AdminContext";
 
 const AboutPage = () => {
+  const { isAdmin } = useAdmin();
+
   return (
     <>
       {/* Hero Section */}
@@ -27,17 +33,46 @@ const AboutPage = () => {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 sm:mb-8 leading-tight animate-slide-up drop-shadow-2xl">
-              우리의 이야기
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="about"
+                fields={{
+                  about_title: {
+                    value: "우리의 이야기",
+                    className:
+                      "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white",
+                  },
+                }}
+              />
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-potato-orange-light max-w-3xl mx-auto leading-relaxed mb-8 sm:mb-12 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
-              창의적인 영상으로 브랜드의 가치를 전달하는 팀
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="about"
+                fields={{
+                  about_subtitle: {
+                    value: "창의적인 영상으로 브랜드의 가치를 전달하는 팀",
+                    className:
+                      "text-lg sm:text-xl lg:text-2xl text-potato-orange-light font-bold",
+                  },
+                }}
+              />
             </p>
 
             <div className="animate-slide-up-delayed">
               <Link href="#story">
                 <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange-dark transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange">
-                  📖 스토리 보기
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="about"
+                    fields={{
+                      story_button: {
+                        value: "📖 스토리 보기",
+                        className: "text-white font-black",
+                      },
+                    }}
+                  />
                 </button>
               </Link>
             </div>
@@ -54,27 +89,62 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="animate-fade-in order-2 lg:order-1">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 sm:mb-8">
-                COUCH POTATO의
-                <br />
-                <span className="bg-gradient-to-r from-potato-orange to-potato-orange-light bg-clip-text text-transparent">
-                  시작
-                </span>
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="about"
+                  fields={{
+                    story_title: {
+                      value: "COUCH POTATO의 시작",
+                      className:
+                        "text-3xl sm:text-4xl lg:text-5xl font-black text-white",
+                    },
+                  }}
+                />
               </h2>
               <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mb-6 sm:mb-8"></div>
 
               <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-300 leading-relaxed">
                 <p>
-                  <strong>COUCH POTATO</strong>는 &apos;소파에서 감자&apos;라는
-                  뜻으로, 편안하게 소파에 앉아 영상을 감상하는 순간을
-                  의미합니다.
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="about"
+                    fields={{
+                      story_description1: {
+                        value:
+                          "COUCH POTATO는 '소파에서 감자'라는 뜻으로, 편안하게 소파에 앉아 영상을 감상하는 순간을 의미합니다.",
+                        className:
+                          "text-base sm:text-lg text-gray-300 leading-relaxed",
+                      },
+                    }}
+                  />
                 </p>
                 <p>
-                  우리는 그 순간에 시청자의 마음을 움직이고, 브랜드의 메시지를
-                  깊이 있게 전달하는 영상을 만들고자 합니다.
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="about"
+                    fields={{
+                      story_description2: {
+                        value:
+                          "우리는 그 순간에 시청자의 마음을 움직이고, 브랜드의 메시지를 깊이 있게 전달하는 영상을 만들고자 합니다.",
+                        className:
+                          "text-base sm:text-lg text-gray-300 leading-relaxed",
+                      },
+                    }}
+                  />
                 </p>
                 <p>
-                  단순한 영상 제작을 넘어서, 브랜드와 고객 사이의 감정적
-                  연결고리를 만들어내는 것이 우리의 목표입니다.
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="about"
+                    fields={{
+                      story_description3: {
+                        value:
+                          "단순한 영상 제작을 넘어서, 브랜드와 고객 사이의 감정적 연결고리를 만들어내는 것이 우리의 목표입니다.",
+                        className:
+                          "text-base sm:text-lg text-gray-300 leading-relaxed",
+                      },
+                    }}
+                  />
                 </p>
               </div>
             </div>
@@ -107,7 +177,17 @@ const AboutPage = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6">
-              대표 메시지
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="about"
+                fields={{
+                  ceo_message_title: {
+                    value: "대표 메시지",
+                    className:
+                      "text-3xl sm:text-4xl lg:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-6 sm:mb-8"></div>
           </div>
@@ -122,21 +202,30 @@ const AboutPage = () => {
 
               <div className="flex-1 text-center md:text-left">
                 <h3 className="text-2xl sm:text-3xl font-black text-white mb-4 sm:mb-6">
-                  신상현 대표
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="about"
+                    fields={{
+                      ceo_name: {
+                        value: "신상현 대표",
+                        className: "text-2xl sm:text-3xl font-black text-white",
+                      },
+                    }}
+                  />
                 </h3>
                 <blockquote className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed italic">
-                  &quot;수많은 영상 업체들이 많지만, COUCH POTATO를 컨택해주신
-                  것에는 단순히 제작 그 이상의 가치를 보셨기 때문이라고
-                  생각합니다.
-                  <br />
-                  <br />
-                  영상 콘텐츠로 전하는 브랜드의 힘을 믿습니다. 우리는 전하고
-                  싶은 메시지를 가장 잘 표현할 수 있는 방법을 수단과 방법을
-                  가리지 않고 찾아내어, 기어코 구현시키는 팀입니다.
-                  <br />
-                  <br />
-                  고객의 비전을 현실로 만드는 것, 그것이 COUCH POTATO의
-                  사명입니다.&quot;
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="about"
+                    fields={{
+                      ceo_message: {
+                        value:
+                          "수많은 영상 업체들이 많지만, COUCH POTATO를 컨택해주신 것에는 단순히 제작 그 이상의 가치를 보셨기 때문이라고 생각합니다.\n\n영상 콘텐츠로 전하는 브랜드의 힘을 믿습니다. 우리는 전하고 싶은 메시지를 가장 잘 표현할 수 있는 방법을 수단과 방법을 가리지 않고 찾아내어, 기어코 구현시키는 팀입니다.\n\n고객의 비전을 현실로 만드는 것, 그것이 COUCH POTATO의 사명입니다.",
+                        className:
+                          "text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed italic",
+                      },
+                    }}
+                  />
                 </blockquote>
               </div>
             </div>
@@ -149,11 +238,30 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6">
-              우리의 가치
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="about"
+                fields={{
+                  values_title: {
+                    value: "우리의 가치",
+                    className:
+                      "text-3xl sm:text-4xl lg:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-6 sm:mb-8"></div>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto px-4 sm:px-0">
-              COUCH POTATO가 추구하는 핵심 가치들입니다
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="about"
+                fields={{
+                  values_subtitle: {
+                    value: "COUCH POTATO가 추구하는 핵심 가치들입니다",
+                    className: "text-base sm:text-lg lg:text-xl text-gray-300",
+                  },
+                }}
+              />
             </p>
           </div>
 
@@ -202,11 +310,30 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-              우리 팀
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="about"
+                fields={{
+                  team_title: {
+                    value: "우리 팀",
+                    className: "text-4xl md:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-8"></div>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              각자의 전문성을 바탕으로 최고의 결과물을 만들어내는 팀입니다
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="about"
+                fields={{
+                  team_subtitle: {
+                    value:
+                      "각자의 전문성을 바탕으로 최고의 결과물을 만들어내는 팀입니다",
+                    className: "text-xl text-gray-300",
+                  },
+                }}
+              />
             </p>
           </div>
 
@@ -260,22 +387,58 @@ const AboutPage = () => {
       <section className="py-24 bg-clapperboard-gray-dark">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-8">
-            함께 시작해보세요
+            <UniversalContent
+              isAdmin={isAdmin}
+              pageName="about"
+              fields={{
+                contact_cta_title: {
+                  value: "함께 시작해보세요",
+                  className: "text-4xl md:text-5xl font-black text-white",
+                },
+              }}
+            />
           </h2>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            COUCH POTATO와 함께 브랜드의 이야기를 영상으로 완성해보세요.
-            언제든지 연락 주시면 친절하게 상담해드리겠습니다.
+            <UniversalContent
+              isAdmin={isAdmin}
+              pageName="about"
+              fields={{
+                contact_cta_subtitle: {
+                  value:
+                    "COUCH POTATO와 함께 브랜드의 이야기를 영상으로 완성해보세요. 언제든지 연락 주시면 친절하게 상담해드리겠습니다.",
+                  className: "text-xl text-gray-300 leading-relaxed",
+                },
+              }}
+            />
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link href="/contact">
               <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange-dark transform hover:scale-105 transition-all duration-300 shadow-xl">
-                📞 연락하기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="about"
+                  fields={{
+                    contact_cta_button1: {
+                      value: "📞 연락하기",
+                      className: "text-white font-bold",
+                    },
+                  }}
+                />
               </button>
             </Link>
             <Link href="/portfolio">
               <button className="px-12 py-5 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-clapperboard-gray-dark transform hover:scale-105 transition-all duration-300">
-                🎬 포트폴리오 보기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="about"
+                  fields={{
+                    contact_cta_button2: {
+                      value: "🎬 포트폴리오 보기",
+                      className: "text-white font-bold",
+                    },
+                  }}
+                />
               </button>
             </Link>
           </div>

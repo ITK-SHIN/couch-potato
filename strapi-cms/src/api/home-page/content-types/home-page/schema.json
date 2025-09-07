@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "Home Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tagline1": {
+      "type": "string",
+      "default": "브랜드의 이야기를123",
+      "unique": false
+    },
+    "tagline2": {
+      "type": "string",
+      "default": "영상으로 완성하는"
+    },
+    "tagline3": {
+      "type": "string",
+      "default": "크리에이티브 스튜디오"
+    }
+  }
+}

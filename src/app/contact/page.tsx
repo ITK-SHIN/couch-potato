@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import emailjs from "@emailjs/browser";
+import UniversalContent from "@/components/UniversalContent";
+import { useAdmin } from "@/contexts/AdminContext";
 
 const ContactPage = () => {
+  const { isAdmin } = useAdmin();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -229,17 +232,47 @@ ${formData.message}
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 sm:mb-8 leading-tight animate-slide-up drop-shadow-2xl">
-              연락하기
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="contact"
+                fields={{
+                  contact_title: {
+                    value: "연락하기",
+                    className:
+                      "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white",
+                  },
+                }}
+              />
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-potato-orange-light leading-relaxed mb-6 sm:mb-8 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
-              프로젝트 상담부터 견적까지, 언제든 편하게 연락주세요
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="contact"
+                fields={{
+                  contact_subtitle: {
+                    value:
+                      "프로젝트 상담부터 견적까지, 언제든 편하게 연락주세요",
+                    className:
+                      "text-lg sm:text-xl lg:text-2xl text-potato-orange-light font-bold",
+                  },
+                }}
+              />
             </p>
 
             <div className="animate-slide-up-delayed mb-6 sm:mb-8">
               <Link href="#contact-info">
                 <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange-dark transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange">
-                  📞 연락처 정보 보기
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="contact"
+                    fields={{
+                      contact_info_button: {
+                        value: "📞 연락처 정보 보기",
+                        className: "text-white font-black",
+                      },
+                    }}
+                  />
                 </button>
               </Link>
             </div>
@@ -250,13 +283,31 @@ ${formData.message}
                 href="tel:010-1234-5678"
                 className="px-8 py-4 bg-green-500 text-white font-bold rounded-full hover:bg-green-600 transform hover:scale-105 transition-all duration-300 shadow-xl"
               >
-                📞 바로 전화하기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="contact"
+                  fields={{
+                    phone_button: {
+                      value: "📞 바로 전화하기",
+                      className: "text-white font-bold",
+                    },
+                  }}
+                />
               </a>
               <a
                 href="mailto:hello@couchpotato.kr"
                 className="px-8 py-4 bg-blue-500 text-white font-bold rounded-full hover:bg-blue-600 transform hover:scale-105 transition-all duration-300 shadow-xl"
               >
-                📧 이메일 보내기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="contact"
+                  fields={{
+                    email_button: {
+                      value: "📧 이메일 보내기",
+                      className: "text-white font-bold",
+                    },
+                  }}
+                />
               </a>
             </div>
           </div>
@@ -273,10 +324,28 @@ ${formData.message}
                   <span className="text-lg">📝</span>
                 </div>
                 <h2 className="text-2xl font-black text-white mb-2 drop-shadow-lg">
-                  빠른 견적 문의
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="contact"
+                    fields={{
+                      form_title: {
+                        value: "빠른 견적 문의",
+                        className: "text-2xl font-black text-white",
+                      },
+                    }}
+                  />
                 </h2>
                 <p className="text-blue-100 text-xs font-medium">
-                  간단한 정보만 남겨주시면 24시간 내 연락드려요
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="contact"
+                    fields={{
+                      form_subtitle: {
+                        value: "간단한 정보만 남겨주시면 24시간 내 연락드려요",
+                        className: "text-xs font-medium",
+                      },
+                    }}
+                  />
                 </p>
                 <div className="w-16 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mt-3 rounded-full"></div>
               </div>
@@ -567,11 +636,31 @@ ${formData.message}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6">
-              연락처 정보
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="contact"
+                fields={{
+                  contact_info_title: {
+                    value: "연락처 정보",
+                    className:
+                      "text-3xl sm:text-4xl lg:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-6 sm:mb-8"></div>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
-              다양한 방법으로 연락주시면 신속하게 답변드리겠습니다
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="contact"
+                fields={{
+                  contact_info_subtitle: {
+                    value:
+                      "다양한 방법으로 연락주시면 신속하게 답변드리겠습니다",
+                    className: "text-base sm:text-lg lg:text-xl text-gray-300",
+                  },
+                }}
+              />
             </p>
           </div>
 
@@ -612,11 +701,30 @@ ${formData.message}
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-              왜 COUCH POTATO인가요?
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="contact"
+                fields={{
+                  why_us_title: {
+                    value: "왜 COUCH POTATO인가요?",
+                    className: "text-4xl md:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-8"></div>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              전문성과 창의성을 바탕으로 최고의 영상을 제작합니다
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="contact"
+                fields={{
+                  why_us_subtitle: {
+                    value:
+                      "전문성과 창의성을 바탕으로 최고의 영상을 제작합니다",
+                    className: "text-xl text-gray-300",
+                  },
+                }}
+              />
             </p>
           </div>
 
@@ -687,7 +795,16 @@ ${formData.message}
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-              자주 묻는 질문
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="contact"
+                fields={{
+                  faq_title: {
+                    value: "자주 묻는 질문",
+                    className: "text-4xl md:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-light mx-auto mb-8"></div>
           </div>
@@ -733,10 +850,29 @@ ${formData.message}
       <section className="py-24 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-black mb-8">
-            지금 바로 시작하세요!
+            <UniversalContent
+              isAdmin={isAdmin}
+              pageName="contact"
+              fields={{
+                final_cta_title: {
+                  value: "지금 바로 시작하세요!",
+                  className: "text-4xl md:text-5xl font-black",
+                },
+              }}
+            />
           </h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
-            전문적인 영상 제작으로 여러분의 스토리를 세상에 알려보세요
+            <UniversalContent
+              isAdmin={isAdmin}
+              pageName="contact"
+              fields={{
+                final_cta_subtitle: {
+                  value:
+                    "전문적인 영상 제작으로 여러분의 스토리를 세상에 알려보세요",
+                  className: "text-xl leading-relaxed opacity-90",
+                },
+              }}
+            />
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -744,11 +880,29 @@ ${formData.message}
               href="tel:010-1234-5678"
               className="px-12 py-5 bg-white text-potato-orange font-bold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl"
             >
-              📞 010-1234-5678
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="contact"
+                fields={{
+                  final_cta_phone: {
+                    value: "📞 010-1234-5678",
+                    className: "text-potato-orange font-bold",
+                  },
+                }}
+              />
             </a>
             <Link href="/portfolio">
               <button className="px-12 py-5 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-potato-orange transform hover:scale-105 transition-all duration-300">
-                🎬 포트폴리오 보기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="contact"
+                  fields={{
+                    final_cta_portfolio: {
+                      value: "🎬 포트폴리오 보기",
+                      className: "text-white font-bold",
+                    },
+                  }}
+                />
               </button>
             </Link>
           </div>

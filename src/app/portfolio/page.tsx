@@ -2,9 +2,13 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getChannelVideos, isYouTubeAPIConfigured } from "@/utils/youtube";
+import UniversalContent from "@/components/UniversalContent";
+import CategoryManager from "@/components/CategoryManager";
+import VideoManager from "@/components/VideoManager";
+import { useAdmin } from "@/contexts/AdminContext";
 
 const PortfolioPage = () => {
+  const { isAdmin } = useAdmin();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -19,6 +23,37 @@ const PortfolioPage = () => {
     useState<HTMLDivElement | null>(null);
   const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
   const [player, setPlayer] = useState<any>(null);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const videosPerPage = 9;
+
+  // 카테고리 로딩 함수
+  const loadCategories = async () => {
+    try {
+      const response = await fetch("/api/categories");
+      if (response.ok) {
+        const result = await response.json();
+        setCategories(result.categories || []);
+      }
+    } catch (error) {
+      console.error("카테고리 로딩 오류:", error);
+      // 기본 카테고리 사용
+      setCategories(getDefaultCategories());
+    }
+  };
+
+  // 기본 카테고리 (API 실패 시 사용)
+  const getDefaultCategories = () => [
+    { id: "all", name: "전체", icon: "🎬", order: 0 },
+    { id: "youtube", name: "YouTube", icon: "📹", order: 1 },
+    { id: "wedding", name: "웨딩", icon: "💒", order: 2 },
+    { id: "brand", name: "브랜드", icon: "🏢", order: 3 },
+    { id: "commercial", name: "광고", icon: "📺", order: 4 },
+    { id: "corporate", name: "기업홍보", icon: "🏭", order: 5 },
+    { id: "event", name: "이벤트", icon: "🎉", order: 6 },
+    { id: "education", name: "교육", icon: "📚", order: 7 },
+    { id: "social", name: "소셜미디어", icon: "📱", order: 8 },
+  ];
 
   const openVideoModal = (videoId: string) => {
     setSelectedVideo(videoId);
@@ -100,44 +135,38 @@ const PortfolioPage = () => {
     }
   };
 
-  // YouTube API에서 실제 영상 데이터 로드
+  // 영상 로딩 함수
+  const loadVideos = async () => {
+    try {
+      const response = await fetch("/api/portfolio-videos");
+      if (response.ok) {
+        const result = await response.json();
+        setPortfolioItems(result.videos || []);
+      }
+    } catch (error) {
+      console.error("영상 로딩 오류:", error);
+      setError("영상 데이터를 불러오는 중 오류가 발생했습니다.");
+    }
+  };
+
+  // 카테고리와 포트폴리오 데이터 로드
   useEffect(() => {
-    const loadPortfolioData = async () => {
+    const loadData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // YouTube API가 설정되어 있는지 확인
-        if (!isYouTubeAPIConfigured()) {
-          console.warn("YouTube API key not configured, using fallback data");
-          // 폴백 데이터 사용
-          setPortfolioItems(getFallbackPortfolioData());
-          setLoading(false);
-          return;
-        }
-
-        // YouTube API에서 데이터 가져오기
-        const videos = await getChannelVideos(20); // 최대 20개 영상
-
-        if (videos && videos.length > 0) {
-          setPortfolioItems(videos);
-          console.log(`Loaded ${videos.length} videos from YouTube API`);
-        } else {
-          // API에서 데이터를 가져오지 못한 경우 폴백 데이터 사용
-          console.warn("No videos returned from API, using fallback data");
-          setPortfolioItems(getFallbackPortfolioData());
-        }
+        // 카테고리와 영상 로드
+        await Promise.all([loadCategories(), loadVideos()]);
       } catch (err) {
-        console.error("Error loading portfolio data:", err);
-        setError("영상 데이터를 불러오는 중 오류가 발생했습니다.");
-        // 에러 발생 시에도 폴백 데이터 사용
-        setPortfolioItems(getFallbackPortfolioData());
+        console.error("Error loading data:", err);
+        setError("데이터를 불러오는 중 오류가 발생했습니다.");
       } finally {
         setLoading(false);
       }
     };
 
-    loadPortfolioData();
+    loadData();
   }, []);
 
   // YouTube Player API 로드 및 초기화
@@ -330,22 +359,39 @@ const PortfolioPage = () => {
     },
   ];
 
-  const categories = [
-    { id: "all", name: "전체", icon: "🎬" },
-    { id: "youtube", name: "YouTube", icon: "📹" },
-    { id: "wedding", name: "웨딩", icon: "💒" },
-    { id: "brand", name: "브랜드", icon: "🏢" },
-    { id: "commercial", name: "광고", icon: "📺" },
-    { id: "corporate", name: "기업홍보", icon: "🏭" },
-    { id: "event", name: "이벤트", icon: "🎉" },
-    { id: "education", name: "교육", icon: "📚" },
-    { id: "social", name: "소셜미디어", icon: "📱" },
-  ];
+  // 카테고리 변경 핸들러
+  const handleCategoriesChange = (newCategories: any[]) => {
+    setCategories(newCategories);
+  };
+
+  // 영상 변경 핸들러
+  const handleVideosChange = (newVideos: any[]) => {
+    setPortfolioItems(newVideos);
+  };
 
   const filteredItems =
     selectedCategory === "all"
       ? portfolioItems
       : portfolioItems.filter((item) => item.category === selectedCategory);
+
+  // 페이지네이션 계산
+  const totalPages = Math.ceil(filteredItems.length / videosPerPage);
+  const startIndex = (currentPage - 1) * videosPerPage;
+  const endIndex = startIndex + videosPerPage;
+  const currentItems = filteredItems.slice(startIndex, endIndex);
+
+  // 페이지 변경 핸들러
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // 페이지 상단으로 스크롤
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // 카테고리 변경 시 첫 페이지로 이동
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    setCurrentPage(1);
+  };
 
   return (
     <>
@@ -374,17 +420,46 @@ const PortfolioPage = () => {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 sm:mb-8 leading-tight animate-slide-up drop-shadow-2xl">
-                  작품 갤러리
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="portfolio"
+                    fields={{
+                      portfolio_title: {
+                        value: "작품 갤러리",
+                        className:
+                          "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white",
+                      },
+                    }}
+                  />
                 </h1>
 
                 <p className="text-lg sm:text-xl lg:text-2xl text-potato-orange-light leading-relaxed mb-8 sm:mb-12 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
-                  COUCH POTATO의 실제 작품들을 감상해보세요
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="portfolio"
+                    fields={{
+                      portfolio_subtitle: {
+                        value: "COUCH POTATO의 실제 작품들을 감상해보세요",
+                        className:
+                          "text-lg sm:text-xl lg:text-2xl text-potato-orange-light font-bold",
+                      },
+                    }}
+                  />
                 </p>
 
                 <div className="animate-slide-up-delayed">
                   <Link href="#portfolio-grid">
                     <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange-light">
-                      🎬 작품 갤러리 보기
+                      <UniversalContent
+                        isAdmin={isAdmin}
+                        pageName="portfolio"
+                        fields={{
+                          gallery_button: {
+                            value: "🎬 작품 갤러리 보기",
+                            className: "text-white font-black",
+                          },
+                        }}
+                      />
                     </button>
                   </Link>
                 </div>
@@ -591,20 +666,29 @@ const PortfolioPage = () => {
       {/* Filter Section */}
       <section className="py-12 sm:py-16 bg-clapperboard-gray-light border-b border-clapperboard-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* 카테고리 관리자 (관리자만 표시) */}
+          <CategoryManager
+            isAdmin={isAdmin}
+            onCategoriesChange={handleCategoriesChange}
+          />
+
+          {/* 카테고리 필터 버튼들 */}
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base ${
-                  selectedCategory === category.id
-                    ? "bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white shadow-lg"
-                    : "bg-clapperboard-gray text-white hover:bg-clapperboard-gray-light"
-                }`}
-              >
-                {category.icon} {category.name}
-              </button>
-            ))}
+            {categories
+              .sort((a, b) => a.order - b.order)
+              .map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => handleCategoryChange(category.id)}
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base ${
+                    selectedCategory === category.id
+                      ? "bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white shadow-lg"
+                      : "bg-clapperboard-gray text-white hover:bg-clapperboard-gray-light"
+                  }`}
+                >
+                  {category.icon} {category.name}
+                </button>
+              ))}
           </div>
         </div>
       </section>
@@ -615,12 +699,15 @@ const PortfolioPage = () => {
         className="py-16 sm:py-20 lg:py-24 bg-clapperboard-gray"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* 영상 관리자 (관리자만 표시) */}
+          <VideoManager isAdmin={isAdmin} onVideosChange={handleVideosChange} />
+
           {/* Loading State */}
           {loading && (
             <div className="text-center py-12 sm:py-16">
               <div className="inline-block animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-4 border-blue-500 border-t-transparent mb-4"></div>
               <p className="text-gray-300 text-base sm:text-lg">
-                YouTube 채널에서 영상을 불러오는 중...
+                영상을 불러오는 중...
               </p>
             </div>
           )}
@@ -633,97 +720,166 @@ const PortfolioPage = () => {
                 오류 발생
               </h3>
               <p className="text-gray-300 mb-4 text-sm sm:text-base">{error}</p>
-              <p className="text-xs sm:text-sm text-gray-400">
-                기본 포트폴리오 데이터를 표시합니다.
-              </p>
             </div>
           )}
 
           {/* Portfolio Grid */}
           {!loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {filteredItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="group relative bg-clapperboard-gray-light rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 overflow-hidden"
-                >
-                  {/* Thumbnail */}
-                  <div className="relative aspect-video overflow-hidden">
-                    <Image
-                      src={item.thumbnail}
-                      alt={item.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {currentItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="group relative bg-clapperboard-gray-light rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 overflow-hidden"
+                  >
+                    {/* Thumbnail */}
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
+                        src={item.thumbnail}
+                        alt={item.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
 
-                    {/* Play Button */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button
-                        onClick={() => openVideoModal(item.videoId)}
-                        className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300 hover:bg-red-700"
-                      >
-                        <svg
-                          className="w-8 h-8 text-white ml-1"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
+                      {/* Play Button */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button
+                          onClick={() => openVideoModal(item.videoId)}
+                          className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300 hover:bg-red-700"
                         >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </button>
+                          <svg
+                            className="w-8 h-8 text-white ml-1"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </button>
+                      </div>
+
+                      {/* Category Badge */}
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 bg-black/70 text-white text-xs font-bold rounded-full backdrop-blur-sm">
+                          {
+                            categories.find((cat) => cat.id === item.category)
+                              ?.name
+                          }
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Category Badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-black/70 text-white text-xs font-bold rounded-full backdrop-blur-sm">
-                        {
-                          categories.find((cat) => cat.id === item.category)
-                            ?.name
-                        }
-                      </span>
+                    {/* Content */}
+                    <div className="p-4 sm:p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-xs sm:text-sm text-potato-orange font-semibold">
+                          {item.client}
+                        </span>
+                        <span className="text-xs sm:text-sm text-gray-400">
+                          {item.year}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-3 group-hover:text-potato-orange transition-colors duration-300 line-clamp-2">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
+                        {item.description}
+                      </p>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <button
+                          onClick={() => openVideoModal(item.videoId)}
+                          className="flex-1 bg-potato-orange text-white text-center py-2 px-3 sm:px-4 rounded-lg font-semibold hover:bg-potato-orange-dark transition-colors duration-300 text-sm"
+                        >
+                          🎬 영상 재생
+                        </button>
+                        <a
+                          href={item.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 bg-clapperboard-gray-dark text-white text-center py-2 px-4 rounded-lg font-semibold hover:bg-clapperboard-gray transition-colors duration-300"
+                        >
+                          채널 방문
+                        </a>
+                      </div>
                     </div>
                   </div>
+                ))}
+              </div>
 
-                  {/* Content */}
-                  <div className="p-4 sm:p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs sm:text-sm text-potato-orange font-semibold">
-                        {item.client}
-                      </span>
-                      <span className="text-xs sm:text-sm text-gray-400">
-                        {item.year}
-                      </span>
-                    </div>
+              {/* 페이지네이션 */}
+              {totalPages > 1 && (
+                <div className="flex justify-center items-center mt-12 space-x-2">
+                  {/* 이전 페이지 버튼 */}
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${
+                      currentPage === 1
+                        ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                        : "bg-clapperboard-gray text-white hover:bg-clapperboard-gray-light"
+                    }`}
+                  >
+                    이전
+                  </button>
 
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3 group-hover:text-potato-orange transition-colors duration-300 line-clamp-2">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
-                      {item.description}
-                    </p>
-
-                    {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-2">
+                  {/* 페이지 번호들 */}
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (page) => (
                       <button
-                        onClick={() => openVideoModal(item.videoId)}
-                        className="flex-1 bg-potato-orange text-white text-center py-2 px-3 sm:px-4 rounded-lg font-semibold hover:bg-potato-orange-dark transition-colors duration-300 text-sm"
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${
+                          currentPage === page
+                            ? "bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white shadow-lg"
+                            : "bg-clapperboard-gray text-white hover:bg-clapperboard-gray-light"
+                        }`}
                       >
-                        🎬 영상 재생
+                        {page}
                       </button>
-                      <a
-                        href={item.videoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 bg-clapperboard-gray-dark text-white text-center py-2 px-4 rounded-lg font-semibold hover:bg-clapperboard-gray transition-colors duration-300"
-                      >
-                        채널 방문
-                      </a>
-                    </div>
-                  </div>
+                    )
+                  )}
+
+                  {/* 다음 페이지 버튼 */}
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${
+                      currentPage === totalPages
+                        ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                        : "bg-clapperboard-gray text-white hover:bg-clapperboard-gray-light"
+                    }`}
+                  >
+                    다음
+                  </button>
                 </div>
-              ))}
-            </div>
+              )}
+
+              {/* 페이지 정보 */}
+              <div className="text-center mt-6 text-gray-400 text-sm">
+                {filteredItems.length > 0 ? (
+                  <>
+                    {startIndex + 1}-{Math.min(endIndex, filteredItems.length)}{" "}
+                    / {filteredItems.length}개 영상
+                    {selectedCategory !== "all" && (
+                      <span className="ml-2">
+                        (
+                        {
+                          categories.find((cat) => cat.id === selectedCategory)
+                            ?.name
+                        }{" "}
+                        카테고리)
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  "표시할 영상이 없습니다."
+                )}
+              </div>
+            </>
           )}
         </div>
       </section>
@@ -733,7 +889,16 @@ const PortfolioPage = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-              우리의 성과
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="portfolio"
+                fields={{
+                  stats_title: {
+                    value: "우리의 성과",
+                    className: "text-4xl md:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-dark mx-auto mb-8"></div>
           </div>
@@ -761,17 +926,44 @@ const PortfolioPage = () => {
       <section className="py-24 bg-clapperboard-gray">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-8">
-            다음 작품의 주인공은?
+            <UniversalContent
+              isAdmin={isAdmin}
+              pageName="portfolio"
+              fields={{
+                cta_title: {
+                  value: "다음 작품의 주인공은?",
+                  className: "text-4xl md:text-5xl font-black text-white",
+                },
+              }}
+            />
           </h2>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            여러분의 브랜드 스토리를 COUCH POTATO만의 스타일로 완성해보세요.
-            다음 포트폴리오의 주인공이 되어보시지 않으시겠어요?
+            <UniversalContent
+              isAdmin={isAdmin}
+              pageName="portfolio"
+              fields={{
+                cta_subtitle: {
+                  value:
+                    "여러분의 브랜드 스토리를 COUCH POTATO만의 스타일로 완성해보세요. 다음 포트폴리오의 주인공이 되어보시지 않으시겠어요?",
+                  className: "text-xl text-gray-300 leading-relaxed",
+                },
+              }}
+            />
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link href="/contact">
               <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-105 transition-all duration-300 shadow-xl">
-                🚀 프로젝트 시작하기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="portfolio"
+                  fields={{
+                    cta_button1: {
+                      value: "🚀 프로젝트 시작하기",
+                      className: "text-white font-bold",
+                    },
+                  }}
+                />
               </button>
             </Link>
             <a
@@ -780,12 +972,30 @@ const PortfolioPage = () => {
               rel="noopener noreferrer"
             >
               <button className="px-12 py-5 bg-clapperboard-gray-dark text-white font-bold rounded-full hover:bg-clapperboard-gray transform hover:scale-105 transition-all duration-300 shadow-xl">
-                🎬 YouTube 채널 구독
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="portfolio"
+                  fields={{
+                    cta_button2: {
+                      value: "🎬 YouTube 채널 구독",
+                      className: "text-white font-bold",
+                    },
+                  }}
+                />
               </button>
             </a>
             <Link href="/process">
               <button className="px-12 py-5 border-2 border-potato-orange text-potato-orange font-bold rounded-full hover:bg-potato-orange hover:text-white transform hover:scale-105 transition-all duration-300">
-                📋 제작 과정 보기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="portfolio"
+                  fields={{
+                    cta_button3: {
+                      value: "📋 제작 과정 보기",
+                      className: "text-potato-orange font-bold",
+                    },
+                  }}
+                />
               </button>
             </Link>
           </div>

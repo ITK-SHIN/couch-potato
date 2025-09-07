@@ -2,8 +2,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import UniversalContent from "@/components/UniversalContent";
+import { useAdmin } from "@/contexts/AdminContext";
 
 const ProcessPage = () => {
+  const { isAdmin } = useAdmin();
   const processSteps = [
     {
       step: "01",
@@ -76,17 +79,46 @@ const ProcessPage = () => {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-6 sm:mb-8 leading-tight animate-slide-up drop-shadow-2xl">
-              제작 과정
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="process"
+                fields={{
+                  process_title: {
+                    value: "제작 과정",
+                    className:
+                      "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white",
+                  },
+                }}
+              />
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-potato-orange-light max-w-3xl mx-auto leading-relaxed mb-8 sm:mb-12 animate-fade-in-delayed font-bold drop-shadow-lg px-4 sm:px-0">
-              체계적이고 전문적인 5단계 제작 프로세스
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="process"
+                fields={{
+                  process_subtitle: {
+                    value: "체계적이고 전문적인 5단계 제작 프로세스",
+                    className:
+                      "text-lg sm:text-xl lg:text-2xl text-potato-orange-light font-bold",
+                  },
+                }}
+              />
             </p>
 
             <div className="animate-slide-up-delayed">
               <Link href="#process-steps">
                 <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange-light">
-                  📋 제작 단계 보기
+                  <UniversalContent
+                    isAdmin={isAdmin}
+                    pageName="process"
+                    fields={{
+                      process_button: {
+                        value: "📋 제작 단계 보기",
+                        className: "text-white font-black",
+                      },
+                    }}
+                  />
                 </button>
               </Link>
             </div>
@@ -102,11 +134,31 @@ const ProcessPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6">
-              제작 단계
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="process"
+                fields={{
+                  steps_title: {
+                    value: "제작 단계",
+                    className:
+                      "text-3xl sm:text-4xl lg:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-16 sm:w-20 lg:w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-dark mx-auto mb-6 sm:mb-8"></div>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
-              각 단계별 전문적인 프로세스로 최고 품질의 영상을 제작합니다
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="process"
+                fields={{
+                  steps_subtitle: {
+                    value:
+                      "각 단계별 전문적인 프로세스로 최고 품질의 영상을 제작합니다",
+                    className: "text-base sm:text-lg lg:text-xl text-gray-300",
+                  },
+                }}
+              />
             </p>
           </div>
 
@@ -192,7 +244,16 @@ const ProcessPage = () => {
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-              전체 일정
+              <UniversalContent
+                isAdmin={isAdmin}
+                pageName="process"
+                fields={{
+                  timeline_title: {
+                    value: "전체 일정",
+                    className: "text-4xl md:text-5xl font-black text-white",
+                  },
+                }}
+              />
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-potato-orange to-potato-orange-dark mx-auto mb-8"></div>
           </div>
@@ -243,22 +304,58 @@ const ProcessPage = () => {
       <section className="py-24 bg-clapperboard-gray-dark">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-8">
-            프로젝트를 시작해보세요
+            <UniversalContent
+              isAdmin={isAdmin}
+              pageName="process"
+              fields={{
+                cta_title: {
+                  value: "프로젝트를 시작해보세요",
+                  className: "text-4xl md:text-5xl font-black text-white",
+                },
+              }}
+            />
           </h2>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            체계적인 프로세스로 여러분의 아이디어를 완벽한 영상으로
-            완성해드립니다
+            <UniversalContent
+              isAdmin={isAdmin}
+              pageName="process"
+              fields={{
+                cta_subtitle: {
+                  value:
+                    "체계적인 프로세스로 여러분의 아이디어를 완벽한 영상으로 완성해드립니다",
+                  className: "text-xl text-gray-300 leading-relaxed",
+                },
+              }}
+            />
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link href="/contact">
               <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-105 transition-all duration-300 shadow-xl">
-                🚀 프로젝트 상담하기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="process"
+                  fields={{
+                    cta_button1: {
+                      value: "🚀 프로젝트 상담하기",
+                      className: "text-white font-bold",
+                    },
+                  }}
+                />
               </button>
             </Link>
             <Link href="/portfolio">
               <button className="px-12 py-5 border-2 border-potato-orange text-potato-orange font-bold rounded-full hover:bg-potato-orange hover:text-white transform hover:scale-105 transition-all duration-300">
-                🎬 포트폴리오 보기
+                <UniversalContent
+                  isAdmin={isAdmin}
+                  pageName="process"
+                  fields={{
+                    cta_button2: {
+                      value: "🎬 포트폴리오 보기",
+                      className: "text-potato-orange font-bold",
+                    },
+                  }}
+                />
               </button>
             </Link>
           </div>
