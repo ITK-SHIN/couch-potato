@@ -40,13 +40,13 @@ const Navbar = () => {
       <div>
         {/* 네비게이션 바 디자인 개선: 더 세련된 투명+그라데이션+글로우 효과, 메뉴 간격 넓힘, 폰트 강조 */}
         <div
-          className="hidden lg:flex items-center px-12 py-3 rounded-full shadow-2xl border border-potato-orange/30 bg-gradient-to-r from-clapperboard-gray/80 via-clapperboard-gray-light/60 to-clapperboard-gray/80 bg-clip-padding backdrop-blur-lg"
+          className="hidden lg:flex items-center px-12 py-3 rounded-full shadow-2xl border border-clapperboard-gray-light/40 bg-gradient-to-r from-clapperboard-gray/80 via-clapperboard-gray-light/60 to-clapperboard-gray/80 bg-clip-padding backdrop-blur-lg"
           style={{
             backdropFilter: "blur(18px) saturate(180%)",
             WebkitBackdropFilter: "blur(18px) saturate(180%)",
             boxShadow:
-              "0 8px 32px 0 rgba(210, 105, 30, 0.3), 0 1.5px 8px 0 rgba(244, 164, 96, 0.2)",
-            border: "1.5px solid rgba(210, 105, 30, 0.4)",
+              "0 8px 32px 0 rgba(129, 119, 111, 0.3), 0 1.5px 8px 0 rgba(88, 79, 71, 0.2)",
+            border: "2px solid rgba(64, 64, 64, 0.4)",
           }}
         >
           <ul className="flex gap-6">
@@ -125,7 +125,7 @@ const Navbar = () => {
                 backdropFilter: "blur(20px) saturate(180%)",
                 WebkitBackdropFilter: "blur(20px) saturate(180%)",
                 boxShadow:
-                  "0 12px 40px 0 rgba(210, 105, 30, 0.3), inset 0 1px 0 rgba(244, 164, 96, 0.2), 0 4px 16px 0 rgba(210, 105, 30, 0.2)",
+                  "0 12px 40px 0 rgba(139, 127, 117, 0.3), inset 0 1px 0 rgba(1ㄴ00, 95, 90, 0.2), 0 4px 16px 0 rgba(139, 119, 105, 0.2)",
               }}
             >
               {/* 배경 장식 요소 */}
@@ -141,10 +141,10 @@ const Navbar = () => {
                 className="cursor-pointer text-4xl relative z-10 transition-transform duration-200 hover:rotate-90"
                 style={{
                   background:
-                    "linear-gradient(135deg, #D2691E 0%, #F4A460 50%, #CD853F 100%)",
+                    "linear-gradient(135deg, #7e6e63 0%, #635d59 50%, #615a52 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  filter: "drop-shadow(0 3px 12px rgba(210, 105, 30, 0.4))",
+                  filter: "drop-shadow(0 3px 12px rgba(131, 117, 108, 0.4))",
                 }}
               />
             </div>

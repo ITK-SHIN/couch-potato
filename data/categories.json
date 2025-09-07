@@ -9,13 +9,13 @@
     "id": "youtube",
     "name": "YouTube",
     "icon": "📹",
-    "order": 1
+    "order": 2
   },
   {
     "id": "wedding",
     "name": "웨딩",
     "icon": "💒",
-    "order": 2
+    "order": 1
   },
   {
     "id": "brand",
@@ -45,6 +45,6 @@
     "id": "test2",
     "name": "test2",
     "icon": "📚",
-    "order": 9
+    "order": 7
   }
 ]

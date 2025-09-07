@@ -59,11 +59,11 @@ const config: Config = {
       },
       colors: {
         primary: "#A30FE2",
-        // 로고 색상 기반 팔레트
+        // 로고 색상 기반 팔레트 - 노란색+주황색 조합
         potato: {
-          orange: "#D2691E",
-          "orange-light": "#F4A460",
-          "orange-dark": "#CD853F",
+          orange: "#FFB347", // 노란색+주황색 조합 (Peach)
+          "orange-light": "#FFD700", // 밝은 노란색 (Gold)
+          "orange-dark": "#FF8C00", // 어두운 주황색 (Dark Orange)
         },
         clapperboard: {
           gray: "#2F2F2F",
