@@ -272,8 +272,8 @@ export default function Home() {
                 <div className="flex flex-col gap-3 sm:gap-4 justify-center lg:justify-start">
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <Link href="/contact" className="flex-1">
-                      <button className="group relative w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 text-sm sm:text-base whitespace-nowrap">
-                        <span className="flex items-center justify-center gap-2">
+                      <button className="group relative w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 text-sm sm:text-base whitespace-nowrap overflow-hidden">
+                        <span className="relative z-10 flex items-center justify-center gap-2">
                           <span className="text-sm sm:text-base">🚀</span>
                           <UniversalContent
                             isAdmin={isAdmin}
@@ -286,7 +286,7 @@ export default function Home() {
                             }}
                           />
                         </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-light to-potato-orange rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-dark to-potato-orange-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </button>
                     </Link>
 
@@ -799,8 +799,8 @@ export default function Home() {
             </div>
 
             <Link href="/portfolio">
-              <button className="group px-8 py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-                <span className="flex items-center gap-2">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 overflow-hidden">
+                <span className="relative z-10 flex items-center gap-2">
                   <span>🎬</span>
                   <UniversalContent
                     isAdmin={isAdmin}
@@ -813,7 +813,7 @@ export default function Home() {
                     }}
                   />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-light to-potato-orange rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-dark to-potato-orange-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
             </Link>
           </div>
@@ -1119,8 +1119,8 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
             <Link href="/contact">
-              <button className="group px-8 py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-                <span className="flex items-center gap-2">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 overflow-hidden">
+                <span className="relative z-10 flex items-center gap-2">
                   <span>🚀</span>
                   <UniversalContent
                     isAdmin={isAdmin}
@@ -1133,7 +1133,7 @@ export default function Home() {
                     }}
                   />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-light to-potato-orange rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-dark to-potato-orange-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
             </Link>
 
