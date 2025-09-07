@@ -169,16 +169,16 @@ ${formData.message}
     {
       icon: "📞",
       title: "전화번호",
-      content: "010-1234-5678",
+      content: "010-8480-4376",
       subContent: "평일 09:00 - 18:00",
-      action: "tel:010-1234-5678",
+      action: "tel:010-8480-4376",
     },
     {
       icon: "📧",
       title: "이메일",
-      content: "hello@couchpotato.kr",
+      content: "bano112@naver.com",
       subContent: "24시간 접수 가능",
-      action: "mailto:hello@couchpotato.kr",
+      action: "mailto:bano112@naver.com",
     },
     {
       icon: "💬",
