@@ -199,9 +199,14 @@ export async function POST(request: NextRequest) {
 
     // 새 영상 ID 생성
     const newId = Date.now().toString();
-    const newOrder = videos.length;
+    
+    // 기존 영상들의 order 값을 1씩 증가시켜 순서 조정
+    videos = videos.map(video => ({
+      ...video,
+      order: video.order + 1
+    }));
 
-    // 새 영상 추가
+    // 새 영상 추가 (order: 0으로 설정하여 가장 첫 번째로)
     const newVideo = {
       id: newId,
       title,
@@ -213,10 +218,11 @@ export async function POST(request: NextRequest) {
       videoId,
       videoUrl: videoUrl || `https://www.youtube.com/watch?v=${videoId}`,
       description: description || "",
-      order: newOrder,
+      order: 0,
     };
 
-    videos.push(newVideo);
+    // 새 영상을 배열의 맨 앞에 추가
+    videos.unshift(newVideo);
 
     // 파일에 저장
     fs.writeFileSync(VIDEOS_FILE_PATH, JSON.stringify(videos, null, 2));
