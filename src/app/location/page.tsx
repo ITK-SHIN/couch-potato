@@ -403,14 +403,14 @@ const LocationPage = () => {
               </button>
             </Link>
             <Link href="/portfolio">
-              <button className="px-12 py-5 border-2 border-potato-orange text-potato-orange font-bold rounded-full hover:bg-potato-orange hover:text-white transform hover:scale-105 transition-all duration-300">
+              <button className="px-12 py-5 border-2 border-potato-orange font-bold rounded-full transform hover:scale-105 transition-all duration-300 bg-transparent text-potato-orange hover:bg-potato-orange hover:text-white">
                 <UniversalContent
                   isAdmin={isAdmin}
                   pageName="location"
                   fields={{
                     cta_button2: {
                       value: "🎬 작품 보기",
-                      className: "text-potato-orange font-bold",
+                      className: "", // 버튼에서 직접 색상 제어
                     },
                   }}
                 />

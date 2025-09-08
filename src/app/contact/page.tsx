@@ -847,7 +847,7 @@ ${formData.message}
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white">
+      <section className="py-24 bg-gradient-to-r from-potato-orange to-potato-orange-light text-black">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-black mb-8">
             <UniversalContent
@@ -878,7 +878,7 @@ ${formData.message}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <a
               href="tel:010-1234-5678"
-              className="px-12 py-5 bg-white text-potato-orange font-bold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl"
+              className="px-12 py-5 bg-white text-black font-bold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl"
             >
               <UniversalContent
                 isAdmin={isAdmin}
@@ -886,20 +886,20 @@ ${formData.message}
                 fields={{
                   final_cta_phone: {
                     value: "📞 010-1234-5678",
-                    className: "text-potato-orange font-bold",
+                    className: "text-black font-bold",
                   },
                 }}
               />
             </a>
             <Link href="/portfolio">
-              <button className="px-12 py-5 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-potato-orange transform hover:scale-105 transition-all duration-300">
+              <button className="px-12 py-5 border-2 border-white font-bold rounded-full bg-transparent text-black hover:bg-white hover:text-black transform hover:scale-105 transition-all duration-300">
                 <UniversalContent
                   isAdmin={isAdmin}
                   pageName="contact"
                   fields={{
                     final_cta_portfolio: {
                       value: "🎬 포트폴리오 보기",
-                      className: "text-white font-bold",
+                      className: "", // 버튼에서 직접 색상 제어
                     },
                   }}
                 />

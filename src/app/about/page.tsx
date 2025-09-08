@@ -428,14 +428,14 @@ const AboutPage = () => {
               </button>
             </Link>
             <Link href="/portfolio">
-              <button className="px-12 py-5 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-clapperboard-gray-dark transform hover:scale-105 transition-all duration-300">
+              <button className="px-12 py-5 border-2 border-white text-white font-bold rounded-full transition-all duration-300 shadow-xl bg-transparent hover:bg-white hover:text-clapperboard-gray-dark">
                 <UniversalContent
                   isAdmin={isAdmin}
                   pageName="about"
                   fields={{
                     contact_cta_button2: {
                       value: "🎬 포트폴리오 보기",
-                      className: "text-white font-bold",
+                      className: "font-bold", // text color는 버튼에서 제어
                     },
                   }}
                 />

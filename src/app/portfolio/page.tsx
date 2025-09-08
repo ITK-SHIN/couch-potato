@@ -992,7 +992,8 @@ const PortfolioPage = () => {
                   fields={{
                     cta_button3: {
                       value: "📋 제작 과정 보기",
-                      className: "text-potato-orange font-bold",
+                      // 버튼에서 text-potato-orange, hover:text-white를 직접 제어하므로 className은 비워둡니다.
+                      className: "",
                     },
                   }}
                 />
