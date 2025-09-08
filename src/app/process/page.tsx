@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import UniversalContent from "@/components/UniversalContent";
 import { useAdmin } from "@/contexts/AdminContext";
+import { SmallYellowBorderHoverBigBtn, SmallYellowBtn, SmallYellowHoverBigBtn } from "../components/Button";
 
 const ProcessPage = () => {
   const { isAdmin } = useAdmin();
@@ -107,20 +108,7 @@ const ProcessPage = () => {
             </p>
 
             <div className="animate-slide-up-delayed">
-              <Link href="#process-steps">
-                <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange-light">
-                  <UniversalContent
-                    isAdmin={isAdmin}
-                    pageName="process"
-                    fields={{
-                      process_button: {
-                        value: "📋 제작 단계 보기",
-                        className: "text-white font-black",
-                      },
-                    }}
-                  />
-                </button>
-              </Link>
+            <SmallYellowHoverBigBtn href="#process-steps" text="📋 제작 단계 보기" />    
             </div>
           </div>
         </div>
@@ -330,37 +318,8 @@ const ProcessPage = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link href="/contact">
-              <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-105 transition-all duration-300 shadow-xl">
-                <UniversalContent
-                  isAdmin={isAdmin}
-                  pageName="process"
-                  fields={{
-                    cta_button1: {
-                      value: "🚀 프로젝트 상담하기",
-                      className: "text-white font-bold",
-                    },
-                  }}
-                />
-              </button>
-            </Link>
-            <Link href="/portfolio">
-              <button
-                className="px-12 py-5 border-2 border-potato-orange font-bold rounded-full transform hover:scale-105 transition-all duration-300
-                  bg-transparent text-potato-orange hover:bg-potato-orange hover:text-white"
-              >
-                <UniversalContent
-                  isAdmin={isAdmin}
-                  pageName="process"
-                  fields={{
-                    cta_button2: {
-                      value: "🎬 포트폴리오 보기",
-                      className: "", // 버튼에서 직접 색상 제어
-                    },
-                  }}
-                />
-              </button>
-            </Link>
+            <SmallYellowHoverBigBtn href="/contact" text="🚀 프로젝트 상담하기" />
+            <SmallYellowBorderHoverBigBtn href="/portfolio" text="🎬 포트폴리오 보기" />
           </div>
         </div>
       </section>

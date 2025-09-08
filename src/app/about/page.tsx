@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import UniversalContent from "@/components/UniversalContent";
 import { useAdmin } from "@/contexts/AdminContext";
+import { BigWhiteBtn, SmallYellowBtn, SmallYellowHoverBigBtn } from "../components/Button";
 
 const AboutPage = () => {
   const { isAdmin } = useAdmin();
@@ -61,20 +62,7 @@ const AboutPage = () => {
             </p>
 
             <div className="animate-slide-up-delayed">
-              <Link href="#story">
-                <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange-dark transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange">
-                  <UniversalContent
-                    isAdmin={isAdmin}
-                    pageName="about"
-                    fields={{
-                      story_button: {
-                        value: "📖 스토리 보기",
-                        className: "text-white font-black",
-                      },
-                    }}
-                  />
-                </button>
-              </Link>
+            <SmallYellowHoverBigBtn href="#story" text="📖 스토리 보기" />
             </div>
           </div>
         </div>
@@ -413,34 +401,9 @@ const AboutPage = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link href="/contact">
-              <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange-dark transform hover:scale-105 transition-all duration-300 shadow-xl">
-                <UniversalContent
-                  isAdmin={isAdmin}
-                  pageName="about"
-                  fields={{
-                    contact_cta_button1: {
-                      value: "📞 연락하기",
-                      className: "text-white font-bold",
-                    },
-                  }}
-                />
-              </button>
-            </Link>
-            <Link href="/portfolio">
-              <button className="px-12 py-5 border-2 border-white text-white font-bold rounded-full transition-all duration-300 shadow-xl bg-transparent hover:bg-white hover:text-clapperboard-gray-dark">
-                <UniversalContent
-                  isAdmin={isAdmin}
-                  pageName="about"
-                  fields={{
-                    contact_cta_button2: {
-                      value: "🎬 포트폴리오 보기",
-                      className: "font-bold", // text color는 버튼에서 제어
-                    },
-                  }}
-                />
-              </button>
-            </Link>
+
+            <SmallYellowBtn href="/contact" text="📞 연락하기" />
+            <BigWhiteBtn href="/portfolio" text="🎬 포트폴리오 보기" />
           </div>
         </div>
       </section>

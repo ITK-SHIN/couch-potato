@@ -130,5 +130,17 @@
     "videoUrl": "https://www.youtube.com/@TryToShinDirect",
     "description": "프로 영상 제작을 위한 장비 소개 및 활용법 test",
     "order": 10
+  },
+  {
+    "id": "1757311512214",
+    "title": "[대구 경북 휴게소 음식 먹방] 경부고속도로에서 뭐먹을래?",
+    "category": "commercial",
+    "client": "대구 경북 휴게소",
+    "year": "2025",
+    "thumbnail": "https://img.youtube.com/vi/v=arr1O4uFkuo/maxresdefault.jpg",
+    "videoId": "v=arr1O4uFkuo",
+    "videoUrl": "https://www.youtube.com/watch?v=v=arr1O4uFkuo",
+    "description": "대구 경북 휴게소 음식 소개 영상",
+    "order": 11
   }
 ]

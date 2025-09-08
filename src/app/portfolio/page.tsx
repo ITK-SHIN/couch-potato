@@ -6,6 +6,7 @@ import UniversalContent from "@/components/UniversalContent";
 import CategoryManager from "@/components/CategoryManager";
 import VideoManager from "@/components/VideoManager";
 import { useAdmin } from "@/contexts/AdminContext";
+import { BigYellowBtn, SmallYellowBorderHoverBigBtn, SmallYellowHoverBigBtn } from "../components/Button";
 
 const PortfolioPage = () => {
   const { isAdmin } = useAdmin();
@@ -448,7 +449,7 @@ const PortfolioPage = () => {
                 </p>
 
                 <div className="animate-slide-up-delayed">
-                  <Link href="#portfolio-grid">
+{/*                   <Link href="#portfolio-grid">
                     <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange-light">
                       <UniversalContent
                         isAdmin={isAdmin}
@@ -461,7 +462,8 @@ const PortfolioPage = () => {
                         }}
                       />
                     </button>
-                  </Link>
+                  </Link> */}
+                  <SmallYellowHoverBigBtn href="#portfolio-grid" text="🎬 작품 갤러리 보기" />
                 </div>
               </div>
 
@@ -952,7 +954,7 @@ const PortfolioPage = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link href="/contact">
+  {/*           <Link href="/contact">
               <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-105 transition-all duration-300 shadow-xl">
                 <UniversalContent
                   isAdmin={isAdmin}
@@ -965,9 +967,10 @@ const PortfolioPage = () => {
                   }}
                 />
               </button>
-            </Link>
+            </Link */}
+            <SmallYellowHoverBigBtn href="/contact" text="🚀 프로젝트 시작하기" />
             <a
-              href="https://www.youtube.com/@TryToShinDirect"
+              href="https://www.youtube.com/@TryToShinDirect."
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -984,21 +987,7 @@ const PortfolioPage = () => {
                 />
               </button>
             </a>
-            <Link href="/process">
-              <button className="px-12 py-5 border-2 border-potato-orange text-potato-orange font-bold rounded-full hover:bg-potato-orange hover:text-white transform hover:scale-105 transition-all duration-300">
-                <UniversalContent
-                  isAdmin={isAdmin}
-                  pageName="portfolio"
-                  fields={{
-                    cta_button3: {
-                      value: "📋 제작 과정 보기",
-                      // 버튼에서 text-potato-orange, hover:text-white를 직접 제어하므로 className은 비워둡니다.
-                      className: "",
-                    },
-                  }}
-                />
-              </button>
-            </Link>
+            <SmallYellowBorderHoverBigBtn href="/process" text="📋 제작 과정 보기" />
           </div>
         </div>
       </section>

@@ -9,6 +9,7 @@ import HomeVideoManager from "@/components/HomeVideoManager";
 import UniversalContent from "@/components/UniversalContent";
 import { strapiApiClient } from "@/utils/strapi";
 import { useAdmin } from "@/contexts/AdminContext";
+import { BigBlackBtn, BigWhiteBtn, BigYellowBtn, SmallYellowBtn } from "./components/Button";
 
 export default function Home() {
   const [homeVideo, setHomeVideo] = useState<any>(null);
@@ -271,42 +272,10 @@ export default function Home() {
                 {/* Enhanced CTA Buttons */}
                 <div className="flex flex-col gap-3 sm:gap-4 justify-center lg:justify-start">
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <Link href="/contact" className="flex-1">
-                      <button className="group relative w-full px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 text-sm sm:text-base whitespace-nowrap overflow-hidden">
-                        <span className="relative z-10 flex items-center justify-center gap-2">
-                          <span className="text-sm sm:text-base">🚀</span>
-                          <UniversalContent
-                            isAdmin={isAdmin}
-                            pageName="home"
-                            fields={{
-                              cta_button1: {
-                                value: "프로젝트 시작하기",
-                                className: "font-bold text-sm sm:text-base",
-                              },
-                            }}
-                          />
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-dark to-potato-orange-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      </button>
-                    </Link>
 
-                    <Link href="/portfolio" className="flex-1">
-                      <button className="group w-full px-5 py-3 sm:px-6 sm:py-4 bg-clapperboard-gray/80 backdrop-blur-sm text-white font-semibold rounded-full border border-clapperboard-gray-light hover:bg-clapperboard-gray transition-all duration-300 transform hover:scale-105 text-sm sm:text-base whitespace-nowrap">
-                        <span className="flex items-center justify-center gap-2">
-                          <span className="text-sm sm:text-base">🎬</span>
-                          <UniversalContent
-                            isAdmin={isAdmin}
-                            pageName="home"
-                            fields={{
-                              cta_button2: {
-                                value: "포트폴리오 보기",
-                                className: "font-semibold text-sm sm:text-base",
-                              },
-                            }}
-                          />
-                        </span>
-                      </button>
-                    </Link>
+                 <BigYellowBtn href="/contact" text="🚀 프로젝트 시작하기" />
+                 <BigBlackBtn href="/portfolio" text="🎬 포트폴리오 보기" />
+
                   </div>
 
                   <Link href="#services" className="w-full">
@@ -797,25 +766,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-
-            <Link href="/portfolio">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 overflow-hidden">
-                <span className="relative z-10 flex items-center gap-2">
-                  <span>🎬</span>
-                  <UniversalContent
-                    isAdmin={isAdmin}
-                    pageName="home"
-                    fields={{
-                      portfolio_button: {
-                        value: "작품 갤러리 보기",
-                        className: "font-bold",
-                      },
-                    }}
-                  />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-dark to-potato-orange-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </button>
-            </Link>
+            <SmallYellowBtn href="/portfolio" text="🎬 작품 갤러리 보기" /> 
           </div>
         </div>
       </section>
@@ -1118,42 +1069,8 @@ export default function Home() {
             />
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
-            <Link href="/contact">
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full shadow-2xl hover:shadow-potato-orange/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 overflow-hidden">
-                <span className="relative z-10 flex items-center gap-2">
-                  <span>🚀</span>
-                  <UniversalContent
-                    isAdmin={isAdmin}
-                    pageName="home"
-                    fields={{
-                      cta_button1: {
-                        value: "프로젝트 시작하기",
-                        className: "font-bold",
-                      },
-                    }}
-                  />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-potato-orange-dark to-potato-orange-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </button>
-            </Link>
-
-            <Link href="/process">
-              <button className="group px-8 py-4 bg-clapperboard-gray/80 backdrop-blur-sm text-white font-semibold rounded-full border border-clapperboard-gray-light hover:bg-clapperboard-gray transition-all duration-300 transform hover:scale-105">
-                <span className="flex items-center gap-2">
-                  <span>📋</span>
-                  <UniversalContent
-                    isAdmin={isAdmin}
-                    pageName="home"
-                    fields={{
-                      cta_button2: {
-                        value: "제작 과정 보기",
-                        className: "font-semibold",
-                      },
-                    }}
-                  />
-                </span>
-              </button>
-            </Link>
+          <SmallYellowBtn href="/contact" text="🚀 프로젝트 시작하기" /> 
+          <BigWhiteBtn href="/process" text="📋 제작 과정 보기" />
           </div>
         </div>
       </section>
