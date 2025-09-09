@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         error: "데이터 저장 중 오류가 발생했습니다.",
-        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : String(error)) : undefined
       },
       { status: 500 }
     );
