@@ -1,6 +1,7 @@
-import { AdminConfig } from '@strapi/strapi';
+// AdminConfig 타입이 @strapi/strapi에서 export되지 않아 발생하는 에러입니다.
+// 타입을 제거하고 기본적인 반환 형태로 수정합니다.
 
-export default ({ env }: { env: any }): AdminConfig => ({
+export default ({ env }: { env: any }) => ({
   auth: {
     secret: env('ADMIN_JWT_SECRET'),
   },
