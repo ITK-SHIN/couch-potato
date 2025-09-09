@@ -27,7 +27,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("데이터 저장 오류:", error);
     return NextResponse.json(
-      { error: "데이터 저장 중 오류가 발생했습니다." },
+      { 
+        error: "데이터 저장 중 오류가 발생했습니다.",
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      },
       { status: 500 }
     );
   }
@@ -47,7 +50,10 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("데이터 읽기 오류:", error);
     return NextResponse.json(
-      { error: "데이터 읽기 중 오류가 발생했습니다." },
+      { 
+        error: "데이터 읽기 중 오류가 발생했습니다.",
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      },
       { status: 500 }
     );
   }

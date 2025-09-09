@@ -1,7 +1,11 @@
 import { MongoClient, Db } from 'mongodb';
 
-const uri = process.env.MONGODB_URI!;
+const uri = process.env.MONGODB_URI;
 const dbName = 'couch-potato';
+
+if (!uri) {
+  throw new Error('MONGODB_URI 환경 변수가 설정되지 않았습니다.');
+}
 
 let client: MongoClient;
 let db: Db;
@@ -25,8 +29,13 @@ export async function connectToDatabase() {
 }
 
 export async function getCollection(collectionName: string) {
-  const { db } = await connectToDatabase();
-  return db.collection(collectionName);
+  try {
+    const { db } = await connectToDatabase();
+    return db.collection(collectionName);
+  } catch (error) {
+    console.error(`컬렉션 ${collectionName} 접근 실패:`, error);
+    throw error;
+  }
 }
 
 // 연결 종료 함수
