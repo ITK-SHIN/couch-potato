@@ -1,4 +1,6 @@
-export default ({ env }) => ({
+import { AdminConfig } from '@strapi/strapi';
+
+export default ({ env }: { env: any }): AdminConfig => ({
   auth: {
     secret: env('ADMIN_JWT_SECRET'),
   },
