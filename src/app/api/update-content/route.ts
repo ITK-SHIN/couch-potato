@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       { 
         error: "데이터 읽기 중 오류가 발생했습니다.",
-        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : String(error)) : undefined
       },
       { status: 500 }
     );
