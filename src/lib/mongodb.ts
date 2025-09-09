@@ -22,7 +22,16 @@ export async function connectToDatabase() {
   }
 
   try {
-    client = new MongoClient(mongoUri);
+    client = new MongoClient(mongoUri, {
+      tls: true,
+      tlsAllowInvalidCertificates: false,
+      tlsAllowInvalidHostnames: false,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 10000,
+      maxPoolSize: 10,
+      retryWrites: true,
+      family: 4, // IPv4 사용 강제
+    });
     await client.connect();
     db = client.db(dbName);
     
