@@ -26,10 +26,13 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("데이터 저장 오류:", error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error("에러 상세:", errorMessage);
     return NextResponse.json(
       { 
         error: "데이터 저장 중 오류가 발생했습니다.",
-        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : String(error)) : undefined
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
+        timestamp: new Date().toISOString()
       },
       { status: 500 }
     );
@@ -49,10 +52,13 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error("데이터 읽기 오류:", error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error("에러 상세:", errorMessage);
     return NextResponse.json(
       { 
         error: "데이터 읽기 중 오류가 발생했습니다.",
-        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : String(error)) : undefined
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
+        timestamp: new Date().toISOString()
       },
       { status: 500 }
     );
