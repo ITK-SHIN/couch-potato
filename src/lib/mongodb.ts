@@ -6,6 +6,7 @@ const dbName = 'couch-potato';
 if (!uri) {
   console.error('MONGODB_URI 환경 변수가 설정되지 않았습니다.');
   console.error('현재 환경 변수들:', Object.keys(process.env).filter(key => key.includes('MONGO')));
+  console.error('전체 환경 변수들:', Object.keys(process.env).sort());
   throw new Error('MONGODB_URI 환경 변수가 설정되지 않았습니다.');
 }
 
