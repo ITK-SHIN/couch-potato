@@ -7,6 +7,9 @@ if (!uri) {
   throw new Error('MONGODB_URI 환경 변수가 설정되지 않았습니다.');
 }
 
+// TypeScript에게 uri가 string임을 알려줌
+const mongoUri: string = uri;
+
 let client: MongoClient;
 let db: Db;
 
@@ -16,7 +19,7 @@ export async function connectToDatabase() {
   }
 
   try {
-    client = new MongoClient(uri);
+    client = new MongoClient(mongoUri);
     await client.connect();
     db = client.db(dbName);
     
