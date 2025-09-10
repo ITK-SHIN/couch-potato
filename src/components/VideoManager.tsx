@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   DndContext,
   closestCenter,
@@ -83,11 +84,12 @@ function SortableVideoItem({
     >
       <div className="flex items-start gap-4">
         {/* 썸네일 */}
-        <div className="w-24 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-          <img
+        <div className="w-24 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0 relative">
+          <Image
             src={video.thumbnail}
             alt={video.title}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/imgs/bg1.jpg";
             }}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface HomeVideo {
   id: string;
@@ -155,11 +156,12 @@ export default function HomeVideoManager({
         <div className="bg-white rounded-lg p-4 border border-green-300">
           <div className="flex items-start gap-4">
             {/* 썸네일 */}
-            <div className="w-32 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-              <img
+            <div className="w-32 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0 relative">
+              <Image
                 src={video.thumbnail}
                 alt={video.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = "/imgs/bg1.jpg";
                 }}
@@ -366,4 +368,3 @@ export default function HomeVideoManager({
     </div>
   );
 }
-

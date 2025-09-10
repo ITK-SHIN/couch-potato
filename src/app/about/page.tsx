@@ -5,7 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import UniversalContent from "@/components/UniversalContent";
 import { useAdmin } from "@/contexts/AdminContext";
-import { BigWhiteBtn, SmallYellowBtn, SmallYellowHoverBigBtn } from "../components/Button";
+import {
+  BigWhiteBtn,
+  SmallYellowBtn,
+  SmallYellowHoverBigBtn,
+} from "../components/Button";
 
 const AboutPage = () => {
   const { isAdmin } = useAdmin();
@@ -62,7 +66,7 @@ const AboutPage = () => {
             </p>
 
             <div className="animate-slide-up-delayed">
-            <SmallYellowHoverBigBtn href="#story" text="📖 스토리 보기" />
+              <SmallYellowHoverBigBtn href="#story" text="📖 스토리 보기" />
             </div>
           </div>
         </div>
@@ -143,11 +147,14 @@ const AboutPage = () => {
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-xl sm:rounded-2xl z-10" />
                 {/* 로고 이미지 */}
                 <div className="relative z-20 w-3/4 sm:w-4/5 h-3/4 sm:h-4/5 flex items-center justify-center">
-                  <img
+                  <Image
                     src="/imgs/mainlogo.png"
                     alt="COUCH POTATO 메인 로고"
+                    width={400}
+                    height={400}
                     className="object-contain w-full h-full drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)]"
                     style={{ borderRadius: "1.25rem" }}
+                    priority
                   />
                 </div>
                 {/* 테두리 장식 */}
@@ -401,7 +408,6 @@ const AboutPage = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-
             <SmallYellowBtn href="/contact" text="📞 연락하기" />
             <BigWhiteBtn href="/portfolio" text="🎬 포트폴리오 보기" />
           </div>
