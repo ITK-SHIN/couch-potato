@@ -48,7 +48,7 @@ export const useAddVideo = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (videoData: Omit<Video, "id">) => {
+    mutationFn: async (videoData: Omit<Video, "id" | "_id">) => {
       const response = await fetch("/api/portfolio-videos", {
         method: "POST",
         headers: {

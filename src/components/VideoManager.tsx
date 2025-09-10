@@ -29,6 +29,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 
 interface Video {
+  _id: string;
   id: string;
   title: string;
   category: string;
@@ -39,6 +40,15 @@ interface Video {
   videoUrl: string;
   description: string;
   order: number;
+  stats: {
+    views: string;
+    likes: string;
+  };
+  tags: Array<{
+    id: string;
+    text: string;
+    color: string;
+  }>;
 }
 
 interface Category {
