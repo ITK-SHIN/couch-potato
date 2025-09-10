@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import UniversalContent from "@/components/UniversalContent";
@@ -18,7 +18,7 @@ export default function HeroSection({
   onVideoChange,
 }: HeroSectionProps) {
   const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
-  const [player, setPlayer] = useState<any>(null);
+  const playerRef = useRef<any>(null);
   const [iframeRef, setIframeRef] = useState<HTMLDivElement | null>(null);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [volume, setVolume] = useState<number>(75);
@@ -48,7 +48,7 @@ export default function HeroSection({
       iframeRef &&
       window.YT &&
       window.YT.Player &&
-      !player &&
+      !playerRef.current &&
       homeVideo?.videoId
     ) {
       try {
@@ -83,7 +83,7 @@ export default function HeroSection({
             },
           },
         });
-        setPlayer(newPlayer);
+        playerRef.current = newPlayer;
         console.log("YouTube player created successfully");
       } catch (error) {
         console.error("Error creating YouTube player:", error);
@@ -93,15 +93,15 @@ export default function HeroSection({
 
   // 홈 영상 변경 시 플레이어 업데이트
   useEffect(() => {
-    if (player && homeVideo?.videoId) {
+    if (playerRef.current && homeVideo?.videoId) {
       try {
-        player.loadVideoById(homeVideo.videoId);
+        playerRef.current.loadVideoById(homeVideo.videoId);
         console.log(`Video changed to: ${homeVideo.videoId}`);
       } catch (error) {
         console.error("Error changing video:", error);
       }
     }
-  }, [player, homeVideo?.videoId]);
+  }, [homeVideo?.videoId]);
 
   return (
     <main className="relative min-h-screen overflow-hidden">
@@ -265,14 +265,17 @@ export default function HeroSection({
                             <div className="flex items-center gap-2">
                               <button
                                 onClick={() => {
-                                  if (player && player.isMuted !== undefined) {
+                                  if (
+                                    playerRef.current &&
+                                    playerRef.current.isMuted !== undefined
+                                  ) {
                                     const newMuted = !isMuted;
                                     setIsMuted(newMuted);
 
                                     if (newMuted) {
-                                      player.mute();
+                                      playerRef.current.mute();
                                     } else {
-                                      player.unMute();
+                                      playerRef.current.unMute();
                                     }
 
                                     console.log(
@@ -336,13 +339,16 @@ export default function HeroSection({
                                   setVolume(newVolume);
                                   setIsMuted(newVolume === 0);
 
-                                  if (player && player.setVolume) {
-                                    player.setVolume(newVolume);
+                                  if (
+                                    playerRef.current &&
+                                    playerRef.current.setVolume
+                                  ) {
+                                    playerRef.current.setVolume(newVolume);
 
                                     if (newVolume === 0) {
-                                      player.mute();
+                                      playerRef.current.mute();
                                     } else {
-                                      player.unMute();
+                                      playerRef.current.unMute();
                                     }
 
                                     console.log(

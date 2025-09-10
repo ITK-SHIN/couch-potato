@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import RealInlineEditor from "./RealInlineEditor";
 
 interface UniversalContentProps {
@@ -23,12 +23,7 @@ export default function UniversalContent({
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await fetch(`/api/update-content?page=${pageName}`);
       if (response.ok) {
@@ -40,7 +35,12 @@ export default function UniversalContent({
     } finally {
       setLoading(false);
     }
-  };
+  }, [pageName]);
+
+  useEffect(() => {
+    setMounted(true);
+    fetchData();
+  }, [fetchData]);
 
   const handleSave = (field: string, newValue: string) => {
     setData((prev) => ({

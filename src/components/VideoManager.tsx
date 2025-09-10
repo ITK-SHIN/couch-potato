@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import {
   DndContext,
@@ -192,7 +192,7 @@ export default function VideoManager({
   );
 
   // 영상 목록 로드
-  const loadVideos = async () => {
+  const loadVideos = useCallback(async () => {
     try {
       const response = await fetch("/api/portfolio-videos");
       if (response.ok) {
@@ -205,10 +205,10 @@ export default function VideoManager({
     } finally {
       setLoading(false);
     }
-  };
+  }, [onVideosChange]);
 
   // 카테고리 목록 로드
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     try {
       const response = await fetch("/api/categories");
       if (response.ok) {
@@ -218,12 +218,12 @@ export default function VideoManager({
     } catch (error) {
       console.error("카테고리 로딩 오류:", error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadVideos();
     loadCategories();
-  }, []);
+  }, [loadVideos, loadCategories]);
 
   // 페이지네이션 계산
   const totalPages = Math.ceil(videos.length / videosPerPage);

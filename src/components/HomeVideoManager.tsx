@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 interface HomeVideo {
@@ -40,7 +40,7 @@ export default function HomeVideoManager({
   const [editingVideo, setEditingVideo] = useState<HomeVideo | null>(null);
 
   // 홈페이지 영상 정보 로드
-  const loadHomeVideo = async () => {
+  const loadHomeVideo = useCallback(async () => {
     try {
       const response = await fetch("/api/home-video");
       if (response.ok) {
@@ -53,11 +53,11 @@ export default function HomeVideoManager({
     } finally {
       setLoading(false);
     }
-  };
+  }, [onVideoChange]);
 
   useEffect(() => {
     loadHomeVideo();
-  }, []);
+  }, [loadHomeVideo]);
 
   // 영상 수정
   const handleEditVideo = async (e: React.FormEvent) => {
