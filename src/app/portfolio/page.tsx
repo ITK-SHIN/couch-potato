@@ -1,11 +1,13 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import UniversalContent from "@/components/UniversalContent";
 import CategoryManager from "@/components/CategoryManager";
 import VideoManager from "@/components/VideoManager";
 import { useAdmin } from "@/contexts/AdminContext";
+import { usePortfolioVideos } from "@/hooks/usePortfolioVideos";
+import { useCategories } from "@/hooks/useCategories";
 import {
   BigYellowBtn,
   SmallYellowBorderHoverBigBtn,
@@ -17,9 +19,6 @@ const PortfolioPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [portfolioItems, setPortfolioItems] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [volume, setVolume] = useState<number>(75);
   const [showVolumeSlider, setShowVolumeSlider] = useState<boolean>(false);
@@ -28,24 +27,17 @@ const PortfolioPage = () => {
     useState<HTMLDivElement | null>(null);
   const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
   const [player, setPlayer] = useState<any>(null);
-  const [categories, setCategories] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const videosPerPage = 9;
 
-  // 카테고리 로딩 함수
-  const loadCategories = useCallback(async () => {
-    try {
-      const response = await fetch("/api/categories");
-      if (response.ok) {
-        const result = await response.json();
-        setCategories(result.categories || []);
-      }
-    } catch (error) {
-      console.error("카테고리 로딩 오류:", error);
-      // 기본 카테고리 사용
-      setCategories(getDefaultCategories());
-    }
-  }, []);
+  // React Query 훅 사용
+  const { data: portfolioData, isLoading: portfolioLoading, error: portfolioError } = usePortfolioVideos();
+  const { data: categoriesData, isLoading: categoriesLoading, error: categoriesError } = useCategories();
+
+  const portfolioItems = portfolioData?.videos || [];
+  const categories = categoriesData?.categories || [];
+  const loading = portfolioLoading || categoriesLoading;
+  const error = portfolioError || categoriesError;
 
   // 기본 카테고리 (API 실패 시 사용)
   const getDefaultCategories = () => [
@@ -140,39 +132,8 @@ const PortfolioPage = () => {
     }
   };
 
-  // 영상 로딩 함수
-  const loadVideos = useCallback(async () => {
-    try {
-      const response = await fetch("/api/portfolio-videos");
-      if (response.ok) {
-        const result = await response.json();
-        setPortfolioItems(result.videos || []);
-      }
-    } catch (error) {
-      console.error("영상 로딩 오류:", error);
-      setError("영상 데이터를 불러오는 중 오류가 발생했습니다.");
-    }
-  }, []);
-
-  // 카테고리와 포트폴리오 데이터 로드
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // 카테고리와 영상 로드
-        await Promise.all([loadCategories(), loadVideos()]);
-      } catch (err) {
-        console.error("Error loading data:", err);
-        setError("데이터를 불러오는 중 오류가 발생했습니다.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, [loadCategories, loadVideos]);
+  // 에러가 발생한 경우 기본 카테고리 사용
+  const displayCategories = categories.length > 0 ? categories : getDefaultCategories();
 
   // YouTube Player API 로드 및 초기화
   useEffect(() => {
@@ -364,15 +325,7 @@ const PortfolioPage = () => {
     },
   ];
 
-  // 카테고리 변경 핸들러
-  const handleCategoriesChange = (newCategories: any[]) => {
-    setCategories(newCategories);
-  };
 
-  // 영상 변경 핸들러
-  const handleVideosChange = (newVideos: any[]) => {
-    setPortfolioItems(newVideos);
-  };
 
   const filteredItems =
     selectedCategory === "all"
@@ -676,14 +629,11 @@ const PortfolioPage = () => {
       <section className="py-12 sm:py-16 bg-clapperboard-gray-light border-b border-clapperboard-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 카테고리 관리자 (관리자만 표시) */}
-          <CategoryManager
-            isAdmin={isAdmin}
-            onCategoriesChange={handleCategoriesChange}
-          />
+          <CategoryManager isAdmin={isAdmin} />
 
           {/* 카테고리 필터 버튼들 */}
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            {categories
+            {displayCategories
               .sort((a, b) => a.order - b.order)
               .map((category) => (
                 <button
@@ -709,7 +659,7 @@ const PortfolioPage = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 영상 관리자 (관리자만 표시) */}
-          <VideoManager isAdmin={isAdmin} onVideosChange={handleVideosChange} />
+          <VideoManager isAdmin={isAdmin} />
 
           {/* Loading State */}
           {loading && (
@@ -728,7 +678,9 @@ const PortfolioPage = () => {
               <h3 className="text-lg sm:text-xl font-bold text-potato-orange mb-2">
                 오류 발생
               </h3>
-              <p className="text-gray-300 mb-4 text-sm sm:text-base">{error}</p>
+              <p className="text-gray-300 mb-4 text-sm sm:text-base">
+                {error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.'}
+              </p>
             </div>
           )}
 
@@ -771,7 +723,7 @@ const PortfolioPage = () => {
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 bg-black/70 text-white text-xs font-bold rounded-full backdrop-blur-sm">
                           {
-                            categories.find((cat) => cat.id === item.category)
+                            displayCategories.find((cat) => cat.id === item.category)
                               ?.name
                           }
                         </span>
@@ -877,7 +829,7 @@ const PortfolioPage = () => {
                       <span className="ml-2">
                         (
                         {
-                          categories.find((cat) => cat.id === selectedCategory)
+                          displayCategories.find((cat) => cat.id === selectedCategory)
                             ?.name
                         }{" "}
                         카테고리)

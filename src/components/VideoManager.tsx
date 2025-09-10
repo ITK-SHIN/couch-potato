@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import { usePortfolioVideos, useAddVideo, useUpdateVideo, useDeleteVideo } from "@/hooks/usePortfolioVideos";
+import { useCategories } from "@/hooks/useCategories";
 import {
   DndContext,
   closestCenter,
@@ -42,7 +44,6 @@ interface Category {
 
 interface VideoManagerProps {
   isAdmin: boolean;
-  onVideosChange?: (videos: Video[]) => void;
 }
 
 // 드래그 가능한 영상 아이템 컴포넌트
@@ -163,15 +164,24 @@ function SortableVideoItem({
 
 export default function VideoManager({
   isAdmin,
-  onVideosChange,
 }: VideoManagerProps) {
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingVideo, setEditingVideo] = useState<Video | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const videosPerPage = 9;
+
+  // React Query 훅 사용
+  const { data: videosData, isLoading: videosLoading, error: videosError } = usePortfolioVideos();
+  const { data: categoriesData, isLoading: categoriesLoading, error: categoriesError } = useCategories();
+  
+  const addVideoMutation = useAddVideo();
+  const updateVideoMutation = useUpdateVideo();
+  const deleteVideoMutation = useDeleteVideo();
+
+  const videos = videosData?.videos || [];
+  const categories = categoriesData?.categories || [];
+  const loading = videosLoading || categoriesLoading;
+  const error = videosError || categoriesError;
   const [newVideo, setNewVideo] = useState({
     title: "",
     category: "",
@@ -181,6 +191,12 @@ export default function VideoManager({
     videoId: "",
     videoUrl: "",
     description: "",
+    order: 0,
+    stats: {
+      views: "0",
+      likes: "0",
+    },
+    tags: [],
   });
 
   // 드래그 앤 드롭 센서 설정
@@ -191,39 +207,6 @@ export default function VideoManager({
     })
   );
 
-  // 영상 목록 로드
-  const loadVideos = useCallback(async () => {
-    try {
-      const response = await fetch("/api/portfolio-videos");
-      if (response.ok) {
-        const result = await response.json();
-        setVideos(result.videos || []);
-        onVideosChange?.(result.videos || []);
-      }
-    } catch (error) {
-      console.error("영상 로딩 오류:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [onVideosChange]);
-
-  // 카테고리 목록 로드
-  const loadCategories = useCallback(async () => {
-    try {
-      const response = await fetch("/api/categories");
-      if (response.ok) {
-        const result = await response.json();
-        setCategories(result.categories || []);
-      }
-    } catch (error) {
-      console.error("카테고리 로딩 오류:", error);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadVideos();
-    loadCategories();
-  }, [loadVideos, loadCategories]);
 
   // 페이지네이션 계산
   const totalPages = Math.ceil(videos.length / videosPerPage);
@@ -253,8 +236,6 @@ export default function VideoManager({
         order: index,
       }));
 
-      setVideos(updatedVideos);
-      onVideosChange?.(updatedVideos);
 
       // 서버에 순서 업데이트 저장
       try {
@@ -294,33 +275,26 @@ export default function VideoManager({
     if (!newVideo.title || !newVideo.category || !newVideo.videoId) return;
 
     try {
-      const response = await fetch("/api/portfolio-videos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      await addVideoMutation.mutateAsync(newVideo);
+      setNewVideo({
+        title: "",
+        category: "",
+        client: "",
+        year: new Date().getFullYear().toString(),
+        thumbnail: "",
+        videoId: "",
+        videoUrl: "",
+        description: "",
+        order: 0,
+        stats: {
+          views: "0",
+          likes: "0",
         },
-        body: JSON.stringify(newVideo),
+        tags: [],
       });
-
-      if (response.ok) {
-        setNewVideo({
-          title: "",
-          category: "",
-          client: "",
-          year: new Date().getFullYear().toString(),
-          thumbnail: "",
-          videoId: "",
-          videoUrl: "",
-          description: "",
-        });
-        setShowAddForm(false);
-        setCurrentPage(1);
-        loadVideos();
-        alert("영상이 추가되었습니다!");
-      } else {
-        const error = await response.json();
-        alert(`오류: ${error.error}`);
-      }
+      setShowAddForm(false);
+      setCurrentPage(1);
+      alert("영상이 추가되었습니다!");
     } catch (error) {
       console.error("영상 추가 오류:", error);
       alert("영상 추가 중 오류가 발생했습니다.");
@@ -333,23 +307,10 @@ export default function VideoManager({
     if (!editingVideo) return;
 
     try {
-      const response = await fetch("/api/portfolio-videos", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editingVideo),
-      });
-
-      if (response.ok) {
-        setEditingVideo(null);
-        setCurrentPage(1);
-        loadVideos();
-        alert("영상이 수정되었습니다!");
-      } else {
-        const error = await response.json();
-        alert(`오류: ${error.error}`);
-      }
+      await updateVideoMutation.mutateAsync(editingVideo);
+      setEditingVideo(null);
+      setCurrentPage(1);
+      alert("영상이 수정되었습니다!");
     } catch (error) {
       console.error("영상 수정 오류:", error);
       alert("영상 수정 중 오류가 발생했습니다.");
@@ -361,18 +322,9 @@ export default function VideoManager({
     if (!confirm("정말로 이 영상을 삭제하시겠습니까?")) return;
 
     try {
-      const response = await fetch(`/api/portfolio-videos?id=${id}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        setCurrentPage(1);
-        loadVideos();
-        alert("영상이 삭제되었습니다!");
-      } else {
-        const error = await response.json();
-        alert(`오류: ${error.error}`);
-      }
+      await deleteVideoMutation.mutateAsync(id);
+      setCurrentPage(1);
+      alert("영상이 삭제되었습니다!");
     } catch (error) {
       console.error("영상 삭제 오류:", error);
       alert("영상 삭제 중 오류가 발생했습니다.");
@@ -387,6 +339,23 @@ export default function VideoManager({
     return (
       <div className="bg-blue-100 border border-blue-400 rounded-lg p-4 mb-6">
         <p className="text-blue-800">영상을 불러오는 중...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-red-100 border border-red-400 rounded-lg p-4 mb-6">
+        <p className="text-red-800">
+          영상 데이터를 불러오는데 실패했습니다. 
+          {error instanceof Error ? ` (${error.message})` : ''}
+        </p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          다시 시도
+        </button>
       </div>
     );
   }

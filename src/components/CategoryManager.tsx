@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
+import { useCategories, useAddCategory, useUpdateCategory, useDeleteCategory, useUpdateCategoryOrder } from "@/hooks/useCategories";
 import {
   DndContext,
   closestCenter,
@@ -28,7 +29,6 @@ interface Category {
 
 interface CategoryManagerProps {
   isAdmin: boolean;
-  onCategoriesChange?: (categories: Category[]) => void;
 }
 
 // 드래그 가능한 카테고리 아이템 컴포넌트
@@ -115,10 +115,7 @@ function SortableCategoryItem({
 
 export default function CategoryManager({
   isAdmin,
-  onCategoriesChange,
 }: CategoryManagerProps) {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [newCategory, setNewCategory] = useState({
@@ -126,6 +123,16 @@ export default function CategoryManager({
     icon: "",
     order: 0,
   });
+
+  // React Query 훅 사용
+  const { data: categoriesData, isLoading, error } = useCategories();
+  const addCategoryMutation = useAddCategory();
+  const updateCategoryMutation = useUpdateCategory();
+  const deleteCategoryMutation = useDeleteCategory();
+  const updateCategoryOrderMutation = useUpdateCategoryOrder();
+
+  const categories = categoriesData?.categories || [];
+  const loading = isLoading;
 
   // 드래그 앤 드롭 센서 설정
   const sensors = useSensors(
@@ -152,54 +159,17 @@ export default function CategoryManager({
         order: index,
       }));
 
-      setCategories(updatedCategories);
-      onCategoriesChange?.(updatedCategories);
-
       // 서버에 순서 업데이트 저장
       try {
-        await Promise.all(
-          updatedCategories.map((category) =>
-            fetch("/api/categories", {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                id: category.id,
-                name: category.name,
-                icon: category.icon,
-                order: category.order,
-              }),
-            })
-          )
-        );
-        console.log("카테고리 순서가 업데이트되었습니다.");
+        await updateCategoryOrderMutation.mutateAsync(updatedCategories);
+        alert("카테고리 순서가 저장되었습니다!");
       } catch (error) {
-        console.error("카테고리 순서 업데이트 오류:", error);
+        console.error("카테고리 순서 저장 오류:", error);
         alert("순서 저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.");
       }
     }
   };
 
-  // 카테고리 목록 로드
-  const loadCategories = useCallback(async () => {
-    try {
-      const response = await fetch("/api/categories");
-      if (response.ok) {
-        const result = await response.json();
-        setCategories(result.categories || []);
-        onCategoriesChange?.(result.categories || []);
-      }
-    } catch (error) {
-      console.error("카테고리 로딩 오류:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [onCategoriesChange]);
-
-  useEffect(() => {
-    loadCategories();
-  }, [loadCategories]);
 
   // 새 카테고리 추가
   const handleAddCategory = async (e: React.FormEvent) => {
@@ -207,23 +177,10 @@ export default function CategoryManager({
     if (!newCategory.name || !newCategory.icon) return;
 
     try {
-      const response = await fetch("/api/categories", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newCategory),
-      });
-
-      if (response.ok) {
-        setNewCategory({ name: "", icon: "", order: 0 });
-        setShowAddForm(false);
-        loadCategories();
-        alert("카테고리가 추가되었습니다!");
-      } else {
-        const error = await response.json();
-        alert(`오류: ${error.error}`);
-      }
+      await addCategoryMutation.mutateAsync(newCategory);
+      setNewCategory({ name: "", icon: "", order: 0 });
+      setShowAddForm(false);
+      alert("카테고리가 추가되었습니다!");
     } catch (error) {
       console.error("카테고리 추가 오류:", error);
       alert("카테고리 추가 중 오류가 발생했습니다.");
@@ -236,22 +193,9 @@ export default function CategoryManager({
     if (!editingCategory) return;
 
     try {
-      const response = await fetch("/api/categories", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editingCategory),
-      });
-
-      if (response.ok) {
-        setEditingCategory(null);
-        loadCategories();
-        alert("카테고리가 수정되었습니다!");
-      } else {
-        const error = await response.json();
-        alert(`오류: ${error.error}`);
-      }
+      await updateCategoryMutation.mutateAsync(editingCategory);
+      setEditingCategory(null);
+      alert("카테고리가 수정되었습니다!");
     } catch (error) {
       console.error("카테고리 수정 오류:", error);
       alert("카테고리 수정 중 오류가 발생했습니다.");
@@ -263,17 +207,8 @@ export default function CategoryManager({
     if (!confirm("정말로 이 카테고리를 삭제하시겠습니까?")) return;
 
     try {
-      const response = await fetch(`/api/categories?id=${id}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        loadCategories();
-        alert("카테고리가 삭제되었습니다!");
-      } else {
-        const error = await response.json();
-        alert(`오류: ${error.error}`);
-      }
+      await deleteCategoryMutation.mutateAsync(id);
+      alert("카테고리가 삭제되었습니다!");
     } catch (error) {
       console.error("카테고리 삭제 오류:", error);
       alert("카테고리 삭제 중 오류가 발생했습니다.");
@@ -288,6 +223,23 @@ export default function CategoryManager({
     return (
       <div className="bg-yellow-100 border border-yellow-400 rounded-lg p-4 mb-6">
         <p className="text-yellow-800">카테고리를 불러오는 중...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-red-100 border border-red-400 rounded-lg p-4 mb-6">
+        <p className="text-red-800">
+          카테고리 데이터를 불러오는데 실패했습니다. 
+          {error instanceof Error ? ` (${error.message})` : ''}
+        </p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          다시 시도
+        </button>
       </div>
     );
   }

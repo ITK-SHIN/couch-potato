@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import RealInlineEditor from "./RealInlineEditor";
+import { useUniversalContent, useUpdateUniversalContent } from "@/hooks/useUniversalContent";
 
 interface UniversalContentProps {
   isAdmin: boolean;
@@ -19,34 +20,25 @@ export default function UniversalContent({
   pageName,
   fields,
 }: UniversalContentProps) {
-  const [data, setData] = useState<{ [key: string]: string }>({});
-  const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 
-  const fetchData = useCallback(async () => {
-    try {
-      const response = await fetch(`/api/update-content?page=${pageName}`);
-      if (response.ok) {
-        const result = await response.json();
-        setData(result.data || {});
-      }
-    } catch (error) {
-      console.error("데이터 로딩 오류:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [pageName]);
+  // React Query 훅 사용
+  const { data: contentData, isLoading, error } = useUniversalContent(pageName);
+  const updateContentMutation = useUpdateUniversalContent(pageName);
+
+  const data = contentData?.data || {};
+  const loading = isLoading;
 
   useEffect(() => {
     setMounted(true);
-    fetchData();
-  }, [fetchData]);
+  }, []);
 
-  const handleSave = (field: string, newValue: string) => {
-    setData((prev) => ({
-      ...prev,
-      [field]: newValue,
-    }));
+  const handleSave = async (field: string, newValue: string) => {
+    try {
+      await updateContentMutation.mutateAsync({ field, value: newValue });
+    } catch (error) {
+      console.error("콘텐츠 저장 오류:", error);
+    }
   };
 
   // 서버 사이드 렌더링 시에는 기본값만 표시 (Hydration 에러 방지)
@@ -68,6 +60,18 @@ export default function UniversalContent({
         {Object.entries(fields).map(([key, field]) => (
           <span key={key} className={field.className}>
             로딩 중...
+          </span>
+        ))}
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        {Object.entries(fields).map(([key, field]) => (
+          <span key={key} className={field.className}>
+            {field.value} {/* 에러 시 기본값 표시 */}
           </span>
         ))}
       </>

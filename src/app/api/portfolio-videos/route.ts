@@ -4,12 +4,24 @@ import { getCollection } from "@/lib/mongodb";
 // GET: 포트폴리오 영상 목록 조회
 export async function GET() {
   try {
-    const collection = await getCollection('portfolio-videos');
+    const collection = await getCollection("portfolio-videos");
     const videos = await collection.find({}).sort({ order: 1 }).toArray();
-    
+
     return NextResponse.json({ videos });
   } catch (error) {
     console.error("영상 조회 오류:", error);
+
+    // MongoDB 연결 에러인 경우 빈 배열 반환 (React Query가 캐시된 데이터 사용)
+    if (
+      error instanceof Error &&
+      (error.message.includes("MongoServerSelectionError") ||
+        error.message.includes("SSL routines") ||
+        error.message.includes("tlsv1 alert internal error"))
+    ) {
+      console.log("MongoDB 연결 실패 - 빈 배열 반환하여 캐시된 데이터 사용");
+      return NextResponse.json({ videos: [] });
+    }
+
     return NextResponse.json(
       { error: "영상 조회 중 오류가 발생했습니다." },
       { status: 500 }
@@ -38,7 +50,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const collection = await getCollection('portfolio-videos');
+    const collection = await getCollection("portfolio-videos");
 
     // 기존 영상들의 order 값을 1씩 증가시켜 순서 조정
     await collection.updateMany({}, { $inc: { order: 1 } });
@@ -49,7 +61,8 @@ export async function POST(request: NextRequest) {
       category,
       client: client || "",
       year: year || new Date().getFullYear().toString(),
-      thumbnail: thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+      thumbnail:
+        thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
       videoId,
       videoUrl: videoUrl || `https://www.youtube.com/watch?v=${videoId}`,
       description: description || "",
@@ -86,19 +99,19 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const collection = await getCollection('portfolio-videos');
-    
+    const collection = await getCollection("portfolio-videos");
+
     // ObjectId로 변환
-    const { ObjectId } = await import('mongodb');
+    const { ObjectId } = await import("mongodb");
     const objectId = new ObjectId(id);
 
     const result = await collection.updateOne(
       { _id: objectId },
-      { 
-        $set: { 
-          ...updateData, 
-          updatedAt: new Date().toISOString() 
-        } 
+      {
+        $set: {
+          ...updateData,
+          updatedAt: new Date().toISOString(),
+        },
       }
     );
 
@@ -135,10 +148,10 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const collection = await getCollection('portfolio-videos');
-    
+    const collection = await getCollection("portfolio-videos");
+
     // ObjectId로 변환
-    const { ObjectId } = await import('mongodb');
+    const { ObjectId } = await import("mongodb");
     const objectId = new ObjectId(id);
 
     const result = await collection.deleteOne({ _id: objectId });

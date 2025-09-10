@@ -1,13 +1,16 @@
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient, Db } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
-const dbName = 'couch-potato';
+const dbName = "couch-potato";
 
 if (!uri) {
-  console.error('MONGODB_URI 환경 변수가 설정되지 않았습니다.');
-  console.error('현재 환경 변수들:', Object.keys(process.env).filter(key => key.includes('MONGO')));
-  console.error('전체 환경 변수들:', Object.keys(process.env).sort());
-  throw new Error('MONGODB_URI 환경 변수가 설정되지 않았습니다.');
+  console.error("MONGODB_URI 환경 변수가 설정되지 않았습니다.");
+  console.error(
+    "현재 환경 변수들:",
+    Object.keys(process.env).filter((key) => key.includes("MONGO"))
+  );
+  console.error("전체 환경 변수들:", Object.keys(process.env).sort());
+  throw new Error("MONGODB_URI 환경 변수가 설정되지 않았습니다.");
 }
 
 // TypeScript에게 uri가 string임을 알려줌
@@ -26,19 +29,22 @@ export async function connectToDatabase() {
       tls: true,
       tlsAllowInvalidCertificates: false,
       tlsAllowInvalidHostnames: false,
-      serverSelectionTimeoutMS: 5000,
-      connectTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 10000, // 타임아웃 증가
+      connectTimeoutMS: 15000, // 연결 타임아웃 증가
+      socketTimeoutMS: 20000, // 소켓 타임아웃 추가
       maxPoolSize: 10,
       retryWrites: true,
+      retryReads: true, // 읽기 재시도 추가
       family: 4, // IPv4 사용 강제
+      heartbeatFrequencyMS: 10000, // 하트비트 빈도 조정
     });
     await client.connect();
     db = client.db(dbName);
-    
-    console.log('MongoDB 연결 성공');
+
+    console.log("MongoDB 연결 성공");
     return { client, db };
   } catch (error) {
-    console.error('MongoDB 연결 실패:', error);
+    console.error("MongoDB 연결 실패:", error);
     throw error;
   }
 }

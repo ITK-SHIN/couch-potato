@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/layouts/Navbar";
 import Footer from "./components/layouts/Footer";
 import { AdminProvider } from "@/contexts/AdminContext";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -20,11 +21,13 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <AdminProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </AdminProvider>
+        <QueryProvider>
+          <AdminProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </AdminProvider>
+        </QueryProvider>
       </body>
     </html>
   );

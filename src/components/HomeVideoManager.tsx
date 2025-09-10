@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { useHomeVideo, useUpdateHomeVideo } from "@/hooks/useHomeVideo";
 
 interface HomeVideo {
   id: string;
@@ -34,30 +35,22 @@ export default function HomeVideoManager({
   isAdmin,
   onVideoChange,
 }: HomeVideoManagerProps) {
-  const [video, setVideo] = useState<HomeVideo | null>(null);
-  const [loading, setLoading] = useState(true);
   const [showEditForm, setShowEditForm] = useState(false);
   const [editingVideo, setEditingVideo] = useState<HomeVideo | null>(null);
 
-  // 홈페이지 영상 정보 로드
-  const loadHomeVideo = useCallback(async () => {
-    try {
-      const response = await fetch("/api/home-video");
-      if (response.ok) {
-        const result = await response.json();
-        setVideo(result.video);
-        onVideoChange?.(result.video);
-      }
-    } catch (error) {
-      console.error("홈페이지 영상 로딩 오류:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [onVideoChange]);
+  // React Query 훅 사용
+  const { data: homeVideoData, isLoading, error } = useHomeVideo();
+  const updateHomeVideoMutation = useUpdateHomeVideo();
 
-  useEffect(() => {
-    loadHomeVideo();
-  }, [loadHomeVideo]);
+  const video = homeVideoData?.video || null;
+  const loading = isLoading;
+
+  // 비디오 데이터가 변경될 때마다 부모 컴포넌트에 알림
+  React.useEffect(() => {
+    if (video && onVideoChange) {
+      onVideoChange(video);
+    }
+  }, [video, onVideoChange]);
 
   // 영상 수정
   const handleEditVideo = async (e: React.FormEvent) => {
@@ -65,23 +58,10 @@ export default function HomeVideoManager({
     if (!editingVideo) return;
 
     try {
-      const response = await fetch("/api/home-video", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editingVideo),
-      });
-
-      if (response.ok) {
-        setEditingVideo(null);
-        setShowEditForm(false);
-        loadHomeVideo();
-        alert("홈페이지 영상이 수정되었습니다!");
-      } else {
-        const error = await response.json();
-        alert(`오류: ${error.error}`);
-      }
+      await updateHomeVideoMutation.mutateAsync(editingVideo);
+      setEditingVideo(null);
+      setShowEditForm(false);
+      alert("홈페이지 영상이 수정되었습니다!");
     } catch (error) {
       console.error("홈페이지 영상 수정 오류:", error);
       alert("홈페이지 영상 수정 중 오류가 발생했습니다.");
@@ -130,6 +110,23 @@ export default function HomeVideoManager({
     return (
       <div className="bg-green-100 border border-green-400 rounded-lg p-4 mb-6">
         <p className="text-green-800">홈페이지 영상을 불러오는 중...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-red-100 border border-red-400 rounded-lg p-4 mb-6">
+        <p className="text-red-800">
+          홈페이지 영상을 불러오는데 실패했습니다. 
+          {error instanceof Error ? ` (${error.message})` : ''}
+        </p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          다시 시도
+        </button>
       </div>
     );
   }
