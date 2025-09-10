@@ -1,12 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import UniversalContent from "@/components/UniversalContent";
 import CategoryManager from "@/components/CategoryManager";
 import VideoManager from "@/components/VideoManager";
 import { useAdmin } from "@/contexts/AdminContext";
-import { BigYellowBtn, SmallYellowBorderHoverBigBtn, SmallYellowHoverBigBtn } from "../components/Button";
+import {
+  BigYellowBtn,
+  SmallYellowBorderHoverBigBtn,
+  SmallYellowHoverBigBtn,
+} from "../components/Button";
 
 const PortfolioPage = () => {
   const { isAdmin } = useAdmin();
@@ -29,7 +33,7 @@ const PortfolioPage = () => {
   const videosPerPage = 9;
 
   // 카테고리 로딩 함수
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     try {
       const response = await fetch("/api/categories");
       if (response.ok) {
@@ -41,7 +45,7 @@ const PortfolioPage = () => {
       // 기본 카테고리 사용
       setCategories(getDefaultCategories());
     }
-  };
+  }, []);
 
   // 기본 카테고리 (API 실패 시 사용)
   const getDefaultCategories = () => [
@@ -137,7 +141,7 @@ const PortfolioPage = () => {
   };
 
   // 영상 로딩 함수
-  const loadVideos = async () => {
+  const loadVideos = useCallback(async () => {
     try {
       const response = await fetch("/api/portfolio-videos");
       if (response.ok) {
@@ -148,7 +152,7 @@ const PortfolioPage = () => {
       console.error("영상 로딩 오류:", error);
       setError("영상 데이터를 불러오는 중 오류가 발생했습니다.");
     }
-  };
+  }, []);
 
   // 카테고리와 포트폴리오 데이터 로드
   useEffect(() => {
@@ -168,7 +172,7 @@ const PortfolioPage = () => {
     };
 
     loadData();
-  }, []);
+  }, [loadCategories, loadVideos]);
 
   // YouTube Player API 로드 및 초기화
   useEffect(() => {
@@ -449,7 +453,7 @@ const PortfolioPage = () => {
                 </p>
 
                 <div className="animate-slide-up-delayed">
-{/*                   <Link href="#portfolio-grid">
+                  {/*                   <Link href="#portfolio-grid">
                     <button className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange-light">
                       <UniversalContent
                         isAdmin={isAdmin}
@@ -463,7 +467,10 @@ const PortfolioPage = () => {
                       />
                     </button>
                   </Link> */}
-                  <SmallYellowHoverBigBtn href="#portfolio-grid" text="🎬 작품 갤러리 보기" />
+                  <SmallYellowHoverBigBtn
+                    href="#portfolio-grid"
+                    text="🎬 작품 갤러리 보기"
+                  />
                 </div>
               </div>
 
@@ -954,7 +961,7 @@ const PortfolioPage = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-  {/*           <Link href="/contact">
+            {/*           <Link href="/contact">
               <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-105 transition-all duration-300 shadow-xl">
                 <UniversalContent
                   isAdmin={isAdmin}
@@ -968,7 +975,10 @@ const PortfolioPage = () => {
                 />
               </button>
             </Link */}
-            <SmallYellowHoverBigBtn href="/contact" text="🚀 프로젝트 시작하기" />
+            <SmallYellowHoverBigBtn
+              href="/contact"
+              text="🚀 프로젝트 시작하기"
+            />
             <a
               href="https://www.youtube.com/@TryToShinDirect."
               target="_blank"
@@ -987,7 +997,10 @@ const PortfolioPage = () => {
                 />
               </button>
             </a>
-            <SmallYellowBorderHoverBigBtn href="/process" text="📋 제작 과정 보기" />
+            <SmallYellowBorderHoverBigBtn
+              href="/process"
+              text="📋 제작 과정 보기"
+            />
           </div>
         </div>
       </section>

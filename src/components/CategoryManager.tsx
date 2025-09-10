@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   DndContext,
   closestCenter,
@@ -182,7 +182,7 @@ export default function CategoryManager({
   };
 
   // 카테고리 목록 로드
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     try {
       const response = await fetch("/api/categories");
       if (response.ok) {
@@ -195,11 +195,11 @@ export default function CategoryManager({
     } finally {
       setLoading(false);
     }
-  };
+  }, [onCategoriesChange]);
 
   useEffect(() => {
     loadCategories();
-  }, []);
+  }, [loadCategories]);
 
   // 새 카테고리 추가
   const handleAddCategory = async (e: React.FormEvent) => {
