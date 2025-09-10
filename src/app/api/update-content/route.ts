@@ -1,21 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCollection } from "@/lib/mongodb";
+import fs from "fs";
+import path from "path";
 
 export async function POST(request: NextRequest) {
   try {
     const { field, value, pageName } = await request.json();
 
-    const collection = await getCollection('page-content');
+    const collection = await getCollection("page-content");
 
     // 페이지별 데이터 업데이트
     const result = await collection.updateOne(
       { pageName: pageName || "home" },
-      { 
-        $set: { 
+      {
+        $set: {
           [field]: value,
           lastUpdated: new Date().toISOString(),
-          pageName: pageName || "home"
-        } 
+          pageName: pageName || "home",
+        },
       },
       { upsert: true }
     );
@@ -38,11 +40,11 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const pageName = searchParams.get("page") || "home";
 
-    const collection = await getCollection('page-content');
+    const collection = await getCollection("page-content");
     const data = await collection.findOne({ pageName });
 
-    return NextResponse.json({ 
-      data: data ? { ...data, _id: undefined } : {} 
+    return NextResponse.json({
+      data: data ? { ...data, _id: undefined } : {},
     });
   } catch (error) {
     console.error("데이터 읽기 오류:", error);
