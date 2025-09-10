@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { usePortfolioVideos, useAddVideo, useUpdateVideo, useDeleteVideo } from "@/hooks/usePortfolioVideos";
+import {
+  usePortfolioVideos,
+  useAddVideo,
+  useUpdateVideo,
+  useDeleteVideo,
+  useUpdateVideoOrder,
+} from "@/hooks/usePortfolioVideos";
 import { useCategories } from "@/hooks/useCategories";
 import {
   DndContext,
@@ -65,7 +71,7 @@ function SortableVideoItem({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: video.id });
+  } = useSortable({ id: video._id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -84,6 +90,27 @@ function SortableVideoItem({
       }`}
     >
       <div className="flex items-start gap-4">
+        {/* 드래그 핸들 */}
+        <div
+          {...attributes}
+          {...listeners}
+          className="cursor-grab active:cursor-grabbing p-1 hover:bg-gray-100 rounded"
+          title="드래그하여 순서 변경"
+        >
+          <svg
+            className="w-4 h-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 8h16M4 16h16"
+            />
+          </svg>
+        </div>
         {/* 썸네일 */}
         <div className="w-24 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0 relative">
           <Image
@@ -99,49 +126,22 @@ function SortableVideoItem({
 
         {/* 영상 정보 */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between mb-2">
-            <div className="flex-1">
-              <h4 className="font-bold text-gray-800 text-sm mb-1 line-clamp-2">
-                {video.title}
-              </h4>
-              <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
-                <span className="flex items-center gap-1">
-                  {categoryInfo?.icon} {categoryInfo?.name || video.category}
-                </span>
-                <span>•</span>
-                <span>{video.client}</span>
-                <span>•</span>
-                <span>{video.year}</span>
-              </div>
-              <p className="text-xs text-gray-500 line-clamp-2">
-                {video.description}
-              </p>
-            </div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-lg">{categoryInfo?.icon}</span>
+            <span className="font-medium text-gray-800">{video.title}</span>
+            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+              순서: {video.order}
+            </span>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-gray-600">
+            <span>{video.client}</span>
+            <span>•</span>
+            <span>{video.year}</span>
           </div>
         </div>
 
         {/* 액션 버튼들 */}
-        <div className="flex flex-col gap-2">
-          <div
-            {...attributes}
-            {...listeners}
-            className="cursor-grab active:cursor-grabbing p-1 hover:bg-gray-100 rounded"
-            title="드래그하여 순서 변경"
-          >
-            <svg
-              className="w-4 h-4 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 8h16M4 16h16"
-              />
-            </svg>
-          </div>
+        <div className="flex gap-1">
           <button
             onClick={() => onEdit(video)}
             className="p-1 text-blue-600 hover:bg-blue-100 rounded"
@@ -150,7 +150,7 @@ function SortableVideoItem({
             ✏️
           </button>
           <button
-            onClick={() => onDelete(video.id)}
+            onClick={() => onDelete(video._id)}
             className="p-1 text-red-600 hover:bg-red-100 rounded"
             title="삭제"
           >
@@ -162,21 +162,28 @@ function SortableVideoItem({
   );
 }
 
-export default function VideoManager({
-  isAdmin,
-}: VideoManagerProps) {
+export default function VideoManager({ isAdmin }: VideoManagerProps) {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingVideo, setEditingVideo] = useState<Video | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const videosPerPage = 9;
 
   // React Query 훅 사용
-  const { data: videosData, isLoading: videosLoading, error: videosError } = usePortfolioVideos();
-  const { data: categoriesData, isLoading: categoriesLoading, error: categoriesError } = useCategories();
-  
+  const {
+    data: videosData,
+    isLoading: videosLoading,
+    error: videosError,
+  } = usePortfolioVideos();
+  const {
+    data: categoriesData,
+    isLoading: categoriesLoading,
+    error: categoriesError,
+  } = useCategories();
+
   const addVideoMutation = useAddVideo();
   const updateVideoMutation = useUpdateVideo();
   const deleteVideoMutation = useDeleteVideo();
+  const updateVideoOrderMutation = useUpdateVideoOrder();
 
   const videos = videosData?.videos || [];
   const categories = categoriesData?.categories || [];
@@ -207,7 +214,6 @@ export default function VideoManager({
     })
   );
 
-
   // 페이지네이션 계산
   const totalPages = Math.ceil(videos.length / videosPerPage);
   const startIndex = (currentPage - 1) * videosPerPage;
@@ -224,8 +230,8 @@ export default function VideoManager({
     const { active, over } = event;
 
     if (active.id !== over?.id) {
-      const oldIndex = videos.findIndex((item) => item.id === active.id);
-      const newIndex = videos.findIndex((item) => item.id === over?.id);
+      const oldIndex = videos.findIndex((item) => item._id === active.id);
+      const newIndex = videos.findIndex((item) => item._id === over?.id);
 
       // 배열 순서 변경
       const newVideos = arrayMove(videos, oldIndex, newIndex);
@@ -236,31 +242,9 @@ export default function VideoManager({
         order: index,
       }));
 
-
       // 서버에 순서 업데이트 저장
       try {
-        await Promise.all(
-          updatedVideos.map((video) =>
-            fetch("/api/portfolio-videos", {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                id: video.id,
-                title: video.title,
-                category: video.category,
-                client: video.client,
-                year: video.year,
-                thumbnail: video.thumbnail,
-                videoId: video.videoId,
-                videoUrl: video.videoUrl,
-                description: video.description,
-                order: video.order,
-              }),
-            })
-          )
-        );
+        await updateVideoOrderMutation.mutateAsync(updatedVideos);
         console.log("영상 순서가 업데이트되었습니다.");
       } catch (error) {
         console.error("영상 순서 업데이트 오류:", error);
@@ -347,11 +331,11 @@ export default function VideoManager({
     return (
       <div className="bg-red-100 border border-red-400 rounded-lg p-4 mb-6">
         <p className="text-red-800">
-          영상 데이터를 불러오는데 실패했습니다. 
-          {error instanceof Error ? ` (${error.message})` : ''}
+          영상 데이터를 불러오는데 실패했습니다.
+          {error instanceof Error ? ` (${error.message})` : ""}
         </p>
-        <button 
-          onClick={() => window.location.reload()} 
+        <button
+          onClick={() => window.location.reload()}
           className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
         >
           다시 시도
@@ -383,7 +367,7 @@ export default function VideoManager({
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={videos.map((video) => video.id)}
+            items={videos.map((video) => video._id)}
             strategy={verticalListSortingStrategy}
           >
             <div className="space-y-3">
@@ -391,7 +375,7 @@ export default function VideoManager({
                 .sort((a, b) => a.order - b.order)
                 .map((video) => (
                   <SortableVideoItem
-                    key={video.id}
+                    key={video._id}
                     video={video}
                     categories={categories}
                     onEdit={setEditingVideo}
