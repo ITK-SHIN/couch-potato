@@ -1,10 +1,6 @@
 import { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
-
-export interface ErrorState {
-  error: string | null;
-  isError: boolean;
-}
+import { ErrorState } from './types';
 
 export const useErrorHandler = () => {
   const [errorState, setErrorState] = useState<ErrorState>({
