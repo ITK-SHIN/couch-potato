@@ -20,6 +20,11 @@ export {
   useUpdateCategory,
   useDeleteCategory 
 } from './useCategories';
-export * from './usePortfolioVideos';
+export { 
+  usePortfolioVideos, 
+  useAddVideo as useAddVideoLegacy,
+  useUpdateVideo,
+  useDeleteVideo 
+} from './usePortfolioVideos';
 export * from './useHomeVideo';
 export * from './useUniversalContent';
