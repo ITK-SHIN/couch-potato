@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import emailjs from "@emailjs/browser";
-import UniversalContent from "@/components/UniversalContent";
+import UniversalContent from "@/components/ui/UniversalContent";
 import { useAdmin } from "@/contexts/AdminContext";
-import { BigWhiteBtn, SmallYellowHoverBigBtn } from "../components/Button";
+import { BigWhiteBtn, SmallYellowHoverBigBtn } from "@/components/ui/Button";
 
 const ContactPage = () => {
   const { isAdmin } = useAdmin();

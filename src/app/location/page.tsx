@@ -2,9 +2,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import UniversalContent from "@/components/UniversalContent";
+import UniversalContent from "@/components/ui/UniversalContent";
 import { useAdmin } from "@/contexts/AdminContext";
-import { SmallYellowBorderHoverBigBtn, SmallYellowHoverBigBtn } from "../components/Button";
+import { SmallYellowBorderHoverBigBtn, SmallYellowHoverBigBtn } from "@/components/ui/Button";
 
 const LocationPage = () => {
   const { isAdmin } = useAdmin();
@@ -347,21 +347,21 @@ const LocationPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-clapperboard-gray">
+      <section className="py-24 bg-gradient-to-r from-potato-orange to-potato-orange-light text-black">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-8">
+          <h2 className="text-4xl md:text-5xl font-black mb-8">
             <UniversalContent
               isAdmin={isAdmin}
               pageName="location"
               fields={{
                 cta_title: {
                   value: "방문 상담 예약하기",
-                  className: "text-4xl md:text-5xl font-black text-white",
+                  className: "text-4xl md:text-5xl font-black",
                 },
               }}
             />
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
             <UniversalContent
               isAdmin={isAdmin}
               pageName="location"
@@ -369,7 +369,7 @@ const LocationPage = () => {
                 cta_subtitle: {
                   value:
                     "직접 방문하셔서 스튜디오 시설을 둘러보고 프로젝트에 대해 상담받으세요",
-                  className: "text-xl text-gray-300 leading-relaxed",
+                  className: "text-xl leading-relaxed opacity-90",
                 },
               }}
             />

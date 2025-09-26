@@ -1,7 +1,7 @@
 "use client";
 
-import UniversalContent from "@/components/UniversalContent";
-import StrapiContent from "@/components/StrapiContent";
+import UniversalContent from "@/components/ui/UniversalContent";
+import StrapiContent from "@/components/ui/StrapiContent";
 import { useAdmin } from "@/contexts/AdminContext";
 
 export default function TestimonialsSection() {
@@ -73,7 +73,7 @@ export default function TestimonialsSection() {
                   </div>
                 ))
               ) : (
-                // 기본 리뷰 데이터 표시
+                // 기본 리뷰 카드 표시
                 <>
                   <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                     <div className="flex items-center mb-4 sm:mb-6">
@@ -91,7 +91,7 @@ export default function TestimonialsSection() {
                     </div>
                     <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
                       &quot;정말 훌륭한 영상 제작 서비스입니다. 브랜드의 가치를
-                      완벽하게 표현해주셨어요.&quot;
+                      완벽하게 표현해주어서 감사합니다.&quot;
                     </p>
                   </div>
                   <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
@@ -110,7 +110,7 @@ export default function TestimonialsSection() {
                     </div>
                     <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
                       &quot;웨딩 영상이 정말 감동적이었어요. 평생 기억에 남을
-                      소중한 순간을 아름답게 담아주셨습니다.&quot;
+                      소중한 순간을 아름답게 담아주셨네요.&quot;
                     </p>
                   </div>
                   <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
@@ -120,16 +120,16 @@ export default function TestimonialsSection() {
                       </div>
                       <div>
                         <h4 className="text-white font-bold text-lg sm:text-xl">
-                          박준호
+                          박성호
                         </h4>
                         <p className="text-gray-300 text-xs sm:text-sm">
-                          기업 마케팅팀장
+                          기업 마케팅팀
                         </p>
                       </div>
                     </div>
                     <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
                       &quot;기업 홍보 영상 제작에서 전문성과 창의성을 모두 갖춘
-                      팀입니다. 강력 추천합니다!&quot;
+                      팀이네요. 강력 추천합니다!&quot;
                     </p>
                   </div>
                 </>

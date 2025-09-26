@@ -1,67 +1,75 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
-import UniversalContent from "@/components/UniversalContent";
-import HomeVideoManager from "@/components/HomeVideoManager";
+import Image from "next/image";
+import UniversalContent from "@/components/ui/UniversalContent";
+import HomeVideoManager from "@/components/admin/HomeVideoManager";
 import { useAdmin } from "@/contexts/AdminContext";
-import { BigBlackBtn, BigYellowBtn } from "@/app/components/Button";
+import { BigBlackBtn, BigYellowBtn } from "@/components/ui/Button";
 
 interface HeroSectionProps {
   homeVideo: any;
   onVideoChange: (video: any) => void;
 }
 
-export default function HeroSection({
+const HeroSection = React.memo(function HeroSection({
   homeVideo,
   onVideoChange,
 }: HeroSectionProps) {
-  const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
-  const playerRef = useRef<any>(null);
-  const [iframeRef, setIframeRef] = useState<HTMLDivElement | null>(null);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [volume, setVolume] = useState<number>(75);
+  const [iframeRef, setIframeRef] = useState<HTMLDivElement | null>(null);
+  const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
+  const [player, setPlayer] = useState<any>(null);
   const { isAdmin } = useAdmin();
 
   // YouTube Player API 로드 및 초기화
   useEffect(() => {
+    // YouTube API 스크립트 로드
     if (typeof window !== "undefined" && !window.YT) {
       const script = document.createElement("script");
       script.src = "https://www.youtube.com/iframe_api";
       script.async = true;
       document.head.appendChild(script);
 
+      // API 준비 완료 콜백
       window.onYouTubeIframeAPIReady = () => {
-        console.log("YouTube API loaded!");
+        console.log("YouTube API loaded");
         setIsPlayerReady(true);
       };
-    } else if (window.YT) {
+    } else if (window.YT && window.YT.Player) {
       setIsPlayerReady(true);
     }
+
+    return () => {
+      // 클린업
+      if (window.onYouTubeIframeAPIReady) {
+        window.onYouTubeIframeAPIReady = null;
+      }
+    };
   }, []);
 
-  // YouTube Player 생성
+  // 플레이어 초기화
   useEffect(() => {
     if (
       isPlayerReady &&
       iframeRef &&
       window.YT &&
       window.YT.Player &&
-      !playerRef.current &&
-      homeVideo?.videoId
+      !player
     ) {
       try {
         console.log("Creating YouTube player...");
         const newPlayer = new window.YT.Player(iframeRef, {
           height: "100%",
           width: "100%",
-          videoId: homeVideo.videoId,
+          videoId: homeVideo?.videoId || "1CUt84BK_p0",
           playerVars: {
             autoplay: 1,
             mute: 1,
             loop: 1,
-            playlist: homeVideo.videoId,
+            playlist: homeVideo?.videoId || "1CUt84BK_p0",
             controls: 1,
             showinfo: 0,
             rel: 0,
@@ -72,7 +80,9 @@ export default function HeroSection({
           events: {
             onReady: (event: any) => {
               console.log("YouTube Player ready!");
+              // 초기 볼륨 설정
               event.target.setVolume(volume);
+              // 초기에는 항상 음소거 상태
               event.target.mute();
               console.log(
                 `Initial volume set to: ${volume}, muted: ${isMuted}`
@@ -83,7 +93,7 @@ export default function HeroSection({
             },
           },
         });
-        playerRef.current = newPlayer;
+        setPlayer(newPlayer);
         console.log("YouTube player created successfully");
       } catch (error) {
         console.error("Error creating YouTube player:", error);
@@ -93,15 +103,15 @@ export default function HeroSection({
 
   // 홈 영상 변경 시 플레이어 업데이트
   useEffect(() => {
-    if (playerRef.current && homeVideo?.videoId) {
+    if (player && homeVideo?.videoId) {
       try {
-        playerRef.current.loadVideoById(homeVideo.videoId);
+        player.loadVideoById(homeVideo.videoId);
         console.log(`Video changed to: ${homeVideo.videoId}`);
       } catch (error) {
         console.error("Error changing video:", error);
       }
     }
-  }, [homeVideo?.videoId]);
+  }, [homeVideo?.videoId, player]);
 
   return (
     <main className="relative min-h-screen overflow-hidden">
@@ -200,23 +210,24 @@ export default function HeroSection({
                   <div className="relative group transform hover:scale-105 lg:scale-110 lg:hover:scale-115 transition-transform duration-500">
                     {/* Video Container with Glassmorphism Frame */}
                     <div className="relative bg-white/5 backdrop-blur-2xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/20 shadow-2xl">
-                      {/* Video Player */}
+                      {/* Video Player - 포트폴리오 스타일 */}
                       <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-black/30">
                         <div
-                          ref={setIframeRef}
+                          ref={(ref) => setIframeRef(ref)}
                           className="w-full h-full rounded-2xl"
                           id="youtube-player"
                         ></div>
 
-                        {/* Loading Indicator */}
-                        {!isPlayerReady && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                            <div className="text-white text-center">
-                              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-potato-orange mx-auto mb-2"></div>
-                              <p className="text-sm">영상을 불러오는 중...</p>
-                            </div>
-                          </div>
-                        )}
+                        {/* Simple Fullscreen Button */}
+                        <button
+                          onClick={() => window.open(`https://www.youtube.com/watch?v=${homeVideo?.videoId}`, '_blank')}
+                          className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+                          title="전체화면"
+                        >
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                          </svg>
+                        </button>
                       </div>
 
                       {/* Video Information Inside Glass Frame */}
@@ -264,28 +275,17 @@ export default function HeroSection({
                           <div className="flex items-center gap-3">
                             <div className="flex items-center gap-2">
                               <button
-                                onClick={() => {
-                                  if (
-                                    playerRef.current &&
-                                    playerRef.current.isMuted !== undefined
-                                  ) {
-                                    const newMuted = !isMuted;
-                                    setIsMuted(newMuted);
-
-                                    if (newMuted) {
-                                      playerRef.current.mute();
-                                    } else {
-                                      playerRef.current.unMute();
-                                    }
-
-                                    console.log(
-                                      `YouTube player ${
-                                        newMuted ? "muted" : "unmuted"
-                                      }`
-                                    );
-                                  } else {
-                                    console.warn("YouTube player not ready");
-                                  }
+                                type="button"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  const newMuted = !isMuted;
+                                  setIsMuted(newMuted);
+                                  console.log(
+                                    `음소거 상태 변경: ${
+                                      newMuted ? "음소거" : "음소거 해제"
+                                    }`
+                                  );
                                 }}
                                 className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300"
                                 title={isMuted ? "음소거 해제" : "음소거"}
@@ -338,27 +338,9 @@ export default function HeroSection({
                                   const newVolume = parseInt(e.target.value);
                                   setVolume(newVolume);
                                   setIsMuted(newVolume === 0);
-
-                                  if (
-                                    playerRef.current &&
-                                    playerRef.current.setVolume
-                                  ) {
-                                    playerRef.current.setVolume(newVolume);
-
-                                    if (newVolume === 0) {
-                                      playerRef.current.mute();
-                                    } else {
-                                      playerRef.current.unMute();
-                                    }
-
-                                    console.log(
-                                      `YouTube volume set to: ${newVolume}`
-                                    );
-                                  } else {
-                                    console.warn(
-                                      "YouTube player not ready for volume control"
-                                    );
-                                  }
+                                  console.log(
+                                    `볼륨 변경: ${newVolume}%`
+                                  );
                                 }}
                                 className="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
                                 style={{
@@ -409,4 +391,6 @@ export default function HeroSection({
       </div>
     </main>
   );
-}
+});
+
+export default HeroSection;

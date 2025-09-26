@@ -1,19 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import RealInlineEditor from "./RealInlineEditor";
+import UnifiedInlineEditor from "./UnifiedInlineEditor";
 import { useUniversalContent, useUpdateUniversalContent } from "@/hooks/useUniversalContent";
 
-interface UniversalContentProps {
-  isAdmin: boolean;
-  pageName: string;
-  fields: {
-    [key: string]: {
-      value: string;
-      className: string;
-    };
-  };
-}
+import { UniversalContentProps } from '@/types';
 
 export default function UniversalContent({
   isAdmin,
@@ -82,13 +73,14 @@ export default function UniversalContent({
     <>
       {Object.entries(fields).map(([key, field]) => (
         <span key={key} className={field.className}>
-          <RealInlineEditor
+          <UnifiedInlineEditor
             value={data[key] || field.value}
             field={key}
             pageName={pageName}
             className={field.className}
             isAdmin={isAdmin}
             onSave={(newValue) => handleSave(key, newValue)}
+            saveMethod="api"
           />
         </span>
       ))}

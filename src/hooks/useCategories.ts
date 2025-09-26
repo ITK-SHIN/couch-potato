@@ -1,15 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-
-interface Category {
-  id: string;
-  name: string;
-  icon: string;
-  order: number;
-}
-
-interface CategoriesResponse {
-  categories: Category[];
-}
+import { Category, CategoriesResponse } from '@/types';
 
 // 카테고리 목록 가져오기
 export const useCategories = () => {

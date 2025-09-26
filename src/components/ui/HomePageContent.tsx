@@ -1,18 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import RealInlineEditor from "./RealInlineEditor";
+import UnifiedInlineEditor from "./UnifiedInlineEditor";
 
-interface HomePageData {
-  tagline1?: string;
-  tagline2?: string;
-  tagline3?: string;
-  lastUpdated?: string;
-}
-
-interface HomePageContentProps {
-  isAdmin: boolean;
-}
+import { HomePageData, HomePageContentProps } from '@/types';
 
 export default function HomePageContent({ isAdmin }: HomePageContentProps) {
   const [data, setData] = useState<HomePageData>({});
@@ -85,35 +76,38 @@ export default function HomePageContent({ isAdmin }: HomePageContentProps) {
   return (
     <div className="animate-fade-in-delayed space-y-2 sm:space-y-4">
       <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white/95 leading-relaxed font-light">
-        <RealInlineEditor
+        <UnifiedInlineEditor
           value={data.tagline1 || "브랜드의 이야기를"}
           field="tagline1"
           pageName="home"
           className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white/95 leading-relaxed font-light"
           isAdmin={isAdmin}
           onSave={(newValue) => handleSave("tagline1", newValue)}
+          saveMethod="api"
         />
       </p>
       <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
         <span className="bg-gradient-to-r from-potato-orange-light via-potato-orange to-potato-orange-dark bg-clip-text text-transparent">
-          <RealInlineEditor
+          <UnifiedInlineEditor
             value={data.tagline2 || "영상으로 완성하는"}
             field="tagline2"
             pageName="home"
             className="bg-gradient-to-r from-potato-orange-light via-potato-orange to-potato-orange-dark bg-clip-text text-transparent"
             isAdmin={isAdmin}
             onSave={(newValue) => handleSave("tagline2", newValue)}
+            saveMethod="api"
           />
         </span>
       </p>
       <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white/95 leading-relaxed font-light">
-        <RealInlineEditor
+        <UnifiedInlineEditor
           value={data.tagline3 || "크리에이티브 스튜디오"}
           field="tagline3"
           pageName="home"
           className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-white/95 leading-relaxed font-light"
           isAdmin={isAdmin}
           onSave={(newValue) => handleSave("tagline3", newValue)}
+          saveMethod="api"
         />
       </p>
     </div>

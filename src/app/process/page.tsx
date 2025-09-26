@@ -2,9 +2,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import UniversalContent from "@/components/UniversalContent";
+import UniversalContent from "@/components/ui/UniversalContent";
 import { useAdmin } from "@/contexts/AdminContext";
-import { SmallYellowBorderHoverBigBtn, SmallYellowBtn, SmallYellowHoverBigBtn } from "../components/Button";
+import { SmallYellowBorderHoverBigBtn, SmallYellowBtn, SmallYellowHoverBigBtn } from "@/components/ui/Button";
 
 const ProcessPage = () => {
   const { isAdmin } = useAdmin();
@@ -289,21 +289,21 @@ const ProcessPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-clapperboard-gray-dark">
+      <section className="py-24 bg-gradient-to-r from-potato-orange to-potato-orange-light text-black">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-8">
+          <h2 className="text-4xl md:text-5xl font-black mb-8">
             <UniversalContent
               isAdmin={isAdmin}
               pageName="process"
               fields={{
                 cta_title: {
                   value: "프로젝트를 시작해보세요",
-                  className: "text-4xl md:text-5xl font-black text-white",
+                  className: "text-4xl md:text-5xl font-black",
                 },
               }}
             />
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
             <UniversalContent
               isAdmin={isAdmin}
               pageName="process"
@@ -311,7 +311,7 @@ const ProcessPage = () => {
                 cta_subtitle: {
                   value:
                     "체계적인 프로세스로 여러분의 아이디어를 완벽한 영상으로 완성해드립니다",
-                  className: "text-xl text-gray-300 leading-relaxed",
+                  className: "text-xl leading-relaxed opacity-90",
                 },
               }}
             />

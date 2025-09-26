@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import UniversalContent from "@/components/UniversalContent";
-import CategoryManager from "@/components/CategoryManager";
-import VideoManager from "@/components/VideoManager";
+import UniversalContent from "@/components/ui/UniversalContent";
+import CategoryManager from "@/components/admin/CategoryManager";
+import VideoManager from "@/components/admin/VideoManager";
 import { useAdmin } from "@/contexts/AdminContext";
 import { usePortfolioVideos } from "@/hooks/usePortfolioVideos";
 import { useCategories } from "@/hooks/useCategories";
@@ -12,7 +12,7 @@ import {
   BigYellowBtn,
   SmallYellowBorderHoverBigBtn,
   SmallYellowHoverBigBtn,
-} from "../components/Button";
+} from "@/components/ui/Button";
 
 const PortfolioPage = () => {
   const { isAdmin } = useAdmin();
@@ -884,21 +884,21 @@ const PortfolioPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-clapperboard-gray">
+      <section className="py-24 bg-gradient-to-r from-potato-orange to-potato-orange-light text-black">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-8">
+          <h2 className="text-4xl md:text-5xl font-black mb-8">
             <UniversalContent
               isAdmin={isAdmin}
               pageName="portfolio"
               fields={{
                 cta_title: {
                   value: "다음 작품의 주인공은?",
-                  className: "text-4xl md:text-5xl font-black text-white",
+                  className: "text-4xl md:text-5xl font-black",
                 },
               }}
             />
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
             <UniversalContent
               isAdmin={isAdmin}
               pageName="portfolio"
@@ -906,27 +906,13 @@ const PortfolioPage = () => {
                 cta_subtitle: {
                   value:
                     "여러분의 브랜드 스토리를 COUCH POTATO만의 스타일로 완성해보세요. 다음 포트폴리오의 주인공이 되어보시지 않으시겠어요?",
-                  className: "text-xl text-gray-300 leading-relaxed",
+                  className: "text-xl leading-relaxed opacity-90",
                 },
               }}
             />
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            {/*           <Link href="/contact">
-              <button className="px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-105 transition-all duration-300 shadow-xl">
-                <UniversalContent
-                  isAdmin={isAdmin}
-                  pageName="portfolio"
-                  fields={{
-                    cta_button1: {
-                      value: "🚀 프로젝트 시작하기",
-                      className: "text-white font-bold",
-                    },
-                  }}
-                />
-              </button>
-            </Link */}
             <SmallYellowHoverBigBtn
               href="/contact"
               text="🚀 프로젝트 시작하기"
@@ -936,14 +922,14 @@ const PortfolioPage = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-12 py-5 bg-clapperboard-gray-dark text-white font-bold rounded-full hover:bg-clapperboard-gray transform hover:scale-105 transition-all duration-300 shadow-xl">
+              <button className="px-12 py-5 bg-white text-black font-bold rounded-full hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-xl">
                 <UniversalContent
                   isAdmin={isAdmin}
                   pageName="portfolio"
                   fields={{
                     cta_button2: {
                       value: "🎬 YouTube 채널 구독",
-                      className: "text-white font-bold",
+                      className: "text-black font-bold",
                     },
                   }}
                 />

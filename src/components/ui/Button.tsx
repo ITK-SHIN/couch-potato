@@ -66,7 +66,7 @@ export const SmallYellowBtn: React.FC<SmallYellowBtnProps> = ({
   text,
 }) => {
   const buttonClasses =
-    "px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-light text-white font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange-dark transform hover:scale-105 transition-all duration-300 shadow-xl";
+    "px-12 py-5 bg-gradient-to-r from-potato-orange to-potato-orange-light text-black font-bold rounded-full hover:from-potato-orange-light hover:to-potato-orange-dark transform hover:scale-105 transition-all duration-300 shadow-xl";
 
   if (href) {
     return (
@@ -93,7 +93,7 @@ export const SmallYellowHoverBigBtn: React.FC<SmallYellowHoverBigBtnProps> = ({
 }) => {
   // location/page.tsx에서 사용한 버튼 클래스와 완전히 동일하게 맞춤
   const buttonClasses =
-    "w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-white font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange-light";
+    "w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-potato-orange to-potato-orange-dark text-black font-black rounded-full hover:from-potato-orange-light hover:to-potato-orange transform hover:scale-110 transition-all duration-300 shadow-2xl border-2 border-potato-orange-light";
 
   // a 태그 대신 next/link의 Link와 button 조합으로 변경 (접근성 및 SSR 일관성)
   return (
@@ -120,7 +120,7 @@ export const SmallYellowBorderHoverBigBtn: React.FC<SmallYellowBorderHoverBigBtn
 }) => {
   // SmallYellowHoverBigBtn의 디자인을 그대로 사용하되, 배경은 투명 & border만 노란색, hover 시 배경이 노란색으로 변하도록
   const buttonClasses =
-    "w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-transparent border-2 border-potato-orange text-potato-orange font-black rounded-full hover:bg-gradient-to-r hover:from-potato-orange hover:to-potato-orange-dark hover:text-white transform hover:scale-110 transition-all duration-300 shadow-2xl";
+    "w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-4 bg-transparent border-2 border-potato-orange text-black font-black rounded-full hover:bg-gradient-to-r hover:from-potato-orange hover:to-potato-orange-dark hover:text-white transform hover:scale-110 transition-all duration-300 shadow-2xl";
 
   return (
     <Link href={href}>

@@ -1,7 +1,7 @@
 "use client";
 
-import UniversalContent from "@/components/UniversalContent";
-import StrapiContent from "@/components/StrapiContent";
+import UniversalContent from "@/components/ui/UniversalContent";
+import StrapiContent from "@/components/ui/StrapiContent";
 import { useAdmin } from "@/contexts/AdminContext";
 
 export default function ServicesSection() {
@@ -20,7 +20,7 @@ export default function ServicesSection() {
               pageName="home"
               fields={{
                 services_title: {
-                  value: "우리의 서비스",
+                  value: "전문 서비스",
                   className:
                     "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6",
                 },
@@ -70,7 +70,7 @@ export default function ServicesSection() {
                   </div>
                 ))
               ) : (
-                // 기본 서비스 데이터 표시
+                // 기본 서비스 카드 표시
                 <>
                   <div className="group bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-clapperboard-gray-light">
                     <div className="text-center">

@@ -7,7 +7,7 @@ import PortfolioSection from "@/components/sections/PortfolioSection";
 import AboutSection from "@/components/sections/AboutSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
-import VideoModal from "@/components/VideoModal";
+import VideoModal from "@/components/ui/VideoModal";
 
 export default function Home() {
   const [homeVideo, setHomeVideo] = useState<any>(null);

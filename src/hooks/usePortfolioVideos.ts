@@ -1,31 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
-interface Video {
-  _id: string;
-  id: string;
-  videoId: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  category: string;
-  client: string;
-  year: string;
-  videoUrl: string;
-  order: number;
-  stats: {
-    views: string;
-    likes: string;
-  };
-  tags: Array<{
-    id: string;
-    text: string;
-    color: string;
-  }>;
-}
-
-interface PortfolioVideosResponse {
-  videos: Video[];
-}
+import { Video, PortfolioVideosResponse } from '@/types';
 
 // 포트폴리오 비디오 목록 가져오기
 export const usePortfolioVideos = () => {

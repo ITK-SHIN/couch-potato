@@ -1,20 +1,30 @@
 "use client";
 
+import React, { useMemo, useCallback } from "react";
 import Image from "next/image";
-import UniversalContent from "@/components/UniversalContent";
+import UniversalContent from "@/components/ui/UniversalContent";
 import { useAdmin } from "@/contexts/AdminContext";
-import { SmallYellowBtn } from "@/app/components/Button";
+import { SmallYellowBtn } from "@/components/ui/Button";
+import { ThumbnailImage } from "@/components/optimized/OptimizedImage";
 
 interface PortfolioSectionProps {
   latestVideos: any[];
   onVideoClick: (videoId: string) => void;
 }
 
-export default function PortfolioSection({
+const PortfolioSection = React.memo(function PortfolioSection({
   latestVideos,
   onVideoClick,
 }: PortfolioSectionProps) {
   const { isAdmin } = useAdmin();
+
+  // 비디오 클릭 핸들러 메모이제이션
+  const handleVideoClick = useCallback((videoId: string) => {
+    onVideoClick(videoId);
+  }, [onVideoClick]);
+
+  // 비디오 목록 메모이제이션
+  const memoizedVideos = useMemo(() => latestVideos, [latestVideos]);
 
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-clapperboard-gray">
@@ -161,4 +171,6 @@ export default function PortfolioSection({
       </div>
     </section>
   );
-}
+});
+
+export default PortfolioSection;

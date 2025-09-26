@@ -3,13 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import UniversalContent from "@/components/UniversalContent";
+import UniversalContent from "@/components/ui/UniversalContent";
 import { useAdmin } from "@/contexts/AdminContext";
 import {
   BigWhiteBtn,
   SmallYellowBtn,
   SmallYellowHoverBigBtn,
-} from "../components/Button";
+} from "@/components/ui/Button";
 
 const AboutPage = () => {
   const { isAdmin } = useAdmin();
@@ -379,21 +379,21 @@ const AboutPage = () => {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-24 bg-clapperboard-gray-dark">
+      <section className="py-24 bg-gradient-to-r from-potato-orange to-potato-orange-light text-black">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-8">
+          <h2 className="text-4xl md:text-5xl font-black mb-8">
             <UniversalContent
               isAdmin={isAdmin}
               pageName="about"
               fields={{
                 contact_cta_title: {
                   value: "함께 시작해보세요",
-                  className: "text-4xl md:text-5xl font-black text-white",
+                  className: "text-4xl md:text-5xl font-black",
                 },
               }}
             />
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
             <UniversalContent
               isAdmin={isAdmin}
               pageName="about"
@@ -401,7 +401,7 @@ const AboutPage = () => {
                 contact_cta_subtitle: {
                   value:
                     "COUCH POTATO와 함께 브랜드의 이야기를 영상으로 완성해보세요. 언제든지 연락 주시면 친절하게 상담해드리겠습니다.",
-                  className: "text-xl text-gray-300 leading-relaxed",
+                  className: "text-xl leading-relaxed opacity-90",
                 },
               }}
             />

@@ -1,12 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-
-interface AdminContextType {
-  isAdmin: boolean;
-  login: (password: string) => Promise<boolean>;
-  logout: () => void;
-}
+import { AdminContextType } from '@/types';
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 

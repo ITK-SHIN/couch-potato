@@ -1,12 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-
-interface UniversalContentData {
-  [key: string]: string;
-}
-
-interface UniversalContentResponse {
-  data: UniversalContentData;
-}
+import { UniversalContentData, UniversalContentResponse } from '@/types';
 
 // 유니버설 콘텐츠 데이터 가져오기
 export const useUniversalContent = (pageName: string) => {
