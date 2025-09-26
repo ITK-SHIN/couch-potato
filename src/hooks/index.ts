@@ -26,5 +26,8 @@ export {
   useUpdateVideo,
   useDeleteVideo 
 } from './usePortfolioVideos';
-export * from './useHomeVideo';
+export { 
+  useHomeVideo as useHomeVideoLegacy,
+  useUpdateHomeVideo 
+} from './useHomeVideo';
 export * from './useUniversalContent';
