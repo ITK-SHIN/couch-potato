@@ -6,7 +6,12 @@ import UnifiedInlineEditor from "./UnifiedInlineEditor";
 import { HomePageData, HomePageContentProps } from '@/types';
 
 export default function HomePageContent({ isAdmin }: HomePageContentProps) {
-  const [data, setData] = useState<HomePageData>({});
+  const [data, setData] = useState<HomePageData>({
+    tagline1: "",
+    tagline2: "",
+    tagline3: "",
+    lastUpdated: ""
+  });
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 
