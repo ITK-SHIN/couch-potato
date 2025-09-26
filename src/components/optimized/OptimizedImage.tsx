@@ -100,32 +100,38 @@ export default function OptimizedImage({
 }
 
 // 특정 용도별 최적화된 이미지 컴포넌트들
-export const HeroImage = React.memo((props: Omit<OptimizedImageProps, 'priority' | 'quality'>) => (
+const HeroImageComponent = (props: Omit<OptimizedImageProps, 'priority' | 'quality'>) => (
   <OptimizedImage
     {...props}
     priority={true}
     quality={90}
     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
   />
-));
+);
+HeroImageComponent.displayName = 'HeroImage';
+export const HeroImage = React.memo(HeroImageComponent);
 
-export const ThumbnailImage = React.memo((props: Omit<OptimizedImageProps, 'quality' | 'sizes'>) => (
+const ThumbnailImageComponent = (props: Omit<OptimizedImageProps, 'quality' | 'sizes'>) => (
   <OptimizedImage
     {...props}
     quality={60}
     sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
   />
-));
+);
+ThumbnailImageComponent.displayName = 'ThumbnailImage';
+export const ThumbnailImage = React.memo(ThumbnailImageComponent);
 
-export const AvatarImage = React.memo((props: Omit<OptimizedImageProps, 'quality' | 'sizes'>) => (
+const AvatarImageComponent = (props: Omit<OptimizedImageProps, 'quality' | 'sizes'>) => (
   <OptimizedImage
     {...props}
     quality={70}
     sizes="(max-width: 768px) 80px, 120px"
   />
-));
+);
+AvatarImageComponent.displayName = 'AvatarImage';
+export const AvatarImage = React.memo(AvatarImageComponent);
 
-export const BackgroundImage = React.memo((props: Omit<OptimizedImageProps, 'fill' | 'sizes'>) => (
+const BackgroundImageComponent = (props: Omit<OptimizedImageProps, 'fill' | 'sizes'>) => (
   <OptimizedImage
     {...props}
     fill={true}
@@ -133,4 +139,6 @@ export const BackgroundImage = React.memo((props: Omit<OptimizedImageProps, 'fil
     sizes="100vw"
     style={{ objectFit: 'cover', ...props.style }}
   />
-));
+);
+BackgroundImageComponent.displayName = 'BackgroundImage';
+export const BackgroundImage = React.memo(BackgroundImageComponent);
