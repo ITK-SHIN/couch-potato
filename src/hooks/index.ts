@@ -14,7 +14,12 @@ export * from './useHomeVideoOptimized';
 export * from './useUniversalContentOptimized';
 
 // 기존 훅들 (하위 호환성을 위해 유지)
-export * from './useCategories';
+export { 
+  useCategories, 
+  useAddCategory as useAddCategoryLegacy,
+  useUpdateCategory,
+  useDeleteCategory 
+} from './useCategories';
 export * from './usePortfolioVideos';
 export * from './useHomeVideo';
 export * from './useUniversalContent';
