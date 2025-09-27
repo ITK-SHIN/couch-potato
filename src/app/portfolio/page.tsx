@@ -1,19 +1,33 @@
 "use client";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { BackgroundImage } from "@/components/optimized/OptimizedImage";
+import {
+  BackgroundImage,
+  ThumbnailImage,
+} from "@/components/optimized/OptimizedImage";
 import Link from "next/link";
 import UniversalContent from "@/components/ui/UniversalContent";
 import dynamic from "next/dynamic";
 
 // 관리자 컴포넌트들을 동적으로 로드
-const CategoryManager = dynamic(() => import("@/components/admin/CategoryManager"), {
-  ssr: false,
-  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg">관리자 도구 로딩 중...</div>
-});
+const CategoryManager = dynamic(
+  () => import("@/components/admin/CategoryManager"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 h-32 rounded-lg">
+        관리자 도구 로딩 중...
+      </div>
+    ),
+  }
+);
 
 const VideoManager = dynamic(() => import("@/components/admin/VideoManager"), {
   ssr: false,
-  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg">관리자 도구 로딩 중...</div>
+  loading: () => (
+    <div className="animate-pulse bg-gray-200 h-32 rounded-lg">
+      관리자 도구 로딩 중...
+    </div>
+  ),
 });
 import { useAdmin } from "@/contexts/AdminContext";
 import { usePortfolioVideos, useCategories } from "@/hooks";
@@ -40,11 +54,25 @@ const PortfolioPage = () => {
   const videosPerPage = 9;
 
   // React Query 훅 사용
-  const { data: portfolioData, isLoading: portfolioLoading, error: portfolioError } = usePortfolioVideos();
-  const { data: categoriesData, isLoading: categoriesLoading, error: categoriesError } = useCategories();
+  const {
+    data: portfolioData,
+    isLoading: portfolioLoading,
+    error: portfolioError,
+  } = usePortfolioVideos();
+  const {
+    data: categoriesData,
+    isLoading: categoriesLoading,
+    error: categoriesError,
+  } = useCategories();
 
-  const portfolioItems = portfolioData?.videos || [];
-  const categories = categoriesData?.categories || [];
+  const portfolioItems = useMemo(
+    () => portfolioData?.videos || [],
+    [portfolioData?.videos]
+  );
+  const categories = useMemo(
+    () => categoriesData?.categories || [],
+    [categoriesData?.categories]
+  );
   const loading = portfolioLoading || categoriesLoading;
   const error = portfolioError || categoriesError;
 
@@ -142,7 +170,8 @@ const PortfolioPage = () => {
   };
 
   // 에러가 발생한 경우 기본 카테고리 사용
-  const displayCategories = categories.length > 0 ? categories : getDefaultCategories();
+  const displayCategories =
+    categories.length > 0 ? categories : getDefaultCategories();
 
   // YouTube Player API 로드 및 초기화
   useEffect(() => {
@@ -334,8 +363,6 @@ const PortfolioPage = () => {
     },
   ];
 
-
-
   // 필터링된 아이템들 메모이제이션
   const filteredItems = useMemo(() => {
     return selectedCategory === "all"
@@ -349,7 +376,7 @@ const PortfolioPage = () => {
     const startIndex = (currentPage - 1) * videosPerPage;
     const endIndex = startIndex + videosPerPage;
     const currentItems = filteredItems.slice(startIndex, endIndex);
-    
+
     return { totalPages, startIndex, endIndex, currentItems };
   }, [filteredItems, currentPage, videosPerPage]);
 
@@ -695,7 +722,9 @@ const PortfolioPage = () => {
                 오류 발생
               </h3>
               <p className="text-gray-300 mb-4 text-sm sm:text-base">
-                {error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.'}
+                {error instanceof Error
+                  ? error.message
+                  : "알 수 없는 오류가 발생했습니다."}
               </p>
             </div>
           )}
@@ -711,11 +740,12 @@ const PortfolioPage = () => {
                   >
                     {/* Thumbnail */}
                     <div className="relative aspect-video overflow-hidden">
-                      <Image
+                      <ThumbnailImage
                         src={item.thumbnail}
                         alt={item.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        width={400}
+                        height={225}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
 
@@ -739,8 +769,9 @@ const PortfolioPage = () => {
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 bg-black/70 text-white text-xs font-bold rounded-full backdrop-blur-sm">
                           {
-                            displayCategories.find((cat) => cat.id === item.category)
-                              ?.name
+                            displayCategories.find(
+                              (cat) => cat.id === item.category
+                            )?.name
                           }
                         </span>
                       </div>
@@ -845,8 +876,9 @@ const PortfolioPage = () => {
                       <span className="ml-2">
                         (
                         {
-                          displayCategories.find((cat) => cat.id === selectedCategory)
-                            ?.name
+                          displayCategories.find(
+                            (cat) => cat.id === selectedCategory
+                          )?.name
                         }{" "}
                         카테고리)
                       </span>

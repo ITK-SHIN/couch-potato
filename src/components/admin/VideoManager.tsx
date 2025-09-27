@@ -141,7 +141,9 @@ const SortableVideoItem = memo(function SortableVideoItem({
   );
 });
 
-const VideoManager = memo(function VideoManager({ isAdmin }: VideoManagerProps) {
+const VideoManager = memo(function VideoManager({
+  isAdmin,
+}: VideoManagerProps) {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingVideo, setEditingVideo] = useState<Video | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -205,32 +207,35 @@ const VideoManager = memo(function VideoManager({ isAdmin }: VideoManagerProps) 
   }, []);
 
   // 드래그 앤 드롭 핸들러
-  const handleDragEnd = useCallback(async (event: DragEndEvent) => {
-    const { active, over } = event;
+  const handleDragEnd = useCallback(
+    async (event: DragEndEvent) => {
+      const { active, over } = event;
 
-    if (active.id !== over?.id) {
-      const oldIndex = videos.findIndex((item) => item._id === active.id);
-      const newIndex = videos.findIndex((item) => item._id === over?.id);
+      if (active.id !== over?.id) {
+        const oldIndex = videos.findIndex((item) => item._id === active.id);
+        const newIndex = videos.findIndex((item) => item._id === over?.id);
 
-      // 배열 순서 변경
-      const newVideos = arrayMove(videos, oldIndex, newIndex);
+        // 배열 순서 변경
+        const newVideos = arrayMove(videos, oldIndex, newIndex);
 
-      // order 값 업데이트
-      const updatedVideos = newVideos.map((video, index) => ({
-        ...video,
-        order: index,
-      }));
+        // order 값 업데이트
+        const updatedVideos = newVideos.map((video, index) => ({
+          ...video,
+          order: index,
+        }));
 
-      // 서버에 순서 업데이트 저장
-      try {
-        await updateVideoOrderMutation.mutateAsync({ videos: updatedVideos });
-        console.log("영상 순서가 업데이트되었습니다.");
-      } catch (error) {
-        console.error("영상 순서 업데이트 오류:", error);
-        alert("순서 저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.");
+        // 서버에 순서 업데이트 저장
+        try {
+          await updateVideoOrderMutation.mutateAsync({ videos: updatedVideos });
+          console.log("영상 순서가 업데이트되었습니다.");
+        } catch (error) {
+          console.error("영상 순서 업데이트 오류:", error);
+          alert("순서 저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.");
+        }
       }
-    }
-  }, [videos, updateVideoOrderMutation]);
+    },
+    [videos, updateVideoOrderMutation]
+  );
 
   // 새 영상 추가
   const handleAddVideo = async (e: React.FormEvent) => {
