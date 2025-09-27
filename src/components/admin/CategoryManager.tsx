@@ -1,8 +1,15 @@
 "use client";
 
 import { useState, memo, useCallback } from "react";
-import { useCategories, useAddCategory, useUpdateCategory, useDeleteCategory, useUpdateCategoryOrder } from "@/hooks";
+import {
+  useCategories,
+  useAddCategory,
+  useUpdateCategory,
+  useDeleteCategory,
+  useUpdateCategoryOrder,
+} from "@/hooks";
 import { Category } from "@/types";
+import { useError } from "@/contexts/ErrorContext";
 import {
   DndContext,
   closestCenter,
@@ -110,6 +117,7 @@ const SortableCategoryItem = memo(function SortableCategoryItem({
 const CategoryManager = memo(function CategoryManager({
   isAdmin,
 }: CategoryManagerProps) {
+  const { handleError } = useError();
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [newCategory, setNewCategory] = useState({
@@ -137,33 +145,35 @@ const CategoryManager = memo(function CategoryManager({
   );
 
   // 드래그 앤 드롭 핸들러
-  const handleDragEnd = useCallback(async (event: DragEndEvent) => {
-    const { active, over } = event;
+  const handleDragEnd = useCallback(
+    async (event: DragEndEvent) => {
+      const { active, over } = event;
 
-    if (active.id !== over?.id) {
-      const oldIndex = categories.findIndex((item) => item.id === active.id);
-      const newIndex = categories.findIndex((item) => item.id === over?.id);
+      if (active.id !== over?.id) {
+        const oldIndex = categories.findIndex((item) => item.id === active.id);
+        const newIndex = categories.findIndex((item) => item.id === over?.id);
 
-      // 배열 순서 변경
-      const newCategories = arrayMove(categories, oldIndex, newIndex);
+        // 배열 순서 변경
+        const newCategories = arrayMove(categories, oldIndex, newIndex);
 
-      // order 값 업데이트
-      const updatedCategories = newCategories.map((category, index) => ({
-        ...category,
-        order: index,
-      }));
+        // order 값 업데이트
+        const updatedCategories = newCategories.map((category, index) => ({
+          ...category,
+          order: index,
+        }));
 
-      // 서버에 순서 업데이트 저장
-      try {
-        await updateCategoryOrderMutation.mutateAsync({ categories: updatedCategories });
-        alert("카테고리 순서가 저장되었습니다!");
-      } catch (error) {
-        console.error("카테고리 순서 저장 오류:", error);
-        alert("순서 저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.");
+        // 서버에 순서 업데이트 저장
+        try {
+          await updateCategoryOrderMutation.mutateAsync({
+            categories: updatedCategories,
+          });
+        } catch (error) {
+          handleError(error, "카테고리 순서 저장");
+        }
       }
-    }
-  }, [categories, updateCategoryOrderMutation]);
-
+    },
+    [categories, updateCategoryOrderMutation]
+  );
 
   // 새 카테고리 추가
   const handleAddCategory = async (e: React.FormEvent) => {
@@ -174,10 +184,9 @@ const CategoryManager = memo(function CategoryManager({
       await addCategoryMutation.mutateAsync(newCategory);
       setNewCategory({ name: "", icon: "", order: 0 });
       setShowAddForm(false);
-      alert("카테고리가 추가되었습니다!");
+      // 성공 시 토스트 메시지는 react-query의 onSuccess에서 처리
     } catch (error) {
-      console.error("카테고리 추가 오류:", error);
-      alert("카테고리 추가 중 오류가 발생했습니다.");
+      handleError(error, "카테고리 추가");
     }
   };
 
@@ -189,10 +198,8 @@ const CategoryManager = memo(function CategoryManager({
     try {
       await updateCategoryMutation.mutateAsync(editingCategory);
       setEditingCategory(null);
-      alert("카테고리가 수정되었습니다!");
     } catch (error) {
-      console.error("카테고리 수정 오류:", error);
-      alert("카테고리 수정 중 오류가 발생했습니다.");
+      handleError(error, "카테고리 수정");
     }
   };
 
@@ -202,10 +209,8 @@ const CategoryManager = memo(function CategoryManager({
 
     try {
       await deleteCategoryMutation.mutateAsync(id);
-      alert("카테고리가 삭제되었습니다!");
     } catch (error) {
-      console.error("카테고리 삭제 오류:", error);
-      alert("카테고리 삭제 중 오류가 발생했습니다.");
+      handleError(error, "카테고리 삭제");
     }
   };
 
@@ -225,11 +230,11 @@ const CategoryManager = memo(function CategoryManager({
     return (
       <div className="bg-red-100 border border-red-400 rounded-lg p-4 mb-6">
         <p className="text-red-800">
-          카테고리 데이터를 불러오는데 실패했습니다. 
-          {error instanceof Error ? ` (${error.message})` : ''}
+          카테고리 데이터를 불러오는데 실패했습니다.
+          {error instanceof Error ? ` (${error.message})` : ""}
         </p>
-        <button 
-          onClick={() => window.location.reload()} 
+        <button
+          onClick={() => window.location.reload()}
           className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
         >
           다시 시도

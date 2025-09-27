@@ -2,6 +2,7 @@
 
 import { useState, memo, useCallback } from "react";
 import { ThumbnailImage } from "@/components/optimized/OptimizedImage";
+import { useError } from "@/contexts/ErrorContext";
 import {
   usePortfolioVideos,
   useAddVideo,
@@ -144,6 +145,7 @@ const SortableVideoItem = memo(function SortableVideoItem({
 const VideoManager = memo(function VideoManager({
   isAdmin,
 }: VideoManagerProps) {
+  const { handleError } = useError();
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingVideo, setEditingVideo] = useState<Video | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -227,10 +229,8 @@ const VideoManager = memo(function VideoManager({
         // 서버에 순서 업데이트 저장
         try {
           await updateVideoOrderMutation.mutateAsync({ videos: updatedVideos });
-          console.log("영상 순서가 업데이트되었습니다.");
         } catch (error) {
-          console.error("영상 순서 업데이트 오류:", error);
-          alert("순서 저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.");
+          handleError(error, "영상 순서 업데이트");
         }
       }
     },
@@ -262,10 +262,8 @@ const VideoManager = memo(function VideoManager({
       });
       setShowAddForm(false);
       setCurrentPage(1);
-      alert("영상이 추가되었습니다!");
     } catch (error) {
-      console.error("영상 추가 오류:", error);
-      alert("영상 추가 중 오류가 발생했습니다.");
+      handleError(error, "영상 추가");
     }
   };
 
@@ -278,10 +276,8 @@ const VideoManager = memo(function VideoManager({
       await updateVideoMutation.mutateAsync(editingVideo);
       setEditingVideo(null);
       setCurrentPage(1);
-      alert("영상이 수정되었습니다!");
     } catch (error) {
-      console.error("영상 수정 오류:", error);
-      alert("영상 수정 중 오류가 발생했습니다.");
+      handleError(error, "영상 수정");
     }
   };
 
@@ -292,10 +288,8 @@ const VideoManager = memo(function VideoManager({
     try {
       await deleteVideoMutation.mutateAsync(id);
       setCurrentPage(1);
-      alert("영상이 삭제되었습니다!");
     } catch (error) {
-      console.error("영상 삭제 오류:", error);
-      alert("영상 삭제 중 오류가 발생했습니다.");
+      handleError(error, "영상 삭제");
     }
   };
 

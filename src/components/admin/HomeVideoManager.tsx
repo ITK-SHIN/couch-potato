@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { ThumbnailImage } from "@/components/optimized/OptimizedImage";
 import { useHomeVideo, useUpdateHomeVideo } from "@/hooks";
 import { HomeVideo } from "@/types";
+import { useError } from "@/contexts/ErrorContext";
 
 interface HomeVideoManagerProps {
   isAdmin: boolean;
@@ -14,6 +15,7 @@ export default function HomeVideoManager({
   isAdmin,
   onVideoChange,
 }: HomeVideoManagerProps) {
+  const { handleError } = useError();
   const [showEditForm, setShowEditForm] = useState(false);
   const [editingVideo, setEditingVideo] = useState<HomeVideo | null>(null);
 
@@ -40,10 +42,8 @@ export default function HomeVideoManager({
       await updateHomeVideoMutation.mutateAsync(editingVideo);
       setEditingVideo(null);
       setShowEditForm(false);
-      alert("홈페이지 영상이 수정되었습니다!");
     } catch (error) {
-      console.error("홈페이지 영상 수정 오류:", error);
-      alert("홈페이지 영상 수정 중 오류가 발생했습니다.");
+      handleError(error, "홈페이지 영상 수정");
     }
   };
 
@@ -97,11 +97,11 @@ export default function HomeVideoManager({
     return (
       <div className="bg-red-100 border border-red-400 rounded-lg p-4 mb-6">
         <p className="text-red-800">
-          홈페이지 영상을 불러오는데 실패했습니다. 
-          {error instanceof Error ? ` (${error.message})` : ''}
+          홈페이지 영상을 불러오는데 실패했습니다.
+          {error instanceof Error ? ` (${error.message})` : ""}
         </p>
-        <button 
-          onClick={() => window.location.reload()} 
+        <button
+          onClick={() => window.location.reload()}
           className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
         >
           다시 시도
@@ -232,9 +232,9 @@ export default function HomeVideoManager({
               onChange={(e) =>
                 setEditingVideo({
                   ...editingVideo,
-                  stats: { 
+                  stats: {
                     views: e.target.value,
-                    likes: editingVideo.stats?.likes || ""
+                    likes: editingVideo.stats?.likes || "",
                   },
                 })
               }
@@ -247,9 +247,9 @@ export default function HomeVideoManager({
               onChange={(e) =>
                 setEditingVideo({
                   ...editingVideo,
-                  stats: { 
+                  stats: {
                     views: editingVideo.stats?.views || "",
-                    likes: e.target.value
+                    likes: e.target.value,
                   },
                 })
               }
