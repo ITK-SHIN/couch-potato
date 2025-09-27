@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useCategories, useAddCategory, useUpdateCategory, useDeleteCategory, useUpdateCategoryOrder } from "@/hooks/useCategories";
+import { useCategories, useAddCategory, useUpdateCategory, useDeleteCategory, useUpdateCategoryOrder } from "@/hooks";
 import {
   DndContext,
   closestCenter,

@@ -8,8 +8,8 @@ import {
   useUpdateVideo,
   useDeleteVideo,
   useUpdateVideoOrder,
-} from "@/hooks/usePortfolioVideos";
-import { useCategories } from "@/hooks/useCategories";
+  useCategories,
+} from "@/hooks";
 import {
   DndContext,
   closestCenter,

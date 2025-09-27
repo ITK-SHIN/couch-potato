@@ -6,8 +6,7 @@ import UniversalContent from "@/components/ui/UniversalContent";
 import CategoryManager from "@/components/admin/CategoryManager";
 import VideoManager from "@/components/admin/VideoManager";
 import { useAdmin } from "@/contexts/AdminContext";
-import { usePortfolioVideos } from "@/hooks/usePortfolioVideos";
-import { useCategories } from "@/hooks/useCategories";
+import { usePortfolioVideos, useCategories } from "@/hooks";
 import {
   BigYellowBtn,
   SmallYellowBorderHoverBigBtn,

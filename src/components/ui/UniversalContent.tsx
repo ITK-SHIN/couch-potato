@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import UnifiedInlineEditor from "./UnifiedInlineEditor";
-import { useUniversalContent, useUpdateUniversalContent } from "@/hooks/useUniversalContent";
+import { useUniversalContent, useUpdateUniversalContent } from "@/hooks";
 
 import { UniversalContentProps } from '@/types';
 

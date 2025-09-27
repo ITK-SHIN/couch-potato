@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { useHomeVideo, useUpdateHomeVideo } from "@/hooks/useHomeVideo";
+import { useHomeVideo, useUpdateHomeVideo } from "@/hooks";
 
 interface HomeVideo {
   id: string;
