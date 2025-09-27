@@ -56,13 +56,14 @@ export const useApiMutation = <TData, TVariables>(
   options?: {
     invalidateQueries?: (string | number)[][];
     onSuccess?: (data: TData, variables: TVariables) => void;
-  }
+  } & Omit<UseMutationOptions<TData, Error, TVariables>, 'mutationFn' | 'onSuccess'>
 ) => {
   const queryClient = useQueryClient();
 
   return useMutation<TData, Error, TVariables>({
     mutationFn,
-    onSuccess: (data, variables) => {
+    ...options,
+    onSuccess: (data, variables, context) => {
       // 쿼리 무효화
       if (options?.invalidateQueries) {
         options.invalidateQueries.forEach(queryKey => {
@@ -80,7 +81,9 @@ export const useApiMutation = <TData, TVariables>(
 export const useCreateMutation = <TData, TVariables>(
   url: string,
   invalidateQueries: (string | number)[][],
-  options?: UseMutationOptions<TData, Error, TVariables>
+  options?: {
+    onSuccess?: (data: TData, variables: TVariables) => void;
+  } & Omit<UseMutationOptions<TData, Error, TVariables>, 'mutationFn' | 'onSuccess'>
 ) => {
   return useApiMutation<TData, TVariables>(
     (variables) => apiFetch<TData>(url, {
@@ -97,7 +100,9 @@ export const useCreateMutation = <TData, TVariables>(
 export const useUpdateMutation = <TData, TVariables>(
   url: string | ((variables: TVariables) => string),
   invalidateQueries: (string | number)[][],
-  options?: UseMutationOptions<TData, Error, TVariables>
+  options?: {
+    onSuccess?: (data: TData, variables: TVariables) => void;
+  } & Omit<UseMutationOptions<TData, Error, TVariables>, 'mutationFn' | 'onSuccess'>
 ) => {
   return useApiMutation<TData, TVariables>(
     (variables) => {
@@ -117,7 +122,9 @@ export const useUpdateMutation = <TData, TVariables>(
 export const useDeleteMutation = <TData, TVariables>(
   url: string | ((variables: TVariables) => string),
   invalidateQueries: (string | number)[][],
-  options?: UseMutationOptions<TData, Error, TVariables>
+  options?: {
+    onSuccess?: (data: TData, variables: TVariables) => void;
+  } & Omit<UseMutationOptions<TData, Error, TVariables>, 'mutationFn' | 'onSuccess'>
 ) => {
   return useApiMutation<TData, TVariables>(
     (variables) => {

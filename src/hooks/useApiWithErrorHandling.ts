@@ -43,9 +43,6 @@ export const useApiQueryWithErrorHandling = <T>(
     queryFn: () => apiFetchWithErrorHandling<T>(url),
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
-    onError: (error) => {
-      handleError(error, `Query ${queryKey.join('-')}`);
-    },
     ...options,
   });
 };
@@ -86,7 +83,10 @@ export const useApiMutationWithErrorHandling = <TData, TVariables>(
 export const useCreateMutationWithErrorHandling = <TData, TVariables>(
   url: string,
   invalidateQueries: (string | number)[][],
-  options?: UseMutationOptions<TData, AppError, TVariables>
+  options?: {
+    onSuccess?: (data: TData, variables: TVariables) => void;
+    onError?: (error: AppError, variables: TVariables) => void;
+  }
 ) => {
   return useApiMutationWithErrorHandling<TData, TVariables>(
     (variables) => apiFetchWithErrorHandling<TData>(url, {
@@ -103,7 +103,10 @@ export const useCreateMutationWithErrorHandling = <TData, TVariables>(
 export const useUpdateMutationWithErrorHandling = <TData, TVariables>(
   url: string | ((variables: TVariables) => string),
   invalidateQueries: (string | number)[][],
-  options?: UseMutationOptions<TData, AppError, TVariables>
+  options?: {
+    onSuccess?: (data: TData, variables: TVariables) => void;
+    onError?: (error: AppError, variables: TVariables) => void;
+  }
 ) => {
   return useApiMutationWithErrorHandling<TData, TVariables>(
     (variables) => {
@@ -123,7 +126,10 @@ export const useUpdateMutationWithErrorHandling = <TData, TVariables>(
 export const useDeleteMutationWithErrorHandling = <TData, TVariables>(
   url: string | ((variables: TVariables) => string),
   invalidateQueries: (string | number)[][],
-  options?: UseMutationOptions<TData, AppError, TVariables>
+  options?: {
+    onSuccess?: (data: TData, variables: TVariables) => void;
+    onError?: (error: AppError, variables: TVariables) => void;
+  }
 ) => {
   return useApiMutationWithErrorHandling<TData, TVariables>(
     (variables) => {
