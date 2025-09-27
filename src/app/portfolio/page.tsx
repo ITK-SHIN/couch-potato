@@ -1,9 +1,7 @@
 "use client";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import {
-  BackgroundImage,
-  ThumbnailImage,
-} from "@/components/optimized/OptimizedImage";
+import { ThumbnailImage } from "@/components/optimized/OptimizedImage";
+import Image from "next/image";
 import Link from "next/link";
 import UniversalContent from "@/components/ui/UniversalContent";
 import dynamic from "next/dynamic";
@@ -400,20 +398,12 @@ const PortfolioPage = () => {
       {/* Hero Section */}
       <main className="relative min-h-screen bg-black overflow-hidden">
         <div className="absolute inset-0">
-          {/* 임시로 CSS background-image 사용하여 테스트 */}
-          <div
-            className="absolute inset-0 opacity-40"
-            style={{
-              backgroundImage: "url(/imgs/bg3.jpg)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          />
-          {/* 디버깅을 위한 fallback 색상 */}
-          <div
-            className="absolute inset-0 bg-gray-800 opacity-20"
-            style={{ zIndex: -1 }}
+          <Image
+            src="/imgs/bg3.jpg"
+            alt="COUCH POTATO Portfolio Background"
+            fill
+            priority
+            className="object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>
