@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo, useCallback } from "react";
 import Image from "next/image";
 import {
   usePortfolioVideos,
@@ -10,6 +10,7 @@ import {
   useUpdateVideoOrder,
   useCategories,
 } from "@/hooks";
+import { Video, Category } from "@/types";
 import {
   DndContext,
   closestCenter,
@@ -28,42 +29,12 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-interface Video {
-  _id: string;
-  id: string;
-  title: string;
-  category: string;
-  client: string;
-  year: string;
-  thumbnail: string;
-  videoId: string;
-  videoUrl: string;
-  description: string;
-  order: number;
-  stats: {
-    views: string;
-    likes: string;
-  };
-  tags: Array<{
-    id: string;
-    text: string;
-    color: string;
-  }>;
-}
-
-interface Category {
-  id: string;
-  name: string;
-  icon: string;
-  order: number;
-}
-
 interface VideoManagerProps {
   isAdmin: boolean;
 }
 
 // 드래그 가능한 영상 아이템 컴포넌트
-function SortableVideoItem({
+const SortableVideoItem = memo(function SortableVideoItem({
   video,
   categories,
   onEdit,
@@ -170,9 +141,9 @@ function SortableVideoItem({
       </div>
     </div>
   );
-}
+});
 
-export default function VideoManager({ isAdmin }: VideoManagerProps) {
+const VideoManager = memo(function VideoManager({ isAdmin }: VideoManagerProps) {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingVideo, setEditingVideo] = useState<Video | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -231,12 +202,12 @@ export default function VideoManager({ isAdmin }: VideoManagerProps) {
   const currentVideos = videos.slice(startIndex, endIndex);
 
   // 페이지 변경 핸들러
-  const handlePageChange = (page: number) => {
+  const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
-  };
+  }, []);
 
   // 드래그 앤 드롭 핸들러
-  const handleDragEnd = async (event: DragEndEvent) => {
+  const handleDragEnd = useCallback(async (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (active.id !== over?.id) {
@@ -261,7 +232,7 @@ export default function VideoManager({ isAdmin }: VideoManagerProps) {
         alert("순서 저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.");
       }
     }
-  };
+  }, [videos, updateVideoOrderMutation]);
 
   // 새 영상 추가
   const handleAddVideo = async (e: React.FormEvent) => {
@@ -677,4 +648,6 @@ export default function VideoManager({ isAdmin }: VideoManagerProps) {
       )}
     </div>
   );
-}
+});
+
+export default VideoManager;

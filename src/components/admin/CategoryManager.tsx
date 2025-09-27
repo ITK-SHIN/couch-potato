@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo, useCallback } from "react";
 import { useCategories, useAddCategory, useUpdateCategory, useDeleteCategory, useUpdateCategoryOrder } from "@/hooks";
+import { Category } from "@/types";
 import {
   DndContext,
   closestCenter,
@@ -20,19 +21,12 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-interface Category {
-  id: string;
-  name: string;
-  icon: string;
-  order: number;
-}
-
 interface CategoryManagerProps {
   isAdmin: boolean;
 }
 
 // 드래그 가능한 카테고리 아이템 컴포넌트
-function SortableCategoryItem({
+const SortableCategoryItem = memo(function SortableCategoryItem({
   category,
   onEdit,
   onDelete,
@@ -111,9 +105,9 @@ function SortableCategoryItem({
       </div>
     </div>
   );
-}
+});
 
-export default function CategoryManager({
+const CategoryManager = memo(function CategoryManager({
   isAdmin,
 }: CategoryManagerProps) {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -143,7 +137,7 @@ export default function CategoryManager({
   );
 
   // 드래그 앤 드롭 핸들러
-  const handleDragEnd = async (event: DragEndEvent) => {
+  const handleDragEnd = useCallback(async (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (active.id !== over?.id) {
@@ -168,7 +162,7 @@ export default function CategoryManager({
         alert("순서 저장 중 오류가 발생했습니다. 페이지를 새로고침해주세요.");
       }
     }
-  };
+  }, [categories, updateCategoryOrderMutation]);
 
 
   // 새 카테고리 추가
@@ -405,4 +399,6 @@ export default function CategoryManager({
       )}
     </div>
   );
-}
+});
+
+export default CategoryManager;
