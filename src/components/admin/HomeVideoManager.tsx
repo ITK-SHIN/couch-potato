@@ -3,28 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useHomeVideo, useUpdateHomeVideo } from "@/hooks";
-
-interface HomeVideo {
-  id: string;
-  videoId: string;
-  title: string;
-  description: string;
-  tags: Array<{
-    id: string;
-    text: string;
-    color: string;
-  }>;
-  stats: {
-    views: string;
-    likes: string;
-  };
-  client: string;
-  year: string;
-  category: string;
-  thumbnail: string;
-  videoUrl: string;
-  lastUpdated: string;
-}
+import { HomeVideo } from "@/types";
 
 interface HomeVideoManagerProps {
   isAdmin: boolean;
@@ -78,7 +57,7 @@ export default function HomeVideoManager({
     };
     setEditingVideo({
       ...editingVideo,
-      tags: [...editingVideo.tags, newTag],
+      tags: [...(editingVideo.tags || []), newTag],
     });
   };
 
@@ -87,7 +66,7 @@ export default function HomeVideoManager({
     if (!editingVideo) return;
     setEditingVideo({
       ...editingVideo,
-      tags: editingVideo.tags.filter((tag) => tag.id !== tagId),
+      tags: (editingVideo.tags || []).filter((tag) => tag.id !== tagId),
     });
   };
 
@@ -96,7 +75,7 @@ export default function HomeVideoManager({
     if (!editingVideo) return;
     setEditingVideo({
       ...editingVideo,
-      tags: editingVideo.tags.map((tag) =>
+      tags: (editingVideo.tags || []).map((tag) =>
         tag.id === tagId ? { ...tag, [field]: value } : tag
       ),
     });
@@ -171,27 +150,29 @@ export default function HomeVideoManager({
                 {video.title}
               </h4>
               <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
-                <span>📅 {video.year}</span>
-                <span>🏢 {video.client}</span>
-                <span>📊 {video.stats.views} 조회수</span>
-                <span>❤️ {video.stats.likes} 좋아요</span>
+                {video.year && <span>📅 {video.year}</span>}
+                {video.client && <span>🏢 {video.client}</span>}
+                {video.stats && <span>📊 {video.stats.views} 조회수</span>}
+                {video.stats && <span>❤️ {video.stats.likes} 좋아요</span>}
               </div>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {video.tags.map((tag) => (
-                  <span
-                    key={tag.id}
-                    className={`px-2 py-1 text-xs font-bold rounded-full ${
-                      tag.color === "potato-orange"
-                        ? "bg-orange-500 text-white"
-                        : tag.color === "clapperboard-gray"
-                        ? "bg-gray-500 text-white"
-                        : "bg-orange-300 text-white"
-                    }`}
-                  >
-                    {tag.text}
-                  </span>
-                ))}
-              </div>
+              {video.tags && video.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {video.tags.map((tag) => (
+                    <span
+                      key={tag.id}
+                      className={`px-2 py-1 text-xs font-bold rounded-full ${
+                        tag.color === "potato-orange"
+                          ? "bg-orange-500 text-white"
+                          : tag.color === "clapperboard-gray"
+                          ? "bg-gray-500 text-white"
+                          : "bg-orange-300 text-white"
+                      }`}
+                    >
+                      {tag.text}
+                    </span>
+                  ))}
+                </div>
+              )}
               <p className="text-sm text-gray-600 line-clamp-2">
                 {video.description}
               </p>
@@ -231,7 +212,7 @@ export default function HomeVideoManager({
             <input
               type="text"
               placeholder="클라이언트"
-              value={editingVideo.client}
+              value={editingVideo.client || ""}
               onChange={(e) =>
                 setEditingVideo({ ...editingVideo, client: e.target.value })
               }
@@ -240,7 +221,7 @@ export default function HomeVideoManager({
             <input
               type="text"
               placeholder="연도"
-              value={editingVideo.year}
+              value={editingVideo.year || ""}
               onChange={(e) =>
                 setEditingVideo({ ...editingVideo, year: e.target.value })
               }
@@ -249,11 +230,11 @@ export default function HomeVideoManager({
             <input
               type="text"
               placeholder="조회수 (예: 150K+)"
-              value={editingVideo.stats.views}
+              value={editingVideo.stats?.views || ""}
               onChange={(e) =>
                 setEditingVideo({
                   ...editingVideo,
-                  stats: { ...editingVideo.stats, views: e.target.value },
+                  stats: { ...(editingVideo.stats || {}), views: e.target.value },
                 })
               }
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -261,11 +242,11 @@ export default function HomeVideoManager({
             <input
               type="text"
               placeholder="좋아요 (예: 2.5K+)"
-              value={editingVideo.stats.likes}
+              value={editingVideo.stats?.likes || ""}
               onChange={(e) =>
                 setEditingVideo({
                   ...editingVideo,
-                  stats: { ...editingVideo.stats, likes: e.target.value },
+                  stats: { ...(editingVideo.stats || {}), likes: e.target.value },
                 })
               }
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -315,7 +296,7 @@ export default function HomeVideoManager({
               </button>
             </div>
             <div className="space-y-2">
-              {editingVideo.tags.map((tag) => (
+              {(editingVideo.tags || []).map((tag) => (
                 <div key={tag.id} className="flex items-center gap-2">
                   <input
                     type="text"

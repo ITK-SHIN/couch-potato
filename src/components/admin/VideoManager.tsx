@@ -254,7 +254,7 @@ export default function VideoManager({ isAdmin }: VideoManagerProps) {
 
       // 서버에 순서 업데이트 저장
       try {
-        await updateVideoOrderMutation.mutateAsync(updatedVideos);
+        await updateVideoOrderMutation.mutateAsync({ videos: updatedVideos });
         console.log("영상 순서가 업데이트되었습니다.");
       } catch (error) {
         console.error("영상 순서 업데이트 오류:", error);

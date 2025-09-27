@@ -37,6 +37,18 @@ export interface HomeVideo {
   isActive: boolean;
   order: number;
   lastUpdated: string;
+  // 추가 정보 (선택적)
+  client?: string;
+  year?: string;
+  stats?: {
+    views: string;
+    likes: string;
+  };
+  tags?: Array<{
+    id: string;
+    text: string;
+    color: string;
+  }>;
 }
 
 // 카테고리

@@ -161,7 +161,7 @@ export default function CategoryManager({
 
       // 서버에 순서 업데이트 저장
       try {
-        await updateCategoryOrderMutation.mutateAsync(updatedCategories);
+        await updateCategoryOrderMutation.mutateAsync({ categories: updatedCategories });
         alert("카테고리 순서가 저장되었습니다!");
       } catch (error) {
         console.error("카테고리 순서 저장 오류:", error);
