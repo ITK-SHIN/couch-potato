@@ -234,7 +234,10 @@ export default function HomeVideoManager({
               onChange={(e) =>
                 setEditingVideo({
                   ...editingVideo,
-                  stats: { ...(editingVideo.stats || {}), views: e.target.value },
+                  stats: { 
+                    views: e.target.value,
+                    likes: editingVideo.stats?.likes || ""
+                  },
                 })
               }
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -246,7 +249,10 @@ export default function HomeVideoManager({
               onChange={(e) =>
                 setEditingVideo({
                   ...editingVideo,
-                  stats: { ...(editingVideo.stats || {}), likes: e.target.value },
+                  stats: { 
+                    views: editingVideo.stats?.views || "",
+                    likes: e.target.value
+                  },
                 })
               }
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
