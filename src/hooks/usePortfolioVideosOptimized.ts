@@ -7,8 +7,9 @@ export const usePortfolioVideos = () => {
     ['portfolio-videos'],
     '/api/portfolio-videos',
     {
-      staleTime: 5 * 60 * 1000, // 5분간 fresh
-      gcTime: 10 * 60 * 1000, // 10분간 캐시
+      staleTime: 3 * 60 * 1000, // 3분간 fresh (비디오는 더 자주 업데이트됨)
+      gcTime: 15 * 60 * 1000, // 15분간 캐시
+      refetchOnWindowFocus: false, // 윈도우 포커스 시 자동 새로고침 비활성화
     }
   );
 };

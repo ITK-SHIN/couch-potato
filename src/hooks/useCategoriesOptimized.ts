@@ -7,8 +7,9 @@ export const useCategories = () => {
     ['categories'],
     '/api/categories',
     {
-      staleTime: 10 * 60 * 1000, // 10분간 fresh (카테고리는 자주 변경되지 않음)
-      gcTime: 30 * 60 * 1000, // 30분간 캐시
+      staleTime: 15 * 60 * 1000, // 15분간 fresh (카테고리는 자주 변경되지 않음)
+      gcTime: 60 * 60 * 1000, // 1시간간 캐시
+      refetchOnWindowFocus: false, // 윈도우 포커스 시 자동 새로고침 비활성화
     }
   );
 };

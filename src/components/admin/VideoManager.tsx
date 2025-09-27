@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, memo, useCallback } from "react";
-import Image from "next/image";
+import { ThumbnailImage } from "@/components/optimized/OptimizedImage";
 import {
   usePortfolioVideos,
   useAddVideo,
@@ -93,15 +93,13 @@ const SortableVideoItem = memo(function SortableVideoItem({
           </svg>
         </div>
         {/* 썸네일 */}
-        <div className="w-24 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0 relative">
-          <Image
+        <div className="w-24 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+          <ThumbnailImage
             src={video.thumbnail}
             alt={video.title}
-            fill
-            className="object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = "/imgs/bg1.jpg";
-            }}
+            width={96}
+            height={64}
+            className="w-full h-full object-cover"
           />
         </div>
 

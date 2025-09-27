@@ -1,10 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { BackgroundImage } from "@/components/optimized/OptimizedImage";
 import Link from "next/link";
 import UniversalContent from "@/components/ui/UniversalContent";
-import CategoryManager from "@/components/admin/CategoryManager";
-import VideoManager from "@/components/admin/VideoManager";
+import dynamic from "next/dynamic";
+
+// 관리자 컴포넌트들을 동적으로 로드
+const CategoryManager = dynamic(() => import("@/components/admin/CategoryManager"), {
+  ssr: false,
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg">관리자 도구 로딩 중...</div>
+});
+
+const VideoManager = dynamic(() => import("@/components/admin/VideoManager"), {
+  ssr: false,
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg">관리자 도구 로딩 중...</div>
+});
 import { useAdmin } from "@/contexts/AdminContext";
 import { usePortfolioVideos, useCategories } from "@/hooks";
 import {
@@ -326,16 +336,24 @@ const PortfolioPage = () => {
 
 
 
-  const filteredItems =
-    selectedCategory === "all"
+  // 필터링된 아이템들 메모이제이션
+  const filteredItems = useMemo(() => {
+    return selectedCategory === "all"
       ? portfolioItems
       : portfolioItems.filter((item) => item.category === selectedCategory);
+  }, [portfolioItems, selectedCategory]);
 
-  // 페이지네이션 계산
-  const totalPages = Math.ceil(filteredItems.length / videosPerPage);
-  const startIndex = (currentPage - 1) * videosPerPage;
-  const endIndex = startIndex + videosPerPage;
-  const currentItems = filteredItems.slice(startIndex, endIndex);
+  // 페이지네이션 계산 메모이제이션
+  const paginationData = useMemo(() => {
+    const totalPages = Math.ceil(filteredItems.length / videosPerPage);
+    const startIndex = (currentPage - 1) * videosPerPage;
+    const endIndex = startIndex + videosPerPage;
+    const currentItems = filteredItems.slice(startIndex, endIndex);
+    
+    return { totalPages, startIndex, endIndex, currentItems };
+  }, [filteredItems, currentPage, videosPerPage]);
+
+  const { totalPages, startIndex, endIndex, currentItems } = paginationData;
 
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
@@ -345,22 +363,21 @@ const PortfolioPage = () => {
   };
 
   // 카테고리 변경 시 첫 페이지로 이동
-  const handleCategoryChange = (categoryId: string) => {
+  const handleCategoryChange = useCallback((categoryId: string) => {
     setSelectedCategory(categoryId);
     setCurrentPage(1);
-  };
+  }, []);
 
   return (
     <>
       {/* Hero Section */}
       <main className="relative min-h-screen bg-black overflow-hidden">
         <div className="absolute inset-0">
-          <Image
+          <BackgroundImage
             src="/imgs/bg1.jpg"
             alt="COUCH POTATO Portfolio Background"
-            fill
             priority
-            className="object-cover opacity-40"
+            className="opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>

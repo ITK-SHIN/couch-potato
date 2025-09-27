@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 import UnifiedInlineEditor from "./UnifiedInlineEditor";
 import { useUniversalContent, useUpdateUniversalContent } from "@/hooks";
 
 import { UniversalContentProps } from '@/types';
 
-export default function UniversalContent({
+const UniversalContent = memo(function UniversalContent({
   isAdmin,
   pageName,
   fields,
@@ -24,13 +24,13 @@ export default function UniversalContent({
     setMounted(true);
   }, []);
 
-  const handleSave = async (field: string, newValue: string) => {
+  const handleSave = useCallback(async (field: string, newValue: string) => {
     try {
       await updateContentMutation.mutateAsync({ field, value: newValue });
     } catch (error) {
       console.error("콘텐츠 저장 오류:", error);
     }
-  };
+  }, [updateContentMutation]);
 
   // 서버 사이드 렌더링 시에는 기본값만 표시 (Hydration 에러 방지)
   if (!mounted) {
@@ -86,4 +86,6 @@ export default function UniversalContent({
       ))}
     </>
   );
-}
+});
+
+export default UniversalContent;
