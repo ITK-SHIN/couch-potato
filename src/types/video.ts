@@ -38,6 +38,7 @@ export interface YouTubePlayerConfig {
     iv_load_policy?: 1 | 3;
     modestbranding?: 0 | 1;
     playsinline?: 0 | 1;
+    playlist?: string;
     start?: number;
     end?: number;
   };
