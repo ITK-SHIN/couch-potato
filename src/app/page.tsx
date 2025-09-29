@@ -8,12 +8,13 @@ import AboutSection from "@/components/sections/AboutSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
 import VideoModal from "@/components/ui/VideoModal";
+import { HomeVideo, PortfolioVideo } from "@/types/video";
 
 export default function Home() {
-  const [homeVideo, setHomeVideo] = useState<any>(null);
+  const [homeVideo, setHomeVideo] = useState<HomeVideo | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [latestVideos, setLatestVideos] = useState<any[]>([]);
+  const [latestVideos, setLatestVideos] = useState<PortfolioVideo[]>([]);
 
   // 홈 영상 데이터 로드
   const loadHomeVideo = async () => {
@@ -29,7 +30,7 @@ export default function Home() {
   };
 
   // 홈 영상 변경 핸들러
-  const handleHomeVideoChange = (video: any) => {
+  const handleHomeVideoChange = (video: HomeVideo) => {
     setHomeVideo(video);
   };
 
@@ -48,6 +49,7 @@ export default function Home() {
       // 기본 영상 데이터 설정
       setLatestVideos([
         {
+          _id: "1",
           id: "1",
           videoId: "1CUt84BK_p0",
           title: "패션을 파는 것은 어떨까요?",
@@ -61,8 +63,10 @@ export default function Home() {
             { id: "tag1", text: "#패션", color: "potato-orange" },
             { id: "tag2", text: "#브랜드영상", color: "clapperboard-gray" },
           ],
+          order: 1,
         },
         {
+          _id: "2",
           id: "2",
           videoId: "dQw4w9WgXcQ",
           title: "웨딩 영상 제작",
@@ -76,8 +80,10 @@ export default function Home() {
             { id: "tag1", text: "#웨딩", color: "potato-orange-light" },
             { id: "tag2", text: "#감동", color: "clapperboard-gray" },
           ],
+          order: 2,
         },
         {
+          _id: "3",
           id: "3",
           videoId: "jNQXAC9IVRw",
           title: "기업 홍보 영상",
@@ -91,6 +97,7 @@ export default function Home() {
             { id: "tag1", text: "#기업홍보", color: "potato-orange" },
             { id: "tag2", text: "#브랜딩", color: "clapperboard-gray" },
           ],
+          order: 3,
         },
       ]);
     }

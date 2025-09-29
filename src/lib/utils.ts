@@ -1,6 +1,6 @@
-import React from 'react';
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import React from "react";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 /**
  * 클래스명을 병합하는 유틸리티 함수
@@ -20,10 +20,10 @@ export function getOptimizedImageUrl(
   quality: number = 75
 ): string {
   // 외부 이미지인 경우 Next.js Image Optimization 사용
-  if (src.startsWith('http')) {
+  if (src.startsWith("http")) {
     return src;
   }
-  
+
   // 로컬 이미지인 경우 그대로 반환
   return src;
 }
@@ -52,12 +52,9 @@ export function useIntersectionObserver(
     const element = elementRef.current;
     if (!element) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsIntersecting(entry.isIntersecting);
-      },
-      options
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsIntersecting(entry.isIntersecting);
+    }, options);
 
     observer.observe(element);
 
@@ -72,12 +69,12 @@ export function useIntersectionObserver(
 /**
  * 디바운스 함수
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
@@ -87,12 +84,12 @@ export function debounce<T extends (...args: any[]) => any>(
 /**
  * 쓰로틀 함수
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
@@ -105,39 +102,36 @@ export function throttle<T extends (...args: any[]) => any>(
 /**
  * 메모이제이션을 위한 깊은 비교 함수
  */
-export function deepEqual(a: any, b: any): boolean {
+export function deepEqual(a: unknown, b: unknown): boolean {
   if (a === b) return true;
-  
+
   if (a == null || b == null) return false;
-  
+
   if (typeof a !== typeof b) return false;
-  
-  if (typeof a !== 'object') return false;
-  
+
+  if (typeof a !== "object") return false;
+
   const keysA = Object.keys(a);
   const keysB = Object.keys(b);
-  
+
   if (keysA.length !== keysB.length) return false;
-  
+
   for (let key of keysA) {
     if (!keysB.includes(key)) return false;
-    if (!deepEqual(a[key], b[key])) return false;
+    if (!deepEqual((a as any)[key], (b as any)[key])) return false;
   }
-  
+
   return true;
 }
 
 /**
  * 성능 측정을 위한 유틸리티
  */
-export function measurePerformance<T>(
-  name: string,
-  fn: () => T
-): T {
+export function measurePerformance<T>(name: string, fn: () => T): T {
   const start = performance.now();
   const result = fn();
   const end = performance.now();
-  
+
   console.log(`${name} took ${end - start} milliseconds`);
   return result;
 }

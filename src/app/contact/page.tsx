@@ -20,7 +20,9 @@ const ContactPage = () => {
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -262,10 +264,11 @@ ${formData.message}
             </p>
 
             <div className="animate-slide-up-delayed mb-6 sm:mb-8">
-                <SmallYellowHoverBigBtn href="#contact-info" text="📞 연락처 정보 보기" />
+              <SmallYellowHoverBigBtn
+                href="#contact-info"
+                text="📞 연락처 정보 보기"
+              />
             </div>
-
-
           </div>
 
           {/* Right Side - Compact Contact Form */}

@@ -41,101 +41,110 @@ export default function TestimonialsSection() {
 
         <StrapiContent
           endpoint="/api/testimonials"
-          render={(testimonials: any[], loading: boolean) => (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {loading ? (
-                <div className="col-span-full text-center text-gray-300">
-                  리뷰를 불러오는 중...
-                </div>
-              ) : testimonials && testimonials.length > 0 ? (
-                testimonials.map((testimonial: any, index: number) => (
-                  <div
-                    key={index}
-                    className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                  >
-                    <div className="flex items-center mb-4 sm:mb-6">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-potato-orange to-potato-orange-light rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mr-4">
-                        {testimonial.attributes?.name?.charAt(0) || "A"}
-                      </div>
-                      <div>
-                        <h4 className="text-white font-bold text-lg sm:text-xl">
-                          {testimonial.attributes?.name || "고객"}
-                        </h4>
-                        <p className="text-gray-300 text-xs sm:text-sm">
-                          {testimonial.attributes?.company || "회사"}
+          render={(testimonials: unknown, loading: boolean) => {
+            const testimonialList = Array.isArray(testimonials)
+              ? testimonials
+              : [];
+            return (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {loading ? (
+                  <div className="col-span-full text-center text-gray-300">
+                    리뷰를 불러오는 중...
+                  </div>
+                ) : testimonialList.length > 0 ? (
+                  testimonialList.map((testimonial: unknown, index: number) => {
+                    const testimonialObj = testimonial as any;
+                    return (
+                      <div
+                        key={index}
+                        className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                      >
+                        <div className="flex items-center mb-4 sm:mb-6">
+                          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-potato-orange to-potato-orange-light rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mr-4">
+                            {testimonialObj?.attributes?.name?.charAt(0) || "A"}
+                          </div>
+                          <div>
+                            <h4 className="text-white font-bold text-lg sm:text-xl">
+                              {testimonialObj?.attributes?.name || "고객"}
+                            </h4>
+                            <p className="text-gray-300 text-xs sm:text-sm">
+                              {testimonialObj?.attributes?.company || "회사"}
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
+                          &quot;
+                          {testimonialObj?.attributes?.review || "리뷰 내용"}
+                          &quot;
                         </p>
                       </div>
+                    );
+                  })
+                ) : (
+                  // 기본 리뷰 카드 표시
+                  <>
+                    <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                      <div className="flex items-center mb-4 sm:mb-6">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-potato-orange to-potato-orange-light rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mr-4">
+                          김
+                        </div>
+                        <div>
+                          <h4 className="text-white font-bold text-lg sm:text-xl">
+                            김민수
+                          </h4>
+                          <p className="text-gray-300 text-xs sm:text-sm">
+                            패션 브랜드 대표
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
+                        &quot;정말 훌륭한 영상 제작 서비스입니다. 브랜드의
+                        가치를 완벽하게 표현해주어서 감사합니다.&quot;
+                      </p>
                     </div>
-                    <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
-                      &quot;{testimonial.attributes?.review || "리뷰 내용"}
-                      &quot;
-                    </p>
-                  </div>
-                ))
-              ) : (
-                // 기본 리뷰 카드 표시
-                <>
-                  <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                    <div className="flex items-center mb-4 sm:mb-6">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-potato-orange to-potato-orange-light rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mr-4">
-                        김
+                    <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                      <div className="flex items-center mb-4 sm:mb-6">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-potato-orange to-potato-orange-light rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mr-4">
+                          이
+                        </div>
+                        <div>
+                          <h4 className="text-white font-bold text-lg sm:text-xl">
+                            이지은
+                          </h4>
+                          <p className="text-gray-300 text-xs sm:text-sm">
+                            웨딩 플래너
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-white font-bold text-lg sm:text-xl">
-                          김민수
-                        </h4>
-                        <p className="text-gray-300 text-xs sm:text-sm">
-                          패션 브랜드 대표
-                        </p>
-                      </div>
+                      <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
+                        &quot;웨딩 영상이 정말 감동적이었어요. 평생 기억에 남을
+                        소중한 순간을 아름답게 담아주셨네요.&quot;
+                      </p>
                     </div>
-                    <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
-                      &quot;정말 훌륭한 영상 제작 서비스입니다. 브랜드의 가치를
-                      완벽하게 표현해주어서 감사합니다.&quot;
-                    </p>
-                  </div>
-                  <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                    <div className="flex items-center mb-4 sm:mb-6">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-potato-orange to-potato-orange-light rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mr-4">
-                        이
+                    <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                      <div className="flex items-center mb-4 sm:mb-6">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-potato-orange to-potato-orange-light rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mr-4">
+                          박
+                        </div>
+                        <div>
+                          <h4 className="text-white font-bold text-lg sm:text-xl">
+                            박성호
+                          </h4>
+                          <p className="text-gray-300 text-xs sm:text-sm">
+                            기업 마케팅팀
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="text-white font-bold text-lg sm:text-xl">
-                          이지은
-                        </h4>
-                        <p className="text-gray-300 text-xs sm:text-sm">
-                          웨딩 플래너
-                        </p>
-                      </div>
+                      <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
+                        &quot;기업 홍보 영상 제작에서 전문성과 창의성을 모두
+                        갖춘 팀이네요. 강력 추천합니다!&quot;
+                      </p>
                     </div>
-                    <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
-                      &quot;웨딩 영상이 정말 감동적이었어요. 평생 기억에 남을
-                      소중한 순간을 아름답게 담아주셨네요.&quot;
-                    </p>
-                  </div>
-                  <div className="bg-clapperboard-gray p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                    <div className="flex items-center mb-4 sm:mb-6">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-potato-orange to-potato-orange-light rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mr-4">
-                        박
-                      </div>
-                      <div>
-                        <h4 className="text-white font-bold text-lg sm:text-xl">
-                          박성호
-                        </h4>
-                        <p className="text-gray-300 text-xs sm:text-sm">
-                          기업 마케팅팀
-                        </p>
-                      </div>
-                    </div>
-                    <p className="text-gray-300 leading-relaxed italic text-sm sm:text-base">
-                      &quot;기업 홍보 영상 제작에서 전문성과 창의성을 모두 갖춘
-                      팀이네요. 강력 추천합니다!&quot;
-                    </p>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
+                  </>
+                )}
+              </div>
+            );
+          }}
         />
       </div>
     </section>

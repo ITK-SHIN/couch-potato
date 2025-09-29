@@ -8,9 +8,11 @@ import HomeVideoManager from "@/components/admin/HomeVideoManager";
 import { useAdmin } from "@/contexts/AdminContext";
 import { BigBlackBtn, BigYellowBtn } from "@/components/ui/Button";
 
+import { HomeVideo, YouTubePlayer, YouTubePlayerEvent } from "@/types/video";
+
 interface HeroSectionProps {
-  homeVideo: any;
-  onVideoChange: (video: any) => void;
+  homeVideo: HomeVideo | null;
+  onVideoChange: (video: HomeVideo) => void;
 }
 
 const HeroSection = React.memo(function HeroSection({
@@ -21,7 +23,7 @@ const HeroSection = React.memo(function HeroSection({
   const [volume, setVolume] = useState<number>(75);
   const [iframeRef, setIframeRef] = useState<HTMLDivElement | null>(null);
   const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
-  const [player, setPlayer] = useState<any>(null);
+  const [player, setPlayer] = useState<YouTubePlayer | null>(null);
   const { isAdmin } = useAdmin();
 
   // YouTube Player API 로드 및 초기화
@@ -78,7 +80,7 @@ const HeroSection = React.memo(function HeroSection({
             playsinline: 1,
           },
           events: {
-            onReady: (event: any) => {
+            onReady: (event: YouTubePlayerEvent) => {
               console.log("YouTube Player ready!");
               // 초기 볼륨 설정
               event.target.setVolume(volume);
@@ -88,7 +90,7 @@ const HeroSection = React.memo(function HeroSection({
                 `Initial volume set to: ${volume}, muted: ${isMuted}`
               );
             },
-            onStateChange: (event: any) => {
+            onStateChange: (event: YouTubePlayerEvent) => {
               console.log("Player state changed:", event.data);
             },
           },
@@ -220,12 +222,21 @@ const HeroSection = React.memo(function HeroSection({
 
                         {/* Simple Fullscreen Button */}
                         <button
-                          onClick={() => window.open(`https://www.youtube.com/watch?v=${homeVideo?.videoId}`, '_blank')}
+                          onClick={() =>
+                            window.open(
+                              `https://www.youtube.com/watch?v=${homeVideo?.videoId}`,
+                              "_blank"
+                            )
+                          }
                           className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
                           title="전체화면"
                         >
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                          <svg
+                            className="w-5 h-5 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
                           </svg>
                         </button>
                       </div>
@@ -338,9 +349,7 @@ const HeroSection = React.memo(function HeroSection({
                                   const newVolume = parseInt(e.target.value);
                                   setVolume(newVolume);
                                   setIsMuted(newVolume === 0);
-                                  console.log(
-                                    `볼륨 변경: ${newVolume}%`
-                                  );
+                                  console.log(`볼륨 변경: ${newVolume}%`);
                                 }}
                                 className="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
                                 style={{

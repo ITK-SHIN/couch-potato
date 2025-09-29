@@ -1,4 +1,4 @@
-import { Category, Video, HomeVideo, UniversalContentData } from '@/types';
+import { Category, Video, HomeVideo, UniversalContentData } from "@/types";
 
 // API 응답 타입들
 export interface ApiResponse<T> {
@@ -8,7 +8,7 @@ export interface ApiResponse<T> {
 }
 
 // CRUD 작업 타입들
-export type CreateData<T> = Omit<T, 'id' | '_id'>;
+export type CreateData<T> = Omit<T, "id" | "_id">;
 export type UpdateData<T> = Partial<T> & { id: string };
 export type DeleteData = { id: string };
 
@@ -48,7 +48,7 @@ export interface HookOptions {
 export interface ApiError {
   message: string;
   code?: string;
-  details?: any;
+  details?: unknown;
 }
 
 // 로딩 상태 타입

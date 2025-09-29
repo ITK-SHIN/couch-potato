@@ -7,8 +7,10 @@ import { useAdmin } from "@/contexts/AdminContext";
 import { SmallYellowBtn } from "@/components/ui/Button";
 import { ThumbnailImage } from "@/components/optimized/OptimizedImage";
 
+import { PortfolioVideo, VideoTag } from "@/types/video";
+
 interface PortfolioSectionProps {
-  latestVideos: any[];
+  latestVideos: PortfolioVideo[];
   onVideoClick: (videoId: string) => void;
 }
 
@@ -19,9 +21,12 @@ const PortfolioSection = React.memo(function PortfolioSection({
   const { isAdmin } = useAdmin();
 
   // 비디오 클릭 핸들러 메모이제이션
-  const handleVideoClick = useCallback((videoId: string) => {
-    onVideoClick(videoId);
-  }, [onVideoClick]);
+  const handleVideoClick = useCallback(
+    (videoId: string) => {
+      onVideoClick(videoId);
+    },
+    [onVideoClick]
+  );
 
   // 비디오 목록 메모이제이션
   const memoizedVideos = useMemo(() => latestVideos, [latestVideos]);
@@ -143,7 +148,7 @@ const PortfolioSection = React.memo(function PortfolioSection({
                     {/* Tags */}
                     {video.tags && video.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1">
-                        {video.tags.slice(0, 2).map((tag: any) => (
+                        {video.tags.slice(0, 2).map((tag: VideoTag) => (
                           <span
                             key={tag.id}
                             className={`px-2 py-1 text-xs font-medium rounded-full ${

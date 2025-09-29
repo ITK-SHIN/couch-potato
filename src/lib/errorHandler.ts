@@ -3,14 +3,14 @@
  */
 
 export enum ErrorType {
-  NETWORK_ERROR = 'NETWORK_ERROR',
-  API_ERROR = 'API_ERROR',
-  VALIDATION_ERROR = 'VALIDATION_ERROR',
-  AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR',
-  AUTHORIZATION_ERROR = 'AUTHORIZATION_ERROR',
-  NOT_FOUND_ERROR = 'NOT_FOUND_ERROR',
-  SERVER_ERROR = 'SERVER_ERROR',
-  UNKNOWN_ERROR = 'UNKNOWN_ERROR',
+  NETWORK_ERROR = "NETWORK_ERROR",
+  API_ERROR = "API_ERROR",
+  VALIDATION_ERROR = "VALIDATION_ERROR",
+  AUTHENTICATION_ERROR = "AUTHENTICATION_ERROR",
+  AUTHORIZATION_ERROR = "AUTHORIZATION_ERROR",
+  NOT_FOUND_ERROR = "NOT_FOUND_ERROR",
+  SERVER_ERROR = "SERVER_ERROR",
+  UNKNOWN_ERROR = "UNKNOWN_ERROR",
 }
 
 export interface AppError {
@@ -18,7 +18,7 @@ export interface AppError {
   message: string;
   code?: string;
   statusCode?: number;
-  details?: any;
+  details?: unknown;
   timestamp: string;
   stack?: string;
 }
@@ -27,17 +27,17 @@ export class CustomError extends Error {
   public type: ErrorType;
   public code?: string;
   public statusCode?: number;
-  public details?: any;
+  public details?: unknown;
 
   constructor(
     message: string,
     type: ErrorType = ErrorType.UNKNOWN_ERROR,
     code?: string,
     statusCode?: number,
-    details?: any
+    details?: unknown
   ) {
     super(message);
-    this.name = 'CustomError';
+    this.name = "CustomError";
     this.type = type;
     this.code = code;
     this.statusCode = statusCode;
@@ -62,17 +62,18 @@ export const getErrorTypeFromStatusCode = (statusCode: number): ErrorType => {
 };
 
 // 네트워크 에러 감지
-export const isNetworkError = (error: any): boolean => {
+export const isNetworkError = (error: unknown): boolean => {
   return (
-    error.name === 'TypeError' &&
-    (error.message.includes('fetch') || error.message.includes('network'))
+    error instanceof Error &&
+    error.name === "TypeError" &&
+    (error.message.includes("fetch") || error.message.includes("network"))
   );
 };
 
 // API 에러를 AppError로 변환
-export const transformToAppError = (error: any): AppError => {
+export const transformToAppError = (error: unknown): AppError => {
   const timestamp = new Date().toISOString();
-  
+
   // 이미 AppError인 경우
   if (error instanceof CustomError) {
     return {
@@ -90,32 +91,38 @@ export const transformToAppError = (error: any): AppError => {
   if (isNetworkError(error)) {
     return {
       type: ErrorType.NETWORK_ERROR,
-      message: '네트워크 연결을 확인해주세요.',
+      message: "네트워크 연결을 확인해주세요.",
       timestamp,
-      stack: error.stack,
+      stack: error instanceof Error ? error.stack : undefined,
     };
   }
 
-  // HTTP 응답 에러
-  if (error.response) {
-    const statusCode = error.response.status;
+  // HTTP 응답 에러 (타입 가드 사용)
+  if (typeof error === 'object' && error !== null && 'response' in error) {
+    const axiosError = error as any;
+    const statusCode = axiosError.response?.status;
     return {
       type: getErrorTypeFromStatusCode(statusCode),
-      message: error.response.data?.message || error.message,
-      code: error.response.data?.code,
+      message: axiosError.response?.data?.message || axiosError.message || "서버 오류가 발생했습니다.",
+      code: axiosError.response?.data?.code,
       statusCode,
-      details: error.response.data?.details,
+      details: axiosError.response?.data?.details,
       timestamp,
-      stack: error.stack,
+      stack: axiosError.stack,
     };
   }
 
-  // 일반 에러
+  // 일반 에러 (타입 가드 사용)
+  const errorMessage = error instanceof Error ? error.message :
+                      typeof error === 'string' ? error :
+                      typeof error === 'object' && error !== null && 'message' in error ? 
+                      String((error as any).message) : "알 수 없는 오류가 발생했습니다.";
+
   return {
     type: ErrorType.UNKNOWN_ERROR,
-    message: error.message || '알 수 없는 오류가 발생했습니다.',
+    message: errorMessage,
     timestamp,
-    stack: error.stack,
+    stack: error instanceof Error ? error.stack : undefined,
   };
 };
 
@@ -123,21 +130,21 @@ export const transformToAppError = (error: any): AppError => {
 export const getUserFriendlyMessage = (error: AppError): string => {
   switch (error.type) {
     case ErrorType.NETWORK_ERROR:
-      return '인터넷 연결을 확인해주세요.';
+      return "인터넷 연결을 확인해주세요.";
     case ErrorType.AUTHENTICATION_ERROR:
-      return '로그인이 필요합니다.';
+      return "로그인이 필요합니다.";
     case ErrorType.AUTHORIZATION_ERROR:
-      return '접근 권한이 없습니다.';
+      return "접근 권한이 없습니다.";
     case ErrorType.NOT_FOUND_ERROR:
-      return '요청한 데이터를 찾을 수 없습니다.';
+      return "요청한 데이터를 찾을 수 없습니다.";
     case ErrorType.VALIDATION_ERROR:
-      return '입력한 정보를 확인해주세요.';
+      return "입력한 정보를 확인해주세요.";
     case ErrorType.SERVER_ERROR:
-      return '서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.';
+      return "서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.";
     case ErrorType.API_ERROR:
-      return error.message || '요청 처리 중 오류가 발생했습니다.';
+      return error.message || "요청 처리 중 오류가 발생했습니다.";
     default:
-      return error.message || '알 수 없는 오류가 발생했습니다.';
+      return error.message || "알 수 없는 오류가 발생했습니다.";
   }
 };
 
@@ -150,18 +157,19 @@ export const logError = (error: AppError, context?: string) => {
     statusCode: error.statusCode,
     context,
     timestamp: error.timestamp,
-    userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : undefined,
-    url: typeof window !== 'undefined' ? window.location.href : undefined,
+    userAgent:
+      typeof window !== "undefined" ? window.navigator.userAgent : undefined,
+    url: typeof window !== "undefined" ? window.location.href : undefined,
   };
 
   // 개발 환경에서는 콘솔에 출력
-  if (process.env.NODE_ENV === 'development') {
-    console.error('Error logged:', logData);
+  if (process.env.NODE_ENV === "development") {
+    console.error("Error logged:", logData);
   }
 
   // 프로덕션 환경에서는 에러 모니터링 서비스에 전송
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === "production") {
     // 실제 서비스에서는 Sentry, LogRocket 등을 사용
-    console.log('Production error logging:', logData);
+    console.log("Production error logging:", logData);
   }
 };

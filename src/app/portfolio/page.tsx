@@ -34,6 +34,7 @@ import {
   SmallYellowBorderHoverBigBtn,
   SmallYellowHoverBigBtn,
 } from "@/components/ui/Button";
+import { YouTubePlayer, YouTubePlayerEvent } from "@/types/video";
 
 const PortfolioPage = () => {
   const { isAdmin } = useAdmin();
@@ -47,7 +48,7 @@ const PortfolioPage = () => {
   const [videoContainerRef, setVideoContainerRef] =
     useState<HTMLDivElement | null>(null);
   const [isPlayerReady, setIsPlayerReady] = useState<boolean>(false);
-  const [player, setPlayer] = useState<any>(null);
+  const [player, setPlayer] = useState<YouTubePlayer | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const videosPerPage = 9;
 
@@ -225,7 +226,7 @@ const PortfolioPage = () => {
             playsinline: 1,
           },
           events: {
-            onReady: (event: any) => {
+            onReady: (event: YouTubePlayerEvent) => {
               console.log("YouTube Player ready!");
               // 초기 볼륨 설정
               event.target.setVolume(volume);
@@ -235,7 +236,7 @@ const PortfolioPage = () => {
                 `Initial volume set to: ${volume}, muted: ${isMuted}`
               );
             },
-            onStateChange: (event: any) => {
+            onStateChange: (event: YouTubePlayerEvent) => {
               console.log("Player state changed:", event.data);
             },
           },

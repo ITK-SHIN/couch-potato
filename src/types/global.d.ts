@@ -1,6 +1,8 @@
+import { YouTubeAPI } from "./video";
+
 declare global {
   interface Window {
-    YT: any;
+    YT: YouTubeAPI;
     onYouTubeIframeAPIReady: (() => void) | null;
     volumeChangeTimer: number;
   }

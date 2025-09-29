@@ -2,7 +2,13 @@
  * 컴포넌트 관련 타입 정의
  */
 
-import { Video, Category, HomeVideo, HomePageData, UniversalContentData } from './content';
+import {
+  Video,
+  Category,
+  HomeVideo,
+  HomePageData,
+  UniversalContentData,
+} from "./content";
 
 // 관리자 컨텍스트
 export interface AdminContextType {
@@ -18,7 +24,7 @@ export interface InlineEditorProps {
   className?: string;
   isAdmin?: boolean;
   onSave?: (newValue: string) => void;
-  saveMethod?: 'api' | 'localStorage' | 'strapi';
+  saveMethod?: "api" | "localStorage" | "strapi";
   pageName?: string;
   endpoint?: string;
   id?: number;
@@ -61,8 +67,8 @@ export interface HomeVideoManagerProps {
 
 // Strapi 콘텐츠
 export interface StrapiContentProps {
-  children: (data: any) => React.ReactNode;
-  render: (data: any) => React.ReactNode;
+  children: (data: unknown) => React.ReactNode;
+  render: (data: unknown) => React.ReactNode;
   endpoint: string;
 }
 

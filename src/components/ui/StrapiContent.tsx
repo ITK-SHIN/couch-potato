@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { strapiApiClient } from "@/utils/strapi";
 
 interface StrapiContentProps {
-  children?: (data: any, loading: boolean) => React.ReactNode;
-  render?: (data: any, loading: boolean) => React.ReactNode;
+  children?: (data: unknown, loading: boolean) => React.ReactNode;
+  render?: (data: unknown, loading: boolean) => React.ReactNode;
   endpoint: string;
 }
 
